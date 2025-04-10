@@ -399,10 +399,6 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-#vcxproj
-*.vcxproj
-*.filters
-
 ## C++ ignore
 # Prerequisites
 *.d
