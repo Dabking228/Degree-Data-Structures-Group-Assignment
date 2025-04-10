@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "strucuture.h"
+#include "structure.h"
 #include "createList.h"
 
 transactionNode* createTransNode(string custId, string product, string catagory, string price, string date, string paymentMethod) {
