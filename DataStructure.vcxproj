@@ -128,7 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DataStructure.cpp" />
-    <ClCompile Include="structure.h" />
+    <ClCompile Include="strucuture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="createList.h" />

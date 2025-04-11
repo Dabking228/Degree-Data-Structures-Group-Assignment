@@ -59,12 +59,12 @@ transaction* transactionCreate(string filepath, transactionNode* transNodeAddres
 		}
 
 		// array creation
-		transactionList[index].custId = custId;
-		transactionList[index].product = product;
-		transactionList[index].catagory = catagory;
-		transactionList[index].price = stod(price);
-		transactionList[index].date = date;
-		transactionList[index].paymentMethod = paymentMethod;
+		transactionList[index].setCustId(custId);
+		transactionList[index].setProduct(product);
+		transactionList[index].setCatagory(catagory);
+		transactionList[index].setPrice(stod(price));
+		transactionList[index].setDate(date);
+		transactionList[index].setPaymentMethod(paymentMethod);
 		
 		index++;
 	}
@@ -111,10 +111,10 @@ review* reviewCreate(string filepath) {
 		}
 
 		// array creation
-		reviewList[index].prodId = prodId;
-		reviewList[index].custId = custId;
-		reviewList[index].rating = stoi(rating);
-		reviewList[index].reviewText = reviewText;
+		reviewList[index].setProdId(prodId);
+		reviewList[index].setCustId(custId);
+		reviewList[index].setRating(stoi(rating));
+		reviewList[index].setReviewText(reviewText);
 		
 		index++;
 	}
@@ -129,21 +129,16 @@ head node exist
 then create newnode -> assign prew addr from curr (newnode) -> assign next addr from newnode (curr)
 done? then update addr of curr from newnode addr
 */
+
 review* reviewNodeCreate(string prodId, string custId, string rating, string reviewText) {
-	review* _reviewNode = new review;
-
-	_reviewNode->prodId = prodId;
-	_reviewNode->custId = custId;
-	_reviewNode->rating = stoi(rating);
-	_reviewNode->reviewText = reviewText;
-
-
+	review* _reviewNode = new review(prodId, custId, stoi(rating), reviewText);
 	return _reviewNode;
 }
 
 reviewNode* reviewCreateLinked(string filepath) {
 	reviewNode* HEAD{};
 	reviewNode* curr{};
+	reviewNode* prev{};
 	string prodId, custId, rating, reviewText;
 
 	ifstream file(filepath);
@@ -165,38 +160,35 @@ reviewNode* reviewCreateLinked(string filepath) {
 			break;
 		}
 		
-		if (HEAD == nullptr) {
+		if (HEAD == NULL) {
 			reviewNode* newnode = new reviewNode;
 			newnode->_review = reviewNodeCreate(prodId, custId, rating, reviewText);
-			newnode->nextnode = nullptr;
-			newnode->prevnode = nullptr;
-			HEAD = curr = newnode;
+			HEAD = curr = prev = newnode;
+			continue;
 		}
 		else {
 			reviewNode* newnode = new reviewNode;
-			newnode->_review = reviewNodeCreate(prodId, custId, rating, reviewText);
-			curr->nextnode = newnode;
-			newnode->prevnode = curr;
+			curr = newnode;
+			curr->_review = reviewNodeCreate(prodId, custId, rating, reviewText);
+			curr->prevnode = prev;
+			prev->nextnode = curr;
+			curr = newnode;
+			prev = newnode;
+			continue;
 		}
 	}
 
-	// reuturn HEAD node
+	if (HEAD != NULL) {
+		HEAD->prevnode = prev;
+		curr->nextnode = HEAD;
+	}
 	return HEAD;
 }
 
 
 
 transaction* transactionNodeCreate(string custId, string product, string catagory, string price, string date, string paymentMethod) {
-	transaction* _transactionNode = new transaction;
-
-	_transactionNode->custId = custId;
-	_transactionNode->product = product;
-	_transactionNode->catagory = catagory;
-	_transactionNode->price = stod(price);
-	_transactionNode->date = date;
-	_transactionNode->paymentMethod = paymentMethod;
-
-
+	transaction* _transactionNode = new transaction(custId, product,catagory,stod(price),date,paymentMethod);
 	return _transactionNode;
 }
 

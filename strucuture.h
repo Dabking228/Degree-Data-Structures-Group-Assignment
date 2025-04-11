@@ -22,6 +22,7 @@ public:
 		this->date = date;
 		this->paymentMethod = paymentMethod;
 	}
+	transaction(){}
 
 	// Getters
 	string getCustId() {
@@ -48,6 +49,30 @@ public:
 		return paymentMethod;
 	}
 
+	// Setter
+	void setCustId(string custId) {
+		this->custId = custId;
+	}
+
+	void setProduct(string product) {
+		this->product = product;
+	}
+
+	void setCatagory(string catagory) {
+		this->category = catagory;
+	}
+
+	void setPrice(double price) {
+		this->price = price;
+	}
+
+	void setDate(string date) {
+		this->date = date;
+	}
+
+	void setPaymentMethod(string paymentMethod) {
+		this->paymentMethod = paymentMethod;
+	}
 	// Destructor
 	~transaction() {
 		cout << "Transaction done by " << custId << " for " << product << " on " << date << " is deleted!" << endl;
@@ -71,6 +96,8 @@ public:
 		this->reviewText = reviewText;
 	}
 
+	review() {}
+
 	// Getters
 	string getProdId() {
 		return prodId;
@@ -86,6 +113,23 @@ public:
 
 	string getReviewText() {
 		return reviewText;
+	}
+
+	// Setter
+	void setProdId(string prodId) {
+		this->prodId = prodId;
+	}
+
+	void setCustId(string custId) {
+		this->custId = custId;
+	}
+
+	void setRating(int rating) {
+		this->rating = rating;
+	}
+
+	void setReviewText(string review) {
+		this->reviewText = review;
 	}
 
 	// Destructor

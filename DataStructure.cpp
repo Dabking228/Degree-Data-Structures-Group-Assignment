@@ -1,9 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "structure.h"
+#include "strucuture.h"
 #include "createList.h"
-
 
 
 /*
@@ -33,6 +32,7 @@ int main() {
 	// codes goes here
 	transPointer = transactionCreate(transFileName, TransHEAD);
 	reviewPointer = reviewCreate(reviewFileName);
+
 	// trans
 	ReviewHEAD = reviewCreateLinked(reviewFileName);
 
@@ -47,18 +47,27 @@ int main() {
 
 	cout << &pointer << endl;
 
+	//linked list need +1
 	while (true) {
-		if (&pointer == &ReviewHEAD) {
+		cout << "prev cust id: " << curr->prevnode->_review->getCustId() << " | next cust id: " << curr->nextnode->_review->getCustId()
+			<< "\ncustomer id: " << curr->_review->getCustId()
+			<< " | prod id: " << curr->_review->getProdId() << " | rating: " << curr->_review->getRating()
+			<< " | text " << curr->_review->getReviewText() << endl;
+		curr = pointer;
+		pointer = pointer->nextnode;
+
+		if (curr->_review->getCustId() == ReviewHEAD->_review->getCustId()) {		
 			break;
 		}
-
-		cout << "Customer ID: " << curr->_review->custId
-			<< " | Prod ID: " << curr->_review->prodId
-			<< " | Rating: " << curr->_review->rating
-			<< " | Text " << curr->_review->reviewText << endl;
-		&curr = &pointer;
-		pointer = pointer->nextnode;
 	}
+	/*for (int i = 0; i < reviewNumOfLines+1; i++) {
+		cout << "prev cust id: " << curr->prevnode->_review->getCustId() << " | next cust id: " << curr->nextnode->_review->getCustId()
+			<< "\ncustomer id: " << curr->_review->getCustId()
+			<< " | prod id: " << curr->_review->getProdId() << " | rating: " << curr->_review->getRating()
+			<< " | text " << curr->_review->getReviewText() << endl;
+		curr = pointer;
+		pointer = pointer->nextnode;
+	}*/
 	cout << "finish list i think " << endl;
 
 	/*for (int i = 0; i < transNumOfLines; i++) {
