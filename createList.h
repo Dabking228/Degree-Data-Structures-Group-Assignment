@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "strucuture.h"
+#include "structure.h"
 
 int getNumberofLines(string filepath) {
 	int numberOfLines = 0;
