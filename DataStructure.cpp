@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "strucuture.h"
+#include "structure.h"
 #include "createList.h"
 
 
