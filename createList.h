@@ -192,6 +192,58 @@ transaction* transactionNodeCreate(string custId, string product, string catagor
 	return _transactionNode;
 }
 
+transactionNode* transactionCreateLinked(string filepath) {
+	transactionNode* HEAD{};
+	transactionNode* curr{};
+	transactionNode* prev{};
+	string custId, product, catagory, price, date, paymentMethod;
+
+	ifstream file(filepath);
+
+	if (!file.good()) {
+		cout << "Something wrong with review file under LinkedList!" << endl;
+		return nullptr;
+	}
+
+	while (file.good()) {
+		getline(file, custId, ',');
+		getline(file, product, ',');
+		getline(file, catagory, ',');
+		getline(file, price, ',');
+		getline(file, date, ',');
+		getline(file, paymentMethod);
+		if (custId == "Customer ID") {
+			continue;
+		}
+		if (custId == "") {
+			break;
+		}
+
+		if (HEAD == NULL) {
+			transactionNode* newnode = new transactionNode;
+			newnode->_transaction = transactionNodeCreate(custId, product,catagory,price, date, paymentMethod);
+			HEAD = curr = prev = newnode;
+			continue;
+		}
+		else {
+			transactionNode* newnode = new transactionNode;
+			curr = newnode;
+			curr->_transaction = transactionNodeCreate(custId, product, catagory, price, date, paymentMethod);
+			curr->prevnode = prev;
+			prev->nextnode = curr;
+			curr = newnode;
+			prev = newnode;
+			continue;
+		}
+	}
+
+	if (HEAD != NULL) {
+		HEAD->prevnode = prev;
+		curr->nextnode = HEAD;
+	}
+	return HEAD;
+}
+
 /*
 create a functiton that read through the file, for both transaction and review.
 but i want it to return a memory address for that array

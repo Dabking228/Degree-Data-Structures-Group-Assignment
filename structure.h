@@ -140,7 +140,7 @@ public:
 
 struct transactionNode {
 	transactionNode* prevnode;
-	transaction _transaction;
+	transaction* _transaction;
 	transactionNode* nextnode;
 };
 
