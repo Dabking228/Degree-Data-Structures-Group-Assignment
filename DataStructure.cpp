@@ -4,23 +4,6 @@
 #include "structure.h"
 #include "createList.h"
 
-transactionNode* createTransNode(string custId, string product, string catagory, string price, string date, string paymentMethod) {
-	transactionNode* newnode = new transactionNode;
-	transaction _transaction;
-
-	_transaction.custId = custId;
-	_transaction.product = product;
-	_transaction.catagory = catagory;
-	_transaction.price = stod(price);
-	_transaction.date = date;
-	_transaction.paymentMethod = paymentMethod;
-
-	newnode->prevnode = NULL;
-	newnode->_transaction = _transaction;
-	newnode->nextnode = NULL;
-
-	return newnode;
-}
 
 
 /*
