@@ -22,7 +22,9 @@ public:
 		this->date = date;
 		this->paymentMethod = paymentMethod;
 	}
-	transaction(){}
+	transaction(){
+		
+	}
 
 	// Getters
 	string getCustId() {
@@ -139,12 +141,20 @@ public:
 };
 
 struct transactionNode {
+	~transactionNode() {
+		cout << "transaction node is deleted" << endl;
+	}
+
 	transactionNode* prevnode;
 	transaction* _transaction;
 	transactionNode* nextnode;
 };
 
 struct reviewNode {
+	~reviewNode() {
+		cout << "Review node is deleted" << endl;
+	}
+
 	reviewNode* prevnode;
 	review* _review;
 	reviewNode* nextnode;

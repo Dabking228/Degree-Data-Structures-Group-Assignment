@@ -19,7 +19,7 @@ int getNumberofLines(string filepath) {
 	return numberOfLines;
 }
 
-transaction* transactionCreate(string filepath, transactionNode* transNodeAddress) {
+transaction* transactionCreate(string filepath) {
 	string custId, product, catagory, price, date, paymentMethod;
 
 	int numberOfTransaction = 0;
@@ -70,6 +70,7 @@ transaction* transactionCreate(string filepath, transactionNode* transNodeAddres
 	}
 
 	return transactionList;
+	
 
 }
 
@@ -120,15 +121,10 @@ review* reviewCreate(string filepath) {
 	}
 
 	return reviewList;
+
+
 }
 
-/*
-create head node if not exsit
-the asign the head node and as current
-head node exist
-then create newnode -> assign prew addr from curr (newnode) -> assign next addr from newnode (curr)
-done? then update addr of curr from newnode addr
-*/
 
 review* reviewNodeCreate(string prodId, string custId, string rating, string reviewText) {
 	review* _reviewNode = new review(prodId, custId, stoi(rating), reviewText);
@@ -244,8 +240,3 @@ transactionNode* transactionCreateLinked(string filepath) {
 	return HEAD;
 }
 
-/*
-create a functiton that read through the file, for both transaction and review.
-but i want it to return a memory address for that array
-maybe i should try it inside main.cpp 1st before
-*/
