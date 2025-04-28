@@ -127,7 +127,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ArrayProgram.cpp" />
     <ClCompile Include="DataStructure.cpp" />
+    <ClCompile Include="LinkedListProgram.cpp" />
     <ClCompile Include="structure.h" />
   </ItemGroup>
   <ItemGroup>

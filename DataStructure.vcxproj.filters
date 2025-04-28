@@ -18,8 +18,14 @@
     <ClCompile Include="DataStructure.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="strucuture.h">
+    <ClCompile Include="structure.h">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArrayProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LinkedListProgram.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
