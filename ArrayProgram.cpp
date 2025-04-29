@@ -1,17 +1,19 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <chrono>
 #include "structure.h"
 #include "createList.h"
-string TransFILENAME = "transactions.csv";
-string reviewFILENAME = "reviews.csv";
+#include "CreateArray.h"
+string TransFILENAME = "transactions_cleaned.csv";
+string reviewFILENAME = "reviews_cleaned.csv";
 
 void showArray() {
-	int transNumOfLines = getNumberofLines(TransFILENAME);
-	int reviewNumOfLines = getNumberofLines(reviewFILENAME);
-
 	transaction* transArray = transactionCreate(TransFILENAME);
 	review* reviewArray = reviewCreate(reviewFILENAME);
+
+	int transNumOfLines = getNumberofLines(transArray);
+	int reviewNumOfLines = getNumberofLines(reviewArray);
 
 	for (int i = 0; i < transNumOfLines; i++) {
 		cout << transArray[i].getCustId() << ", " << transArray[i].getProduct() << ", " << transArray[i].getCategory() << endl;
@@ -26,5 +28,20 @@ void showArray() {
 }
 
 int main() {
+	chrono::time_point<chrono::system_clock> Tstart, Tend, Rstart, Rend;
+
+	Tstart = chrono::system_clock::now();
+	transaction* temp = transactionCreate(TransFILENAME);
+	Tend = chrono::system_clock::now();
+
+	chrono::duration<double> Ttaken = Tend - Tstart;
+	cout << "time take: " << Ttaken.count() << endl;
+
+	Rstart = chrono::system_clock::now();
+	review* temp2 = reviewCreate(reviewFILENAME);
+	Rend = chrono::system_clock::now();
+
+	chrono::duration<double> Rtaken = Rend - Rstart;
+	cout << "time take: " << Rtaken.count() << endl;
 
 }
