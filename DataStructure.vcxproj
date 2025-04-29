@@ -128,13 +128,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ArrayProgram.cpp" />
-    <ClCompile Include="CreateLinkedList.h" />
     <ClCompile Include="LinkedListProgram.cpp" />
     <ClCompile Include="structure.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CreateArray.h" />
-    <ClInclude Include="createList.h" />
+    <ClInclude Include="CreateLinkedList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
