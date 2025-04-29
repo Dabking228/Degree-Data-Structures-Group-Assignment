@@ -112,8 +112,15 @@ review* reviewCreate(string filepath) {
 		if (prodId == "" && custId == "" && rating == "" && reviewText == "") {
 			break; // stops when no more records
 		}
-		if (prodId == "" || custId == "" || rating == "" || reviewText == "") { // data cleaning line
+		if (prodId == "" || custId == "" || rating == "" || reviewText == "" ) { // data cleaning line
 			continue; // skip missing values
+		}
+		// test if the rating can convert to interger
+		try {
+			stoi(rating);
+		}
+		catch (exception& err) {
+			continue;
 		}
 		if (index >= numberOfReview) {
 			break;
@@ -166,19 +173,24 @@ reviewNode* reviewCreateLinked(string filepath) {
 		if (prodId == "" || custId == "" || rating == "" || reviewText == "") { // data cleaning line
 			continue; // skip missing values
 		}
+		// test if the rating can convert to interger
+		try { 
+			stoi(rating); 
+		}
+		catch (exception &err) {
+			continue;
+		}
 		
 		if (HEAD == NULL) {
 			reviewNode* newnode = new reviewNode;
 			newnode->_review = reviewNodeCreate(prodId, custId, rating, reviewText);
-			newnode->nextnode = nullptr;
-			newnode->prevnode = nullptr;
-			HEAD = curr = newnode;
+			HEAD = curr = prev = newnode;
+			continue;
 		}
 		else {
 			reviewNode* newnode = new reviewNode;
 			curr = newnode;
 			curr->_review = reviewNodeCreate(prodId, custId, rating, reviewText);
-			curr->nextnode = newnode;
 			curr->prevnode = prev;
 			prev->nextnode = curr;
 			curr = newnode;
@@ -187,7 +199,10 @@ reviewNode* reviewCreateLinked(string filepath) {
 		}
 	}
 
-
+	if (HEAD != NULL) {
+		HEAD->prevnode = prev;
+		curr->nextnode = HEAD;
+	}
 	return HEAD;
 }
 
