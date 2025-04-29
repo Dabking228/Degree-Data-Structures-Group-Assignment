@@ -18,7 +18,7 @@ transactionNode* transactionCreateLinked(string filepath) {
 	ifstream file(filepath);
 
 	if (!file.good()) {
-		cout << "Something wrong with review file under LinkedList!" << endl;
+		cout << "Something wrong with transation file under LinkedList!" << endl;
 		return nullptr;
 	}
 

@@ -5,8 +5,8 @@
 #include "structure.h"
 #include "CreateLinkedList.h"
 #include "array"
-string TransFILENAME = "transactions.csv";
-string reviewFILENAME = "reviews.csv";
+string TransFILENAME = "./datasets/transactions.csv";
+string reviewFILENAME = "./datasets/reviews.csv";
 
 //void deleteAllNode(transactionNode*& HEAD) {
 //	transactionNode* curr = HEAD->nextnode;
@@ -99,9 +99,7 @@ int LListLength(reviewNode* node) {
 		if (curr->nextnode == nullptr) {
 			break;
 		}
-		
 		curr = curr->nextnode;
-		cout << totalNodes << endl;
 	}
 
 	return totalNodes;
@@ -121,7 +119,7 @@ int main() {
 	reviewNode* temp2 = reviewCreateLinked(reviewFILENAME);
 	Rend = chrono::system_clock::now();
 
-	cout << LListLength(temp2) << endl;
+	cout << "Review Length: " << LListLength(temp2) << endl;
 
 	chrono::duration<double> Rtaken = Rend - Rstart;
 	cout << "time take: " << Rtaken.count() << endl;
