@@ -3,8 +3,8 @@
 #include <sstream>
 #include "structure.h"
 #include "createList.h"
-string TransFILENAME = "transactions_cleaned.csv";
-string reviewFILENAME = "reviews_cleaned.csv";
+string TransFILENAME = "transactions.csv";
+string reviewFILENAME = "reviews.csv";
 
 void showArray() {
 	int transNumOfLines = getNumberofLines(TransFILENAME);

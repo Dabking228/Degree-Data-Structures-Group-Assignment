@@ -4,8 +4,8 @@
 #include <chrono>
 #include "structure.h"
 #include "createList.h"
-string TransFILENAME = "transactions_cleaned.csv";
-string reviewFILENAME = "reviews_cleaned.csv";
+string TransFILENAME = "transactions.csv";
+string reviewFILENAME = "reviews.csv";
 
 /*
 transaction* Array

@@ -4,6 +4,8 @@
 #include <sstream>
 #include "structure.h"
 
+// this file creates transaction and review array and linked list
+
 int getNumberofLines(string filepath) {
 	int numberOfLines = 0;
 	string lines;
@@ -20,7 +22,7 @@ int getNumberofLines(string filepath) {
 }
 
 transaction* transactionCreate(string filepath) {
-	string custId, product, catagory, price, date, paymentMethod;
+	string custId, product, category, price, date, paymentMethod;
 
 	int numberOfTransaction = 0;
 	string lines;
@@ -44,15 +46,18 @@ transaction* transactionCreate(string filepath) {
 	while (file.good()) {
 		getline(file, custId, ',');
 		getline(file, product, ',');
-		getline(file, catagory, ',');
+		getline(file, category, ',');
 		getline(file, price, ',');
 		getline(file, date, ',');
 		getline(file, paymentMethod);
 		if (custId == "Customer ID") {
 			continue;
 		}
-		if (custId == "") {
-			break;
+		if (custId == "" && product == "" && category == "" && price == "" && date == "" && paymentMethod == "") {
+			break; // stops when no more records
+		}
+		if (custId == "" || product == "" || category == "" || price == "" || date == "" || paymentMethod == "") { // data cleaning line
+			continue; // skip missing values
 		}
 		if (index >= numberOfTransaction) {
 			break;
@@ -61,7 +66,7 @@ transaction* transactionCreate(string filepath) {
 		// array creation
 		transactionList[index].setCustId(custId);
 		transactionList[index].setProduct(product);
-		transactionList[index].setCatagory(catagory);
+		transactionList[index].setCatagory(category);
 		transactionList[index].setPrice(stod(price));
 		transactionList[index].setDate(date);
 		transactionList[index].setPaymentMethod(paymentMethod);
@@ -104,8 +109,11 @@ review* reviewCreate(string filepath) {
 		if (prodId == "Product ID") {
 			continue;
 		}
-		if (prodId == "") {
-			break;
+		if (prodId == "" && custId == "" && rating == "" && reviewText == "") {
+			break; // stops when no more records
+		}
+		if (prodId == "" || custId == "" || rating == "" || reviewText == "") { // data cleaning line
+			continue; // skip missing values
 		}
 		if (index >= numberOfReview) {
 			break;
@@ -152,8 +160,11 @@ reviewNode* reviewCreateLinked(string filepath) {
 		if (prodId == "Product ID") {
 			continue;
 		}
-		if (prodId == "") {
-			break;
+		if (prodId == "" && custId == "" && rating == "" && reviewText == "") {
+			break; // stops when no more records
+		}
+		if (prodId == "" || custId == "" || rating == "" || reviewText == "") { // data cleaning line
+			continue; // skip missing values
 		}
 		
 		if (HEAD == NULL) {
@@ -183,8 +194,8 @@ reviewNode* reviewCreateLinked(string filepath) {
 
 
 
-transaction* transactionNodeCreate(string custId, string product, string catagory, string price, string date, string paymentMethod) {
-	transaction* _transactionNode = new transaction(custId, product,catagory,stod(price),date,paymentMethod);
+transaction* transactionNodeCreate(string custId, string product, string category, string price, string date, string paymentMethod) {
+	transaction* _transactionNode = new transaction(custId, product,category,stod(price),date,paymentMethod);
 	return _transactionNode;
 }
 
@@ -192,7 +203,7 @@ transactionNode* transactionCreateLinked(string filepath) {
 	transactionNode* HEAD{};
 	transactionNode* curr{};
 	transactionNode* prev{};
-	string custId, product, catagory, price, date, paymentMethod;
+	string custId, product, category, price, date, paymentMethod;
 
 	ifstream file(filepath);
 
@@ -204,27 +215,30 @@ transactionNode* transactionCreateLinked(string filepath) {
 	while (file.good()) {
 		getline(file, custId, ',');
 		getline(file, product, ',');
-		getline(file, catagory, ',');
+		getline(file, category, ',');
 		getline(file, price, ',');
 		getline(file, date, ',');
 		getline(file, paymentMethod);
 		if (custId == "Customer ID") {
 			continue;
 		}
-		if (custId == "") {
-			break;
+		if (custId == "" && product == "" && category == "" && price == "" && date == "" && paymentMethod == "") {
+			break; // stops when no more records
+		}
+		if (custId == "" || product == "" || category == "" || price == "" || date == "" || paymentMethod == "") { // data cleaning line
+			continue; // skip missing values
 		}
 
 		if (HEAD == NULL) {
 			transactionNode* newnode = new transactionNode;
-			newnode->_transaction = transactionNodeCreate(custId, product,catagory,price, date, paymentMethod);
+			newnode->_transaction = transactionNodeCreate(custId, product,category,price, date, paymentMethod);
 			HEAD = curr = prev = newnode;
 			continue;
 		}
 		else {
 			transactionNode* newnode = new transactionNode;
 			curr = newnode;
-			curr->_transaction = transactionNodeCreate(custId, product, catagory, price, date, paymentMethod);
+			curr->_transaction = transactionNodeCreate(custId, product, category, price, date, paymentMethod);
 			curr->prevnode = prev;
 			prev->nextnode = curr;
 			curr = newnode;

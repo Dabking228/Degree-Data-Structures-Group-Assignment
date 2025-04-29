@@ -2,6 +2,8 @@
 #include <iostream>
 using namespace std;
 
+// this file contains all class / struct for transaction and review
+
 class transaction{
 private:
 	// Attributes
@@ -60,8 +62,8 @@ public:
 		this->product = product;
 	}
 
-	void setCatagory(string catagory) {
-		this->category = catagory;
+	void setCatagory(string category) {
+		this->category = category;
 	}
 
 	void setPrice(double price) {
