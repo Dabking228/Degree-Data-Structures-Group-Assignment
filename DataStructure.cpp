@@ -7,46 +7,28 @@
 string TransFILENAME = "transactions.csv";
 string reviewFILENAME = "reviews.csv";
 
+transactionNode* createTransNode(string custId, string product, string catagory, string price, string date, string paymentMethod) {
+	transactionNode* newnode = new transactionNode;
+	transaction _transaction;
+
+	_transaction.custId = custId;
+	_transaction.product = product;
+	_transaction.catagory = catagory;
+	_transaction.price = stod(price);
+	_transaction.date = date;
+	_transaction.paymentMethod = paymentMethod;
+
+	newnode->prevnode = NULL;
+	newnode->_transaction = _transaction;
+	newnode->nextnode = NULL;
+
+	return newnode;
+}
+
+
 /*
-transaction* Array
-transactionNode* LinkedList's Head
-
-getNumberofLines(FILENAME) // return the amount of lines in the file, when skiping header
-
-transactionCreate(TransFILENAME); // reutrn the array of transaction
-reviewCreate(reviewFILENAME); // return the array of review
-
-transactionCreateLinked(TransFILENAME); //reutrn the HEAD of the linked list from transaction
-reviewCreateLinked(reviewFILENAME); // return the HEAD of linked list from review
-
-deleteAllNode(); // delete all the node based on which HEAD you provided with
-*/
-
-void deleteAllNode(transactionNode* HEAD) {
-	transactionNode* curr = HEAD->nextnode;
-	while (curr != HEAD) {
-		transactionNode* next = curr->nextnode;
-		delete curr;
-		curr = next;
-	}
-	delete HEAD;
-	HEAD = NULL;
-}
-
-void deleteAllNode(reviewNode* HEAD) {
-	reviewNode* curr = HEAD->nextnode;
-	while (curr != HEAD) {
-		reviewNode* next = curr->nextnode;
-		delete curr;
-		curr = next;
-	}
-	delete HEAD;
-	HEAD = NULL;
-}
-
-void showArray() {
-	int transNumOfLines = getNumberofLines(TransFILENAME);
-	int reviewNumOfLines = getNumberofLines(reviewFILENAME);
+Array List is complete
+Linked List need to create
 
 	transaction* transArray = transactionCreate(TransFILENAME);
 	review* reviewArray = reviewCreate(reviewFILENAME);
@@ -69,8 +51,17 @@ void showLinkedList() {
 	transactionNode* TransHEAD = nullptr;
 	reviewNode* ReviewHEAD = nullptr;
 
-	TransHEAD = transactionCreateLinked(TransFILENAME);
-	ReviewHEAD = reviewCreateLinked(reviewFILENAME);
+	// codes goes here
+	transPointer = transactionCreate(transFileName, TransHEAD);
+	reviewPointer = reviewCreate(reviewFileName);
+	// trans
+	ReviewHEAD = reviewCreateLinked(reviewFileName);
+
+
+	cout << transPointer << endl;
+	cout << reviewPointer << endl;
+	//cout << TransHEAD << endl;
+	cout << &ReviewHEAD << endl;
 
 	transactionNode* TransCurr = TransHEAD;
 	transactionNode* TransPointer = TransHEAD->nextnode;
@@ -91,31 +82,19 @@ void showLinkedList() {
 		}
 	}
 
-	//loop transaction
 	while (true) {
-		cout << " prev cust id " << TransCurr->prevnode->_transaction->getCustId() << " | next cust id: " << TransCurr->nextnode->_transaction->getCustId()
-			<< "\n customer id: " << TransCurr->_transaction->getCustId()
-			<< " | Cata: " << TransCurr->_transaction->getCategory()
-			<< " | Product: " << TransCurr->_transaction->getProduct()
-			<< " | Price: " << TransCurr->_transaction->getPrice() << endl;
-		TransCurr = TransPointer;
-		TransPointer = TransPointer->nextnode;
-		if (TransCurr->_transaction->getCustId() == TransHEAD->_transaction->getCustId()) {
+		if (&pointer == &ReviewHEAD) {
 			break;
 		}
+
+		cout << "Customer ID: " << curr->_review->custId
+			<< " | Prod ID: " << curr->_review->prodId
+			<< " | Rating: " << curr->_review->rating
+			<< " | Text " << curr->_review->reviewText << endl;
+		&curr = &pointer;
+		pointer = pointer->nextnode;
 	}
-
-	deleteAllNode(TransHEAD);
-	deleteAllNode(ReviewHEAD);
-}
-
-int main() {
-
-	int transNumOfLines = getNumberofLines(TransFILENAME);
-	int reviewNumOfLines = getNumberofLines(reviewFILENAME);
-
-	//showArray();
-	//showLinkedList();
+	cout << "finish list i think " << endl;
 
 
 	cout << "finish list i think " << endl;

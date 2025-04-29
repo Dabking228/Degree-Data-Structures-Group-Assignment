@@ -170,13 +170,15 @@ reviewNode* reviewCreateLinked(string filepath) {
 		if (HEAD == NULL) {
 			reviewNode* newnode = new reviewNode;
 			newnode->_review = reviewNodeCreate(prodId, custId, rating, reviewText);
-			HEAD = curr = prev = newnode;
-			continue;
+			newnode->nextnode = nullptr;
+			newnode->prevnode = nullptr;
+			HEAD = curr = newnode;
 		}
 		else {
 			reviewNode* newnode = new reviewNode;
 			curr = newnode;
 			curr->_review = reviewNodeCreate(prodId, custId, rating, reviewText);
+			curr->nextnode = newnode;
 			curr->prevnode = prev;
 			prev->nextnode = curr;
 			curr = newnode;
@@ -185,10 +187,7 @@ reviewNode* reviewCreateLinked(string filepath) {
 		}
 	}
 
-	if (HEAD != NULL) {
-		HEAD->prevnode = prev;
-		curr->nextnode = HEAD;
-	}
+
 	return HEAD;
 }
 
