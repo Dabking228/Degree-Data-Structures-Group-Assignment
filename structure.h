@@ -78,9 +78,9 @@ public:
 		this->paymentMethod = paymentMethod;
 	}
 	// Destructor
-	~transaction() {
+	/*~transaction() {
 		cout << "Transaction done by " << custId << " for " << product << " on " << date << " is deleted!" << endl;
-	}
+	}*/
 };
 
 class review {
@@ -137,9 +137,9 @@ public:
 	}
 
 	// Destructor
-	~review() {
-		cout << "Review for " << prodId << " by " << custId << " is deleted!" << endl;
-	}
+	//~review() {
+	//	cout << "Review for " << prodId << " by " << custId << " is deleted!" << endl;
+	//}
 };
 
 struct transactionNode {
