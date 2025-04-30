@@ -8,7 +8,9 @@ template <typename T> class Array {
 	T* typePointer {};
 
 public:
-	Array(string FILENAME);
+	Array(string FILENAME) {
+		this->FILENAME = FILENAME;
+	}
 
 	void createArray();
 

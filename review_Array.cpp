@@ -5,10 +5,6 @@
 using namespace std;
 
 template<>
-Array<review>::Array(string FILENAME) {
-	this->FILENAME = FILENAME;
-}
-
 void Array<review>::createArray() {
 	cout << "Creating Review Array.. " << endl;
 	string prodId, custId, rating, reviewText;

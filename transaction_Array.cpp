@@ -5,10 +5,6 @@
 using namespace std;
 
 template<>
-Array<transaction>::Array(string FILENAME) {
-	this->FILENAME = FILENAME;
-}
-
 void Array<transaction>::createArray() {
 	cout << "Creating Transaction Array." << endl;
 	string custId, product, category, price, date, paymentMethod;

@@ -1,26 +1,33 @@
 #include "Array.hpp"
+#include "LinkedList.hpp"
 #include <iostream>
 using namespace std;
 string TrnasFILENAME = "./datasets/transactions.csv";
 string ReviewFILENAME = "./datasets/reviews.csv";
 
+
 int main() {
+	LinkedList<transaction> _TransactionLinked(TrnasFILENAME);
+	LinkedList<review> _ReviewLinked(ReviewFILENAME);
+
+	_TransactionLinked.createLinkedList();
+	_ReviewLinked.createLinkedList();
+
+
+	cout << _TransactionLinked.getListLength() << endl;
+	cout << _ReviewLinked.getListLength() << endl;
+	 
+	 
 	Array<transaction> _Transaction(TrnasFILENAME);
-	Array<review> _review(ReviewFILENAME);
+	Array<review> _Review(ReviewFILENAME);
 
-	// init this
+	// initialize this
 	_Transaction.createArray();
+	_Review.createArray();
+	//transaction* arrayTransaction = _Transaction.getArray();
+	//review* arrayReview = _Review.getArray();
 
-	transaction* arrayTransaction = _Transaction.getArray();
 	cout << _Transaction.getArrayLength() << endl;
-
-	//for (int i = 0; i < _Transaction.getArrayLength(); i++) {
-	//	cout << arrayTransaction->category << " | "
-	//		<< arrayTransaction->custId << " | "
-	//		<< arrayTransaction->date << " | "
-	//		<< arrayTransaction->paymentMethod << " | "
-	//		<< arrayTransaction->price << " | "
-	//		<< arrayTransaction->product << endl;
-	//}
+	cout << _Review.getArrayLength() << endl;
 }
 
