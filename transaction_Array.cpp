@@ -97,7 +97,8 @@ void Array<transaction>::createArray() {
 		getline(ss, paymentMethod, ',');
 
 		if (isValidTransaction(custId, product, category, priceStr, date, paymentMethod)) {
-			this->typePointer[index++] = new transaction(custId, product, category, priceStr, date, paymentMethod);
+			this->typePointer[index] = new transaction(custId, product, category, priceStr, date, paymentMethod);
+			index++;
 		}
 	}
 	this->arrayLength = index;
