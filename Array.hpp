@@ -4,8 +4,8 @@ using namespace std;
 
 template <typename T> class Array {
 	string FILENAME;
-	int arrayLength;
-	T* typePointer {};
+	int arrayLength = 0;
+	T** typePointer = nullptr;
 
 	void toggleClone() {
 		if (!isClone) {
@@ -21,11 +21,20 @@ public:
 		this->FILENAME = FILENAME;
 	}
 
-	~Array() { delete[] typePointer; }
+	~Array() { 
+		if (typePointer != nullptr) {
+			for (int i = 0; i < arrayLength; ++i) {
+				delete typePointer[i];
+			}
+			delete[] typePointer;
+		}
+	}
 
 	void createArray();
 
-	T* getArray() {
+	int getNumOfValidLines();
+
+	T** getArray() const{
 		return typePointer;
 	}
 
@@ -39,13 +48,16 @@ public:
 			return nullptr;
 		} 
 
-		if (FILENAME == "" || this->arrayLength == 0) { cout << "return nullptr, please initliaze before cloning! " << endl; return nullptr; }
+		if (FILENAME.empty() || this->arrayLength == 0) {
+			cout << "Return nullptr, please initialize before cloning! " << endl;
+			return nullptr; 
+		}
 		Array<T>* newArray = new Array<T>(this->FILENAME);
 		newArray->arrayLength = this->arrayLength;
-		newArray->typePointer = new T[this->arrayLength];
+		newArray->typePointer = new T*[this->arrayLength];
 
 		for (int i = 0; i < this->arrayLength; i++) {
-			newArray->typePointer[i] = this->typePointer[i];
+			newArray->typePointer[i] = new T(*this->typePointer[i]);
 		}
 
 		newArray->toggleClone();
