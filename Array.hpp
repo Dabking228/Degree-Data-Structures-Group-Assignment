@@ -52,4 +52,6 @@ public:
 		return newArray;
 	}
 
+	void arrayLinearSearch();
+
 };

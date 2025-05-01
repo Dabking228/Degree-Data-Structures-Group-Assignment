@@ -32,7 +32,22 @@ void initializeData() {
 int main() {
 	initializeData();
 
+	while (true) {
 
+		int option;
+		cout << "Enter 2 to search or -1 to exit: ";
+		cin >> option;
+
+		switch (option) {
+		case 2: {
+			_TransactionArray.arrayLinearSearch();
+			break;
+		}
+		case -1: {
+			return 0;
+		}
+		}
+	}
 
 	//cout << _TransactionLinked.getListLength() << endl;
 	//cout << _ReviewLinked.getListLength() << endl;

@@ -15,40 +15,54 @@ string toLower(const string& input) {
 
 template <typename T>
 
-Array<T> Array<T>::arrayLinearSearch() {
+void Array<T>::arrayLinearSearch() {
 
     string category, keyword;
-    cout << "Search in which category? ";
-    cin.ignore();
-    getline(cin, category);
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    if (category.empty()) {
-        cout << "Error! Category is empty!" << endl;
-        return Array<T>(0);
+    while (true) {
+        cout << "Enter your Search Category: ";
+        getline(cin, category);
+        category = toLower(category);
+        
+
+        if (category.empty()) {
+            cout << "Error! Category is empty!" << endl;
+            continue;
+        }
+
+        if (category != "customerid" &&
+            category != "product" &&
+            category != "category" &&
+            category != "price" &&
+            category != "date" &&
+            category != "payment method") {
+            cout << "Invalid category! Please enter one of: customerId, product, category, price, date, payment method." << endl;
+            continue;
+        }
+
+        break;
     }
+    
+    while (true) {
+        cout << "Enter your Keyword: ";
+        getline(cin, keyword);
 
-    cout << "Keyword: ";
-    getline(cin, keyword);
+        if (keyword.empty()) {
+            cout << "Error! Keyword is empty!" << endl;
+            continue;
+        }
 
-    if (keyword.empty()) {
-        cout << "Error! Keyword is empty!" << endl;
-        return Array<T>(0); 
+        break;
     }
+    
 
     if (typePointer == nullptr || arrayLength == 0) {
         cout << "Error! Array is empty!" << endl;
-        return Array<T>(0); 
+        return; 
     }
 
     int matchCount = 0;
-
-    try {
-        category = toLower(category);
-    }
-    catch (...) {
-        cout << "Invalid category!" << endl;
-        return Array<T>(0);
-    }
 
     for (int i = 0; i < arrayLength; ++i) {
         if ((category == "customerid" && typePointer[i].custId == keyword) ||
@@ -95,15 +109,23 @@ Array<T> Array<T>::arrayLinearSearch() {
     cout << "Number of results found: " << matchCount << " out of 4128 entries." << endl << endl;
 
     int option;
+
+
     cout << "Search again in filtered list? (1: Yes, -1: No): ";
     cin >> option;
 
-    if (option == 1) {
-        return resultArray.arrayLinearSearch();
+    while (true) {
+        if (option == 1) {
+            resultArray.arrayLinearSearch();
+        }
+        else if (option == -1) {
+            return;
+        }
+        else {
+            cout << "Invalid Input!" << endl;
+        }
     }
-    else {
-        return resultArray;
-    }
+    
 }
 
 template class Array<transaction>;
