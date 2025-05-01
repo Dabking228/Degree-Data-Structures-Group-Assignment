@@ -21,4 +21,6 @@ public:
 	int getArrayLength() {
 		return arrayLength;
 	}
+
+	Array<T> arrayLinearSearch();
 };
