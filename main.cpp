@@ -1,33 +1,43 @@
 #include "Array.hpp"
 #include "LinkedList.hpp"
 #include <iostream>
+#include <chrono>
 using namespace std;
 string TrnasFILENAME = "./datasets/transactions.csv";
 string ReviewFILENAME = "./datasets/reviews.csv";
 
-
-int main() {
+namespace {
 	LinkedList<transaction> _TransactionLinked(TrnasFILENAME);
 	LinkedList<review> _ReviewLinked(ReviewFILENAME);
+
+	Array<transaction> _TransactionArray(TrnasFILENAME);
+	Array<review> _ReviewArray(ReviewFILENAME);
+}
+
+void initializeData() {
+	chrono::time_point<chrono::system_clock> start,end;
+	start = chrono::system_clock::now();
 
 	_TransactionLinked.createLinkedList();
 	_ReviewLinked.createLinkedList();
 
+	_TransactionArray.createArray();
+	_ReviewArray.createArray();
 
-	cout << _TransactionLinked.getListLength() << endl;
-	cout << _ReviewLinked.getListLength() << endl;
-	 
-	 
-	Array<transaction> _Transaction(TrnasFILENAME);
-	Array<review> _Review(ReviewFILENAME);
+	end = chrono::system_clock::now();
+	chrono::duration<double> taken = end - start;
+	cout << "time take: " << taken.count() << endl;
+}
 
-	// initialize this
-	_Transaction.createArray();
-	_Review.createArray();
-	//transaction* arrayTransaction = _Transaction.getArray();
-	//review* arrayReview = _Review.getArray();
+int main() {
+	initializeData();
 
-	cout << _Transaction.getArrayLength() << endl;
-	cout << _Review.getArrayLength() << endl;
+
+
+	//cout << _TransactionLinked.getListLength() << endl;
+	//cout << _ReviewLinked.getListLength() << endl;
+
+	//cout << _TransactionArray.getArrayLength() << endl;
+	//cout << _ReviewArray.getArrayLength() << endl;
 }
 

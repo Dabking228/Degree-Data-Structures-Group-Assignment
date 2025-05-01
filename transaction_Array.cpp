@@ -6,7 +6,7 @@ using namespace std;
 
 template<>
 void Array<transaction>::createArray() {
-	cout << "Creating Transaction Array." << endl;
+	cout << "Creating Transaction Array. \t";
 	string custId, product, category, price, date, paymentMethod;
 	int index = 0;
 
@@ -15,28 +15,9 @@ void Array<transaction>::createArray() {
 
 	if (!file.good()) {
 		cout << "Something wrong with transaction file!" << endl;
-		//return nullptr;
 	}
 
-
-	//transaction* transactionList = new transaction[numberOfTransaction];
-	//transaction* transactionList = new transaction[index + 1];
 	this->typePointer = new transaction[index + 1];
-
-
-	/*
-	idea 1
-	create new while, get number, crete array
-
-	idea 2
-	create array, if there is new data, create and copy old array + 1, add item
-
-
-	4183??? shd be 4128
-	price got NaN, date got "Invalid Date"
-	neeed to filter those out
-
-	*/
 
 	while (file.good()) {
 		getline(file, custId, ',');

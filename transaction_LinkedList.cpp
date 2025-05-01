@@ -6,14 +6,13 @@ using namespace std;
 
 template<>
 void LinkedList<transaction>::createLinkedList() {
-	cout << "Creating Trans Linked List.." << endl;
+	cout << "Creating Trans Linked List.. \t";
 	string custId, product, category, price, date, paymentMethod;
 
 	ifstream file(this->FILENAME);
 
 	if (!file.good()) {
 		cout << "Something wrong with transation file under LinkedList!" << endl;
-		//return nullptr;
 	}
 
 	while (file.good()) {
