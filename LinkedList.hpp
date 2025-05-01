@@ -33,7 +33,7 @@ public:
 		else if (_NodeHEAD != NULL) {
 			_NodeCurr->nextnode = node;
 			node->prevnode = _NodeCurr;
-			_NodeTAIL = node;
+			_NodeTAIL = _NodeCurr = node;
 		}
 	}
 
