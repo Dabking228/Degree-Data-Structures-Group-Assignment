@@ -127,13 +127,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ArrayProgram.cpp" />
     <ClCompile Include="review_Array.cpp" />
     <ClCompile Include="review_LinkedList.cpp" />
     <ClCompile Include="transaction_Array.cpp" />
-    <ClCompile Include="LinkedListProgram.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="structure.h" />
     <ClCompile Include="transaction_LinkedList.cpp" />
   </ItemGroup>
   <ItemGroup>

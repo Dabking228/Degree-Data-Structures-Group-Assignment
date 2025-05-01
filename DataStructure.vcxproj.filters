@@ -15,15 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="structure.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ArrayProgram.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LinkedListProgram.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="transaction_Array.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
