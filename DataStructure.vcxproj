@@ -138,6 +138,7 @@
     <ClInclude Include="CreateArray.h" />
     <ClInclude Include="CreateLinkedList.h" />
     <ClInclude Include="LinkedList.hpp" />
+    <ClInclude Include="SortAlgorithm.hpp" />
     <ClInclude Include="structure.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

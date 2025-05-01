@@ -32,7 +32,13 @@ void initializeData() {
 int main() {
 	initializeData();
 
+	// i want to dupe the _XY, use that XY for sorting purpose
 
+	//Array<transaction>* _newArray = _TransactionArray.clone();
+	//Array<transaction>* _newnewArray = _newArray->clone();
+
+	LinkedList<transaction>* _hteelo = _TransactionLinked.clone();
+	LinkedList<transaction>* _whteelo = _hteelo->clone();
 
 	//cout << _TransactionLinked.getListLength() << endl;
 	//cout << _ReviewLinked.getListLength() << endl;
