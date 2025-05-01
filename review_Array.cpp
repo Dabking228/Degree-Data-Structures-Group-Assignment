@@ -6,7 +6,7 @@ using namespace std;
 
 template<>
 void Array<review>::createArray() {
-	cout << "Creating Review Array.. " << endl;
+	cout << "Creating Review Array.. \t";
 	string prodId, custId, rating, reviewText;
 	int index = 0;
 
@@ -15,7 +15,6 @@ void Array<review>::createArray() {
 
 	if (!file.good()) {
 		cout << "Something wrong with review file!" << endl;
-		//return nullptr;
 	}
 
 	this->typePointer = new review[index + 1];
@@ -62,7 +61,6 @@ void Array<review>::createArray() {
 
 	cout << "Review Array Created!" << endl;
 	this->arrayLength = index;
-	//return reviewList;
 }
 
 template class Array<review>;

@@ -6,7 +6,7 @@ using namespace std;
 
 template <>
 void LinkedList<review>::createLinkedList() {
-	cout << "Creating Review Linked List.." << endl;
+	cout << "Creating Review Linked List.. \t";
 	string prodId, custId, rating, reviewText;
 
 	ifstream file(this->FILENAME);
