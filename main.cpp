@@ -15,7 +15,7 @@ namespace {
 }
 
 void initializeData() {
-	chrono::time_point<chrono::system_clock> start,end;
+	chrono::time_point<chrono::system_clock> start, end;
 	start = chrono::system_clock::now();
 
 	_TransactionLinked.createLinkedList();
@@ -29,29 +29,16 @@ void initializeData() {
 	cout << "time take: " << taken.count() << endl;
 }
 
-	cout << _TransactionLinked.getListLength() << endl;
-	cout << _ReviewLinked.getListLength() << endl;
-	 
-	 
-	Array<transaction> _Transaction(TrnasFILENAME);
-	Array<review> _Review(ReviewFILENAME);
+int main() {
+	initializeData();
+
+
 
 	//cout << _TransactionLinked.getListLength() << endl;
 	//cout << _ReviewLinked.getListLength() << endl;
 
-	cout << _Transaction.getArrayLength() << endl;
-	cout << _Review.getArrayLength() << endl;
-}
-
-		case 2: {
-			Array<transaction> search = _Transaction.arrayLinearSearch();
-			break;
-		}
-		case -1: {
-			return 0;
-		}
-		}
-	}
+	//cout << _TransactionArray.getArrayLength() << endl;
+	//cout << _ReviewArray.getArrayLength() << endl;
 }
 
 
