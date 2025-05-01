@@ -7,6 +7,15 @@ template <typename T> class Array {
 	int arrayLength;
 	T* typePointer {};
 
+	void toggleClone() {
+		if (!isClone) {
+			isClone = !isClone;
+		}
+	}
+
+private:
+	bool isClone = false;
+
 public:
 	Array(string FILENAME) {
 		this->FILENAME = FILENAME;
@@ -25,9 +34,13 @@ public:
 	}
 
 	Array<T>* clone() const {
-		if (this->FILENAME == 0 || this->arrayLength == 0) { cout<< "return nullptr, please initliaze before cloning! " return nullptr };
-		Array<T>* newArray;
-		newArray->FILENAME = this->FILENAME;
+		if (isClone) {
+			cout << "Please use the same variable that is assigned." << endl;
+			return nullptr;
+		} 
+
+		if (FILENAME == "" || this->arrayLength == 0) { cout << "return nullptr, please initliaze before cloning! " << endl; return nullptr; }
+		Array<T>* newArray = new Array<T>(this->FILENAME);
 		newArray->arrayLength = this->arrayLength;
 		newArray->typePointer = new T[this->arrayLength];
 
@@ -35,6 +48,7 @@ public:
 			newArray->typePointer[i] = this->typePointer[i];
 		}
 
+		newArray->toggleClone();
 		return newArray;
 	}
 
