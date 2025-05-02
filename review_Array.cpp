@@ -80,6 +80,9 @@ void Array<review>::createArray() {
 	this->arrayLength = index;
 	cout << "Successfully loaded " << index << " valid reviews!" << endl;
 }
+
+template class Array<review>;
+
 /*	int index = 0;
 
 

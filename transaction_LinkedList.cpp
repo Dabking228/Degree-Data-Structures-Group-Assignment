@@ -52,6 +52,8 @@ Node<transaction>* LinkedList<transaction>::createNode(string custId, string pro
 	return newnode;
 }
 
+template class LinkedList<transaction>;
+
 //dataNode->custId = custId;
 //dataNode->product = product;
 //dataNode->category = category;

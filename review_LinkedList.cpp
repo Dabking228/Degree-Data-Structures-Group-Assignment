@@ -53,6 +53,8 @@ Node<review>* LinkedList<review>::createNode(string prodId, string custId, strin
 	return newnode;
 }
 
+template class LinkedList<review>;
+
 /*
 void LinkedList<review>::createLinkedList() {
 	cout << "Creating Review Linked List.. \t";

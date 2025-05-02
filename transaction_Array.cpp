@@ -91,6 +91,8 @@ void Array<transaction>::createArray() {
 	cout << "Successfully loaded " << arrayLength << " valid transactions!" << endl;
 }
 
+template class Array<transaction>;
+
 /*	if (!file.good()) {
 		cout << "Something wrong with transaction file!" << endl;
 	}
