@@ -55,6 +55,13 @@ void initializeData() {
 * Before sorting, clone from the orignal using .clone()
 * then sort the cloned version, during the searching will do the same
 * do deconstruct when the user return back to the main menu
+* 
+* Cloning will create a pointer to the cloned type
+* cloning will be:
+* Type* Varabile = _AnyOfTheOriginal.clone()
+* 
+* sorting will be:
+* Varaible->sortBy(sorting method, sorting column)
 */
 
 int main() {
@@ -83,10 +90,5 @@ int main() {
 	for (int i = 0; i < _reviewSortCustID->getArrayLength(); i++) {
 		cout << i << " : " << _reviewSortCustID->getArray()[i].getProdId() << endl;
 	}
-
-
-	//Array<transaction>* _newArray = _TransactionArray.clone();
-	//Array<transaction>* _newnewArray = _newArray->clone();
-
 }
 
