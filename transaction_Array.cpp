@@ -13,6 +13,9 @@ bool isValidTransaction(string custId, string product, string category, string p
 
 	try {
 		double price = stod(priceStr);
+		if (isnan(price)) {
+			return false;
+		}
 
 		if (date == "Invalid Date") {
 			return false;
@@ -68,7 +71,7 @@ void Array<transaction>::createArray() {
 	int numOfValidLines = getNumOfValidLines(); // Time Complexity = O(N)
 
 	if (numOfValidLines == 0) {
-		cout << "No valid transactions found!";
+		cout << "No valid transactions found!" << endl;
 		return;
 	}
 
@@ -108,7 +111,7 @@ void Array<transaction>::createArray() {
 		}
 	}
 	this->arrayLength = index;
-	cout << "Successfully loaded " << index << " valid transactions!" << endl;
+	cout << "Successfully loaded " << arrayLength << " valid transactions!" << endl;
 }
 
 /*	if (!file.good()) {

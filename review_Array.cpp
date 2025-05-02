@@ -35,12 +35,12 @@ int Array<review>::getNumOfValidLines() {
 	getline(file, line);
 
 	while (getline(file, line)) {
-		stringstream ss;
+		stringstream ss(line);
 		string prodId, custId, ratingStr, reviewText;
-		getline(file, prodId, ',');
-		getline(file, custId, ',');
-		getline(file, ratingStr, ',');
-		getline(file, reviewText, ',');
+		getline(ss, prodId, ',');
+		getline(ss, custId, ',');
+		getline(ss, ratingStr, ',');
+		getline(ss, reviewText, ',');
 
 		if (isValidTransaction(prodId, custId, ratingStr, reviewText)) {
 			numOfValidLines++;
@@ -58,7 +58,7 @@ void Array<review>::createArray() {
 	int numOfValidLines = getNumOfValidLines();
 
 	if (numOfValidLines == 0) {
-		cout << "No valid reviews found!";
+		cout << "No valid reviews found!" << endl;
 		return;
 	}
 
@@ -76,16 +76,17 @@ void Array<review>::createArray() {
 	// Skip header
 	getline(file, line);
 
-	while (getline(file, line)) {
-		stringstream ss;
+	while (getline(file, line) && index < numOfValidLines) {
+		stringstream ss(line);
 		string prodId, custId, ratingStr, reviewText;
-		getline(file, prodId, ',');
-		getline(file, custId, ',');
-		getline(file, ratingStr, ',');
-		getline(file, reviewText, ',');
+		getline(ss, prodId, ',');
+		getline(ss, custId, ',');
+		getline(ss, ratingStr, ',');
+		getline(ss, reviewText, ',');
 
 		if (isValidTransaction(prodId, custId, ratingStr, reviewText)) {
 			this->typePointer[index] = review(prodId, custId, ratingStr, reviewText);
+			index++;
 		}
 		else {
 			continue;

@@ -3,8 +3,8 @@
 #include <iostream>
 #include <chrono>
 using namespace std;
-string TransactionFILENAME = "./datasets/transactions_cleaned.csv";
-string ReviewFILENAME = "./datasets/reviews_cleaned.csv";
+string TransactionFILENAME = "./datasets/transactions.csv";
+string ReviewFILENAME = "./datasets/reviews.csv";
 
 namespace {
 	//LinkedList<transaction> _TransactionLinked(TransactionFILENAME);
