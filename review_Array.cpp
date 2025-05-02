@@ -40,7 +40,7 @@ int Array<review>::getNumOfValidLines() {
 		getline(ss, prodId, ',');
 		getline(ss, custId, ',');
 		getline(ss, ratingStr, ',');
-		getline(ss, reviewText, ',');
+		getline(ss, reviewText);
 
 		if (isValidTransaction(prodId, custId, ratingStr, reviewText)) {
 			numOfValidLines++;
@@ -82,7 +82,7 @@ void Array<review>::createArray() {
 		getline(ss, prodId, ',');
 		getline(ss, custId, ',');
 		getline(ss, ratingStr, ',');
-		getline(ss, reviewText, ',');
+		getline(ss, reviewText); // So that review text with comma ',' will not be wrongly cut
 
 		if (isValidTransaction(prodId, custId, ratingStr, reviewText)) {
 			this->typePointer[index] = review(prodId, custId, ratingStr, reviewText);
