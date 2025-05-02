@@ -4,8 +4,8 @@ using namespace std;
 
 template <typename T> class Array {
 	string FILENAME;
-	int arrayLength;
-	T* typePointer {};
+	int arrayLength = 0;
+	T* typePointer = nullptr;
 
 	void toggleClone() {
 		if (!isClone) {
@@ -21,11 +21,17 @@ public:
 		this->FILENAME = FILENAME;
 	}
 
-	~Array() { delete[] typePointer; }
+	~Array() {
+		if (typePointer != nullptr) {
+			delete[] typePointer;
+		}
+	}
 
 	void createArray();
 
-	T* getArray() {
+	int getNumOfValidLines();
+
+	T* getArray() const {
 		return typePointer;
 	}
 
@@ -37,9 +43,12 @@ public:
 		if (isClone) {
 			cout << "Please use the same variable that is assigned." << endl;
 			return nullptr;
-		} 
+		}
 
-		if (FILENAME == "" || this->arrayLength == 0) { cout << "return nullptr, please initliaze before cloning! " << endl; return nullptr; }
+		if (FILENAME.empty() || this->arrayLength == 0) {
+			cout << "Return nullptr, please initialize before cloning! " << endl;
+			return nullptr;
+		}
 		Array<T>* newArray = new Array<T>(this->FILENAME);
 		newArray->arrayLength = this->arrayLength;
 		newArray->typePointer = new T[this->arrayLength];
