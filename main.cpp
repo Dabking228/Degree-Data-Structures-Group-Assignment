@@ -3,14 +3,14 @@
 #include <iostream>
 #include <chrono>
 using namespace std;
-string TrnasFILENAME = "./datasets/transactions.csv";
+string TransactionFILENAME = "./datasets/transactions.csv";
 string ReviewFILENAME = "./datasets/reviews.csv";
 
 namespace {
-	LinkedList<transaction> _TransactionLinked(TrnasFILENAME);
+	LinkedList<transaction> _TransactionLinked(TransactionFILENAME);
 	LinkedList<review> _ReviewLinked(ReviewFILENAME);
 
-	Array<transaction> _TransactionArray(TrnasFILENAME);
+	Array<transaction> _TransactionArray(TransactionFILENAME);
 	Array<review> _ReviewArray(ReviewFILENAME);
 }
 
