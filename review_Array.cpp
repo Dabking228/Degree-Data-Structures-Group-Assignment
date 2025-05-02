@@ -2,13 +2,100 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <stdexcept>
 using namespace std;
 
+bool isValidTransaction(string prodId, string custId, string ratingStr, string reviewText) {
+	if (prodId.empty() || custId.empty() || ratingStr.empty() || reviewText.empty()) {
+		return false;
+	}
+
+	try {
+		int rating = stoi(ratingStr);
+		return true;
+	}
+	catch (...) {
+		return false;
+	}
+	return false;
+}
+
 template<>
+int Array<review>::getNumOfValidLines() {
+	ifstream file(this->FILENAME);
+	if (!file) {
+		cerr << "Error in opening review file!" << endl;
+		return 0;
+	}
+
+	string line;
+	int numOfValidLines = 0;
+
+	// Skip header
+	getline(file, line);
+
+	while (getline(file, line)) {
+		stringstream ss(line);
+		string prodId, custId, ratingStr, reviewText;
+		getline(ss, prodId, ',');
+		getline(ss, custId, ',');
+		getline(ss, ratingStr, ',');
+		getline(ss, reviewText); // So that review text with comma ',' will not be wrongly cut
+
+		if (isValidTransaction(prodId, custId, ratingStr, reviewText)) {
+			numOfValidLines++;
+		}
+		else {
+			continue;
+		}
+	}
+	return numOfValidLines;
+}
+
 void Array<review>::createArray() {
-	cout << "Creating Review Array.. \t";
-	string prodId, custId, rating, reviewText;
+	cout << "Creating Review Array... \t";
+	string prodId, custId, ratingStr, reviewText;
+	int numOfValidLines = getNumOfValidLines();
+
+	if (numOfValidLines == 0) {
+		cout << "No valid reviews found!" << endl;
+		return;
+	}
+
+	this->typePointer = new review[numOfValidLines];
+
+	ifstream file(this->FILENAME);
+	if (!file) {
+		cerr << "Error in opening review file!" << endl;
+		return;
+	}
+
+	string line;
 	int index = 0;
+
+	// Skip header
+	getline(file, line);
+
+	while (getline(file, line) && index < numOfValidLines) {
+		stringstream ss(line);
+		string prodId, custId, ratingStr, reviewText;
+		getline(ss, prodId, ',');
+		getline(ss, custId, ',');
+		getline(ss, ratingStr, ',');
+		getline(ss, reviewText); // So that review text with comma ',' will not be wrongly cut
+
+		if (isValidTransaction(prodId, custId, ratingStr, reviewText)) {
+			this->typePointer[index] = review(prodId, custId, ratingStr, reviewText);
+			index++;
+		}
+		else {
+			continue;
+		}
+	}
+	this->arrayLength = index;
+	cout << "Successfully loaded " << index << " valid reviews!" << endl;
+}
+/*	int index = 0;
 
 
 	ifstream file(this->FILENAME);
@@ -64,3 +151,4 @@ void Array<review>::createArray() {
 }
 
 template class Array<review>;
+*/

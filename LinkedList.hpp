@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include "structure.hpp"
 using namespace std;
 
@@ -44,8 +44,8 @@ public:
 
 	void createLinkedList();
 
-	Node<T>* createNode(string, string, string, string, string, string);
-	Node<T>* createNode(string , string , string , string );
+	Node<T>* createNode(string, string, string, double, string, string);
+	Node<T>* createNode(string , string , int , string );
 	Node<T>* createNode(T* type) {
 		Node<T>* newnode = new Node<T>();
 		T* data = new T();
@@ -104,3 +104,4 @@ public:
 
 	}
 };
+*/

@@ -1,4 +1,4 @@
-#include "LinkedList.hpp"
+/*#include "LinkedList.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -59,6 +59,6 @@ Node<review>* LinkedList<review>::createNode(string prodId, string custId, strin
 
 	return newnode;
 }
+*/
 
-
-template class LinkedList<review>;
+//template class LinkedList<review>;
