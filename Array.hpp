@@ -46,10 +46,15 @@ template <typename T> class Array {
 		}
 
 		for (int i = 0; i < this->arrayLength - 1; i++) {
+			bool swapped = false;
 			for (int j = 0; j < this->arrayLength - i - 1; j++) {
 				if (!this->compareByField(this->typePointer[j], this->typePointer[j + 1], field)) {
 					swap(this->typePointer[j], this->typePointer[j + 1]);
+					swapped = true;
 				}
+			}
+			if (!swapped) {
+				break;
 			}
 		}
 	}
