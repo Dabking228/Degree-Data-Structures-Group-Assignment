@@ -52,7 +52,7 @@ int Array<transaction>::getNumOfValidLines() {
 		getline(ss, category, ',');
 		getline(ss, priceStr, ',');
 		getline(ss, date, ',');
-		getline(ss, paymentMethod, ',');
+		getline(ss, paymentMethod);
 
 		if (isValidTransaction(custId, product, category, priceStr, date, paymentMethod)) {
 			numOfValidLines++;
@@ -100,7 +100,7 @@ void Array<transaction>::createArray() {
 		getline(ss, category, ',');
 		getline(ss, priceStr, ',');
 		getline(ss, date, ',');
-		getline(ss, paymentMethod, ',');
+		getline(ss, paymentMethod);
 
 		if (isValidTransaction(custId, product, category, priceStr, date, paymentMethod)) {
 			this->typePointer[index] = transaction(custId, product, category, priceStr, date, paymentMethod);
