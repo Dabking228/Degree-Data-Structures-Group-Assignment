@@ -31,7 +31,7 @@ public:
 
 	int getNumOfValidLines();
 
-	T** getArray() const{
+	T* getArray() const{
 		return typePointer;
 	}
 
@@ -51,10 +51,10 @@ public:
 		}
 		Array<T>* newArray = new Array<T>(this->FILENAME);
 		newArray->arrayLength = this->arrayLength;
-		newArray->typePointer = new T*[this->arrayLength];
+		newArray->typePointer = new T[this->arrayLength];
 
 		for (int i = 0; i < this->arrayLength; i++) {
-			newArray->typePointer[i] = new T(*this->typePointer[i]);
+			newArray->typePointer[i] = this->typePointer[i];
 		}
 
 		newArray->toggleClone();

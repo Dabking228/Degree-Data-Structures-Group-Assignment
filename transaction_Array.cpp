@@ -22,14 +22,14 @@ bool isValidTransaction(string custId, string product, string category, string p
 	catch (...) {
 		return false;
 	}
-	return true;
+	return false;
 }
 
 template<>
 int Array<transaction>::getNumOfValidLines() {
 	ifstream file(this->FILENAME);
 	if (!file) {
-		cerr << "Error opening transaction file!" << endl;
+		cerr << "Error in opening transaction file!" << endl;
 		return 0;
 	}
 
@@ -63,7 +63,7 @@ int Array<transaction>::getNumOfValidLines() {
 
 
 void Array<transaction>::createArray() {
-	cout << "Creating Transaction Array. \t";
+	cout << "Creating Transaction Array... \t";
 	string custId, product, category, price, date, paymentMethod;
 	int numOfValidLines = getNumOfValidLines(); // Time Complexity = O(N)
 
@@ -102,6 +102,9 @@ void Array<transaction>::createArray() {
 		if (isValidTransaction(custId, product, category, priceStr, date, paymentMethod)) {
 			this->typePointer[index] = transaction(custId, product, category, priceStr, date, paymentMethod);
 			index++;
+		}
+		else {
+			continue;
 		}
 	}
 	this->arrayLength = index;

@@ -3,12 +3,12 @@
 #include <iostream>
 #include <chrono>
 using namespace std;
-string TransactionFILENAME = "./datasets/transactions.csv";
-string ReviewFILENAME = "./datasets/reviews.csv";
+string TransactionFILENAME = "./datasets/transactions_cleaned.csv";
+string ReviewFILENAME = "./datasets/reviews_cleaned.csv";
 
 namespace {
-	LinkedList<transaction> _TransactionLinked(TransactionFILENAME);
-	LinkedList<review> _ReviewLinked(ReviewFILENAME);
+	//LinkedList<transaction> _TransactionLinked(TransactionFILENAME);
+	//LinkedList<review> _ReviewLinked(ReviewFILENAME);
 
 	Array<transaction> _TransactionArray(TransactionFILENAME);
 	Array<review> _ReviewArray(ReviewFILENAME);
@@ -18,36 +18,36 @@ void initializeData() {
 	chrono::time_point<chrono::system_clock> start, end;
 	start = chrono::system_clock::now();
 
-	_TransactionLinked.createLinkedList();
-	_ReviewLinked.createLinkedList();
+	//_TransactionLinked.createLinkedList();
+	//_ReviewLinked.createLinkedList();
 
 	_TransactionArray.createArray();
 	_ReviewArray.createArray();
 
 	end = chrono::system_clock::now();
 	chrono::duration<double> taken = end - start;
-	cout << "time take: " << taken.count() << endl;
+	cout << "Time taken: " << taken.count() << endl;
 }
 
 int main() {
 	initializeData();
 
-	while (true) {
+	//while (true) {
 
-		int option;
-		cout << "Enter 2 to search or -1 to exit: ";
-		cin >> option;
+	//	int option;
+	//	cout << "Enter 2 to search or -1 to exit: ";
+	//	cin >> option;
 
-		switch (option) {
-		case 2: {
-			_TransactionArray.arrayLinearSearch();
-			break;
-		}
-		case -1: {
-			return 0;
-		}
-		}
-	}
+	//	switch (option) {
+	//	case 2: {
+	//		_TransactionArray.arrayLinearSearch();
+	//		break;
+	//	}
+	//	case -1: {
+	//		return 0;
+	//	}
+	//	}
+	//}
 
 	//cout << _TransactionLinked.getListLength() << endl;
 	//cout << _ReviewLinked.getListLength() << endl;

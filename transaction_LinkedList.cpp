@@ -1,4 +1,4 @@
-#include "LinkedList.hpp"
+/*#include "LinkedList.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -47,23 +47,34 @@ void LinkedList<transaction>::createLinkedList() {
 }
 
 template<>
-Node<transaction>* LinkedList<transaction>::createNode(string custId, string product, string category, string price, string date, string paymentMethod) 
+Node<transaction>* LinkedList<transaction>::createNode(string custId, string product, string category, double price, string date, string paymentMethod) 
 {
 	Node<transaction>* newnode = new Node<transaction>();
 	transaction* dataNode = new transaction();
 	newnode->nextnode = nullptr;
 	newnode->prevnode = nullptr;
 
-	dataNode->custId= custId;
-	dataNode->product = product;
-	dataNode->category = category;
-	dataNode->price = stod(price);
-	dataNode->date = date;
-	dataNode->paymentMethod = paymentMethod;
+	dataNode->getCustId() = custId;
+	dataNode->getProduct() = product;
+	dataNode->getCategory() = category;
+	dataNode->getPrice() = price;
+	dataNode->getDate() = date;
+	dataNode->getPaymentMethod() = paymentMethod;
 
 	newnode->_T = dataNode;
 	
 	return newnode;
-}
+}*/
 
-template class LinkedList<transaction>;
+//dataNode->custId = custId;
+//dataNode->product = product;
+//dataNode->category = category;
+//dataNode->price = stod(price);
+//dataNode->date = date;
+//dataNode->paymentMethod = paymentMethod;
+//
+//newnode->_T = dataNode;
+//
+//return newnode;
+//
+//template class LinkedList<transaction>;
