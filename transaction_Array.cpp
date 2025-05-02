@@ -5,34 +5,11 @@
 #include <stdexcept>
 using namespace std;
 
-
-bool isValidTransaction(string custId, string product, string category, string priceStr, string date, string paymentMethod) {
-	if (custId.empty() || product.empty() || category.empty() || priceStr.empty() || date.empty() || paymentMethod.empty()) {
-		return false;
-	}
-
-	try {
-		double price = stod(priceStr);
-		if (isnan(price)) {
-			return false;
-		}
-
-		if (date == "Invalid Date") {
-			return false;
-		}
-		return true;
-	}
-	catch (...) {
-		return false;
-	}
-	return false;
-}
-
 template<>
 int Array<transaction>::getNumOfValidLines() {
 	ifstream file(this->FILENAME);
 	if (!file) {
-		cerr << "Error in opening transaction file!" << endl;
+		cerr << "Error in opening transaction file for Array Creation!" << endl;
 		return 0;
 	}
 
@@ -54,7 +31,7 @@ int Array<transaction>::getNumOfValidLines() {
 		getline(ss, date, ',');
 		getline(ss, paymentMethod);
 
-		if (isValidTransaction(custId, product, category, priceStr, date, paymentMethod)) {
+		if (transaction::isValidTransaction(custId, product, category, priceStr, date, paymentMethod)) {
 			numOfValidLines++;
 		}
 		else {
@@ -80,7 +57,7 @@ void Array<transaction>::createArray() {
 	ifstream file(this->FILENAME);
 
 	if (!file) {
-		cerr << "Error opening transaction file!" << endl;
+		cerr << "Error in opening transaction file for Array Creation!" << endl;
 		return;
 	}
 
@@ -102,7 +79,7 @@ void Array<transaction>::createArray() {
 		getline(ss, date, ',');
 		getline(ss, paymentMethod);
 
-		if (isValidTransaction(custId, product, category, priceStr, date, paymentMethod)) {
+		if (transaction::isValidTransaction(custId, product, category, priceStr, date, paymentMethod)) {
 			this->typePointer[index] = transaction(custId, product, category, priceStr, date, paymentMethod);
 			index++;
 		}
@@ -113,6 +90,8 @@ void Array<transaction>::createArray() {
 	this->arrayLength = index;
 	cout << "Successfully loaded " << arrayLength << " valid transactions!" << endl;
 }
+
+template class Array<transaction>;
 
 /*	if (!file.good()) {
 		cout << "Something wrong with transaction file!" << endl;
