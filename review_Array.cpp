@@ -5,26 +5,11 @@
 #include <stdexcept>
 using namespace std;
 
-bool isValidTransaction(string prodId, string custId, string ratingStr, string reviewText) {
-	if (prodId.empty() || custId.empty() || ratingStr.empty() || reviewText.empty()) {
-		return false;
-	}
-
-	try {
-		int rating = stoi(ratingStr);
-		return true;
-	}
-	catch (...) {
-		return false;
-	}
-	return false;
-}
-
 template<>
 int Array<review>::getNumOfValidLines() {
 	ifstream file(this->FILENAME);
 	if (!file) {
-		cerr << "Error in opening review file!" << endl;
+		cerr << "Error in opening review file for Array Creation!" << endl;
 		return 0;
 	}
 
@@ -42,7 +27,7 @@ int Array<review>::getNumOfValidLines() {
 		getline(ss, ratingStr, ',');
 		getline(ss, reviewText); // So that review text with comma ',' will not be wrongly cut
 
-		if (isValidTransaction(prodId, custId, ratingStr, reviewText)) {
+		if (review::isValidReview(prodId, custId, ratingStr, reviewText)) {
 			numOfValidLines++;
 		}
 		else {
@@ -66,7 +51,7 @@ void Array<review>::createArray() {
 
 	ifstream file(this->FILENAME);
 	if (!file) {
-		cerr << "Error in opening review file!" << endl;
+		cerr << "Error in opening review file for Array Creation!" << endl;
 		return;
 	}
 
@@ -84,7 +69,7 @@ void Array<review>::createArray() {
 		getline(ss, ratingStr, ',');
 		getline(ss, reviewText); // So that review text with comma ',' will not be wrongly cut
 
-		if (isValidTransaction(prodId, custId, ratingStr, reviewText)) {
+		if (review::isValidReview(prodId, custId, ratingStr, reviewText)) {
 			this->typePointer[index] = review(prodId, custId, ratingStr, reviewText);
 			index++;
 		}

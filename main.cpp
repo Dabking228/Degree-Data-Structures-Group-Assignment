@@ -7,8 +7,8 @@ string TransactionFILENAME = "./datasets/transactions.csv";
 string ReviewFILENAME = "./datasets/reviews.csv";
 
 namespace {
-	//LinkedList<transaction> _TransactionLinked(TransactionFILENAME);
-	//LinkedList<review> _ReviewLinked(ReviewFILENAME);
+	LinkedList<transaction> _TransactionLinked(TransactionFILENAME);
+	LinkedList<review> _ReviewLinked(ReviewFILENAME);
 
 	Array<transaction> _TransactionArray(TransactionFILENAME);
 	Array<review> _ReviewArray(ReviewFILENAME);
@@ -18,8 +18,8 @@ void initializeData() {
 	chrono::time_point<chrono::system_clock> start, end;
 	start = chrono::system_clock::now();
 
-	//_TransactionLinked.createLinkedList();
-	//_ReviewLinked.createLinkedList();
+	_TransactionLinked.createLinkedList();
+	_ReviewLinked.createLinkedList();
 
 	_TransactionArray.createArray();
 	_ReviewArray.createArray();

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
+#include <cmath>
 using namespace std;
 
 struct transaction {
@@ -28,7 +29,13 @@ public:
 		}
 
 		try {
-			price = stod(priceStr);
+			double checkPrice = stod(priceStr);
+			if (!isnan(checkPrice)) {
+				this->price = checkPrice;
+			}
+			else {
+				throw invalid_argument("Transaction Price is invalid!");
+			}
 		}
 		catch (...) {
 			throw invalid_argument("Transaction Price is invalid!");
@@ -39,6 +46,28 @@ public:
 		this->category = category;
 		this->date = date;
 		this->paymentMethod = paymentMethod;
+	}
+
+	inline static bool isValidTransaction(string custId, string product, string category, string priceStr, string date, string paymentMethod) {
+		if (custId.empty() || product.empty() || category.empty() || priceStr.empty() || date.empty() || paymentMethod.empty()) {
+			return false;
+		}
+
+		try {
+			double price = stod(priceStr);
+			if (isnan(price)) {
+				return false;
+			}
+
+			if (date == "Invalid Date") {
+				return false;
+			}
+			return true;
+		}
+		catch (...) {
+			return false;
+		}
+		return false;
 	}
 
 	// Getters
@@ -59,6 +88,37 @@ public:
 	}
 	string getPaymentMethod() const{
 		return paymentMethod;
+	}
+
+	// Setters
+	void setCustId(string custId) {
+		this->custId = custId;
+	}
+	void setProduct(string product) {
+		this->product = product;
+	}
+	void setCategory(string category) {
+		this->category = category;
+	}
+	void setPrice(string priceStr) {
+		try {
+			double checkPrice = stod(priceStr);
+			if (!isnan(checkPrice)) {
+				this->price = checkPrice;
+			}
+			else {
+				return;
+			}
+		}
+		catch (...) {
+			return;
+		}
+	}
+	void setDate(string date) {
+		this->date = date;
+	}
+	void setPaymentMethod(string paymentMethod) {
+		this->paymentMethod = paymentMethod;
 	}
 };
 
@@ -91,6 +151,21 @@ public:
 		this->reviewText = reviewText;
 	}
 
+	inline static bool isValidReview(string prodId, string custId, string ratingStr, string reviewText) {
+		if (prodId.empty() || custId.empty() || ratingStr.empty() || reviewText.empty()) {
+			return false;
+		}
+
+		try {
+			int rating = stoi(ratingStr);
+			return true;
+		}
+		catch (...) {
+			return false;
+		}
+		return false;
+	}
+
 	// Getters
 	string getProdId() const{
 		return prodId;
@@ -103,5 +178,24 @@ public:
 	}
 	string getReviewText() const{
 		return reviewText;
+	}
+
+	// Setters
+	void setProdId(string prodId) {
+		this->prodId = prodId;
+	}
+	void setCustId(string custId) {
+		this->custId = custId;
+	}
+	void setRating(string ratingStr) {
+		try {
+			this->rating = stoi(ratingStr);
+		}
+		catch (...) {
+			return;
+		}
+	}
+	void setReviewText(string reviewText) {
+		this->reviewText = reviewText;
 	}
 };
