@@ -5,7 +5,7 @@ using namespace std;
 template <typename T> class Array {
 	string FILENAME;
 	int arrayLength = 0;
-	T** typePointer = nullptr;
+	T* typePointer = nullptr;
 
 	void toggleClone() {
 		if (!isClone) {
@@ -23,9 +23,6 @@ public:
 
 	~Array() { 
 		if (typePointer != nullptr) {
-			for (int i = 0; i < arrayLength; ++i) {
-				delete typePointer[i];
-			}
 			delete[] typePointer;
 		}
 	}

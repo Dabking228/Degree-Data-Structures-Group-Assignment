@@ -69,7 +69,7 @@ void Array<transaction>::createArray() {
 		return;
 	}
 
-	this->typePointer = new transaction*[numOfValidLines];
+	this->typePointer = new transaction[numOfValidLines];
 
 	ifstream file(this->FILENAME);
 
@@ -97,7 +97,7 @@ void Array<transaction>::createArray() {
 		getline(ss, paymentMethod, ',');
 
 		if (isValidTransaction(custId, product, category, priceStr, date, paymentMethod)) {
-			this->typePointer[index] = new transaction(custId, product, category, priceStr, date, paymentMethod);
+			this->typePointer[index] = transaction(custId, product, category, priceStr, date, paymentMethod);
 			index++;
 		}
 	}
