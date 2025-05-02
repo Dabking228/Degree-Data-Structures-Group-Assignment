@@ -4,73 +4,95 @@
 #include <sstream>
 #include <ctime>
 #include <iomanip>
+#include <stdexcept>
 using namespace std;
 
 
 
 template<>
-void Array<transaction>::createArray() {
-	cout << "Creating Transaction Array. \t";
-	string custId, product, category, price, date, paymentMethod;
-	int index = 0;
+int Array<transaction>::getNumOfValidLines() {
+	ifstream file(this->FILENAME);
+	if (!file) {
+		cerr << "Error in opening transaction file for Array Creation!" << endl;
+		return 0;
+	}
 
+	string line;
+	int numOfValidLines = 0;
+
+	// Skip header
+	getline(file, line);
+
+	// Time Complexity: O(N)
+	while (getline(file, line)) {
+		stringstream ss(line);
+		string custId, product, category, priceStr, date, paymentMethod;
+
+		getline(ss, custId, ',');
+		getline(ss, product, ',');
+		getline(ss, category, ',');
+		getline(ss, priceStr, ',');
+		getline(ss, date, ',');
+		getline(ss, paymentMethod);
+
+		if (transaction::isValidTransaction(custId, product, category, priceStr, date, paymentMethod)) {
+			numOfValidLines++;
+		}
+		else {
+			continue;
+		}
+	}
+	return numOfValidLines;
+}
+
+
+void Array<transaction>::createArray() {
+	cout << "Creating Transaction Array... \t";
+	string custId, product, category, price, date, paymentMethod;
+	int numOfValidLines = getNumOfValidLines(); // Time Complexity = O(N)
+
+	if (numOfValidLines == 0) {
+		cout << "No valid transactions found!" << endl;
+		return;
+	}
+
+	this->typePointer = new transaction[numOfValidLines];
 
 	ifstream file(this->FILENAME);
 
-	if (!file.good()) {
-		cout << "Something wrong with transaction file!" << endl;
+	if (!file) {
+		cerr << "Error in opening transaction file for Array Creation!" << endl;
+		return;
 	}
 
-	this->typePointer = new transaction[index + 1];
+	string line;
+	int index = 0;
 
-	while (file.good()) {
-		getline(file, custId, ',');
-		getline(file, product, ',');
-		getline(file, category, ',');
-		getline(file, price, ',');
-		getline(file, date, ',');
-		getline(file, paymentMethod);
-		if (custId == "Customer ID") {
+	// Skip header
+	getline(file, line);
+
+	// Time Complexity: O(N)
+	while (getline(file, line) && index < numOfValidLines) {
+		stringstream ss(line);
+		string custId, product, category, priceStr, date, paymentMethod;
+
+		getline(ss, custId, ',');
+		getline(ss, product, ',');
+		getline(ss, category, ',');
+		getline(ss, priceStr, ',');
+		getline(ss, date, ',');
+		getline(ss, paymentMethod);
+
+		if (transaction::isValidTransaction(custId, product, category, priceStr, date, paymentMethod)) {
+			this->typePointer[index] = transaction(custId, product, category, priceStr, date, paymentMethod);
+			index++;
+		}
+		else {
 			continue;
 		}
-		if (custId == "" && product == "" && category == "" && price == "" && date == "" && paymentMethod == "") {
-			break; // stops when no more records
-		}
-		if (custId == "" || product == "" || category == "" || price == "" || date == "" || paymentMethod == "") { // data cleaning line
-			continue; // skip missing values
-		}
-		if (isnan(stod(price))) { // check for NaN price value
-			continue;
-		}
-		if (date == "Invalid Date") { // check if the text is invalid date, need to create another checker for invalid date that is NOT written in "Invalid Date"
-			continue;
-		}
-
-		// TODO: optimize this part of the code, maybe use back idea 1
-		transaction* oldtransactionList = this->typePointer;
-		this->typePointer = new transaction[index + 1];
-		for (int i = 0; i < index; i++) {
-			this->typePointer[i] = oldtransactionList[i];
-		}
-		//cout << index+1 << endl;
-		delete[] oldtransactionList;
-
-
-		//// add item into array
-		this->typePointer[index].custId = custId;
-		this->typePointer[index].product = product;
-		this->typePointer[index].category = category;
-		this->typePointer[index].price = stod(price);
-		this->typePointer[index].date = date;
-		this->typePointer[index].paymentMethod = paymentMethod;
-
-		index++;
-
 	}
-
-	cout << "Transaction Array Created!" << endl;
 	this->arrayLength = index;
-	//return this->typePointer;
+	cout << "Successfully loaded " << arrayLength << " valid transactions!" << endl;
 }
 
 
