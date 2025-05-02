@@ -52,4 +52,6 @@ public:
 		return newArray;
 	}
 
+	void Array<T>::arrayLinearSearch() {
+
 };
