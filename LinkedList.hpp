@@ -171,6 +171,7 @@ public:
 
 		while (_NodeHEAD != nullptr) {
 			_NodeCurr = _NodeHEAD->nextnode;
+			delete _NodeHEAD->_T;
 			delete _NodeHEAD;
 			_NodeHEAD = _NodeCurr;
 		}
