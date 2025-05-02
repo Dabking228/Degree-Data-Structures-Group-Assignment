@@ -46,7 +46,7 @@ public:
 		} 
 
 		if (FILENAME.empty() || this->arrayLength == 0) {
-			cout << "Return nullptr, please initialize before cloning! " << endl;
+			cout << "Return nullptr, please initialize before cloning!" << endl;
 			return nullptr; 
 		}
 		Array<T>* newArray = new Array<T>(this->FILENAME);

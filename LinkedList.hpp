@@ -88,7 +88,10 @@ public:
 			return nullptr;
 		}
 
-		if (FILENAME == "" || this->ListLength == 0) { cout << "return nullptr, please initliaze before cloning!" << endl; return nullptr; }
+		if (FILENAME == "" || this->ListLength == 0) {
+			cout << "Return nullptr, please initialize before cloning!" << endl; 
+			return nullptr; 
+		}
 		LinkedList<T>* newList = new LinkedList<T>(this->FILENAME);
 		Node<T>* curr = this->_NodeHEAD;
 
