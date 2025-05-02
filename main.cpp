@@ -11,7 +11,21 @@ enum sortBy {
 	MergeSort = 2
 };
 
+enum sortColTransaction {
+	trans_custId = 1,
+	trans_product = 2,
+	trans_category = 3,
+	trans_price = 4,
+	trans_date = 5,
+	trans_paymentMethod = 6
+};
 
+enum sortColReview {
+	rv_custId = 1,
+	rv_prodId = 2,
+	rv_rating = 3,
+	rv_reviewText = 4
+};
 
 
 namespace {
@@ -37,6 +51,12 @@ void initializeData() {
 	cout << "time take: " << taken.count() << endl;
 }
 
+/*
+* Before sorting, clone from the orignal using .clone()
+* then sort the cloned version, during the searching will do the same
+* do deconstruct when the user return back to the main menu
+*/
+
 int main() {
 	initializeData();
 
@@ -49,33 +69,24 @@ int main() {
 	chrono::time_point<chrono::system_clock> start, end;
 	start = chrono::system_clock::now();
 
-	/*
-	Option 1: keep using the normal enums
-	Option 2: convert he enums to class enums, then atleast got type safety
-	*/
-
-	_transSortCustID->sortBy(MergeSort, sortColTransaction::trans_custId); //sample for doing sorting for all
-	_reviewSortCustID->sortBy(MergeSort, sortColReview::rv_prodId);
+	_transSortCustID->sortBy(BubbleSort, sortColTransaction::trans_custId); //sample for doing sorting for all
+	_reviewSortCustID->sortBy(BubbleSort, sortColReview::rv_prodId);
 
 	end = chrono::system_clock::now();
 	chrono::duration<double> taken = end - start;
 	cout << "time take: " << taken.count() << endl;
 
 	for (int i = 0; i < _transSortCustID->getArrayLength(); i++) {
-		cout << i << " : " << _transSortCustID->getArray()[i].custId << endl;
+		cout << i << " : " << _transSortCustID->getArray()[i].getCustId() << endl;
 	}
 
 	for (int i = 0; i < _reviewSortCustID->getArrayLength(); i++) {
-		cout << i << " : " << _reviewSortCustID->getArray()[i].prodId << endl;
+		cout << i << " : " << _reviewSortCustID->getArray()[i].getProdId() << endl;
 	}
+
 
 	//Array<transaction>* _newArray = _TransactionArray.clone();
 	//Array<transaction>* _newnewArray = _newArray->clone();
 
-	//cout << _TransactionLinked.getListLength() << endl;
-	//cout << _ReviewLinked.getListLength() << endl;
-
-	//cout << _TransactionArray.getArrayLength() << endl;
-	//cout << _ReviewArray.getArrayLength() << endl;
 }
 

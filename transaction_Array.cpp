@@ -101,13 +101,13 @@ void Array<transaction>::createArray() {
 
 bool Array<transaction>::compareByField(const transaction& a, const transaction& b, int field) {
 	switch (field) {
-	case 1: return a.custId < b.custId; //good
-	case 2: return a.product < b.product; //good
-	case 3: return a.category < b.category; // good
-	case 4: return a.price < b.price; // good
+	case 1: return a.getCustId() < b.getCustId();
+	case 2: return a.getProduct() < b.getProduct();
+	case 3: return a.getCategory() < b.getCategory(); 
+	case 4: return a.getPrice() < b.getPrice(); 
 	case 5: //good
 	{
-		stringstream ssA(a.date), ssB(b.date);
+		stringstream ssA(a.getDate()), ssB(b.getDate());
 		tm tmA = {};
 		tm tmB = {};
 
@@ -123,7 +123,7 @@ bool Array<transaction>::compareByField(const transaction& a, const transaction&
 
 		return mktime(&tmA) < mktime(&tmB);
 	}
-	case 6: return a.paymentMethod < b.paymentMethod;
+	case 6: return a.getPaymentMethod() < b.getPaymentMethod();
 	default: return false;
 	}
 }

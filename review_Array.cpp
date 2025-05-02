@@ -83,10 +83,10 @@ void Array<review>::createArray() {
 
 bool Array<review>::compareByField(const review& a, const review& b, int field) {
 	switch (field) {
-	case 1: return a.custId < b.custId;
-	case 2: return a.prodId < b.prodId;
-	case 3: return a.rating < b.rating;
-	case 4: return a.reviewText < a.reviewText;
+	case 1: return a.getCustId() < b.getCustId();
+	case 2: return a.getProdId() < b.getProdId();
+	case 3: return a.getRating() < b.getRating();
+	case 4: return a.getReviewText() < a.getReviewText();
 	default: return false;
 	}
 }
