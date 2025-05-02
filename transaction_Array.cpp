@@ -17,11 +17,11 @@ bool isValidTransaction(string custId, string product, string category, string p
 		if (date == "Invalid Date") {
 			return false;
 		}
+		return true;
 	}
 	catch (...) {
 		return false;
 	}
-
 	return true;
 }
 
@@ -53,6 +53,9 @@ int Array<transaction>::getNumOfValidLines() {
 
 		if (isValidTransaction(custId, product, category, priceStr, date, paymentMethod)) {
 			numOfValidLines++;
+		}
+		else {
+			continue;
 		}
 	}
 	return numOfValidLines;
