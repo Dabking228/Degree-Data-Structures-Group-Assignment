@@ -2,22 +2,6 @@
 #include "structure.hpp"
 using namespace std;
 
-enum sortColTransaction {
-	trans_custId = 1,
-	trans_product = 2,
-	trans_category = 3,
-	trans_price = 4,
-	trans_date = 5,
-	trans_paymentMethod = 6
-};
-
-enum sortColReview {
-	rv_custId = 1, 
-	rv_prodId = 2, 
-	rv_rating = 3, 
-	rv_reviewText = 4
-};
-
 template <typename T> class Array {
 	string FILENAME;
 	int arrayLength;
