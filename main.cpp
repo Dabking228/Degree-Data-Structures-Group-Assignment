@@ -54,15 +54,19 @@ int main() {
 	Option 2: convert he enums to class enums, then atleast got type safety
 	*/
 
-	//_transSortCustID->sortBy(BubbleSort, sortColTransaction::trans_paymentMethod); //sample for doing sorting for all
-	_reviewSortCustID->sortBy(BubbleSort, sortColReview::rv_custId);
+	_transSortCustID->sortBy(MergeSort, sortColTransaction::trans_custId); //sample for doing sorting for all
+	_reviewSortCustID->sortBy(MergeSort, sortColReview::rv_prodId);
 
 	end = chrono::system_clock::now();
 	chrono::duration<double> taken = end - start;
 	cout << "time take: " << taken.count() << endl;
 
+	for (int i = 0; i < _transSortCustID->getArrayLength(); i++) {
+		cout << i << " : " << _transSortCustID->getArray()[i].custId << endl;
+	}
+
 	for (int i = 0; i < _reviewSortCustID->getArrayLength(); i++) {
-		cout << i << " : " << _reviewSortCustID->getArray()[i].custId << endl;
+		cout << i << " : " << _reviewSortCustID->getArray()[i].prodId << endl;
 	}
 
 	//Array<transaction>* _newArray = _TransactionArray.clone();

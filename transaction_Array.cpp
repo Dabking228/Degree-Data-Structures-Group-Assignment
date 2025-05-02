@@ -106,19 +106,6 @@ bool Array<transaction>::compareByField(const transaction& a, const transaction&
 	}
 }
 
-void Array<transaction>::BubbleSort(int field) {
-	if (!this->getClone()) {
-		cout << "Please Clone before sorting!" << endl;
-	}
-
-	for (int i = 0; i < this->arrayLength - 1; i++) {
-		for (int j = 0; j < this->arrayLength - i - 1; j++) {
-			if (!this->compareByField(this->typePointer[j], this->typePointer[j + 1], field)) {
-				swap(this->typePointer[j], this->typePointer[j + 1]);
-			}
-		}
-	}
-}
 
 
 template class Array<transaction>;
