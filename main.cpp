@@ -73,6 +73,8 @@ void callSearch(string search) {
 		_TransactionArray.arrayLinearSearch(category, keyword);
 	else if (search == "binary")
 		_TransactionArray.arrayBinarySearch(category, keyword);
+	else if (search == "reviews")
+		_ReviewArray.arrayLinearSearch(category, keyword);
 }
 
 int main() {
@@ -87,7 +89,7 @@ int main() {
 		switch (option) {
 		case 2: {
 
-			callSearch("binary");
+			callSearch("reviews"); // changed parameter to what you want to test
 
 			break;
 		}

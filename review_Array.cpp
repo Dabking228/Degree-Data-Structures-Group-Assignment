@@ -1,4 +1,5 @@
 #include "Array.hpp"
+#include "Utils.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -95,6 +96,74 @@ void Array<review>::createArray() {
 	this->arrayLength = index;
 	cout << "Successfully loaded " << index << " valid reviews!" << endl;
 }
+
+template<>
+void Array<review>::searchAgain(string search) {
+	int option;
+
+	while (true) {
+		cout << "Search again in filtered list? (1: Yes, -1: No): ";
+		cin >> option;
+
+		if (option == 1) {
+
+			string category, keyword;
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+			while (true) {
+				cout << "Enter your Search Category: ";
+				getline(cin, category);
+				category = toLower(category);
+
+
+				if (category.empty()) {
+					cout << "Error! Category is empty!" << endl;
+					continue;
+				}
+
+				if (category != "customerid" &&
+					category != "productid" &&
+					category != "rating" &&
+					category != "review") {
+					cout << "Invalid category! Please enter one of: productId, customerId, rating, review." << endl;
+					continue;
+				}
+
+				break;
+			}
+
+			while (true) {
+				cout << "Enter your Keyword: ";
+				getline(cin, keyword);
+
+				if (keyword.empty()) {
+					cout << "Error! Keyword is empty!" << endl;
+					continue;
+				}
+
+				break;
+			}
+
+			if (search == "linear") {
+				arrayLinearSearch(category, keyword);
+			}
+			else if (search == "binary") {
+				arrayBinarySearch(category, keyword);
+			}
+
+			return;
+
+		}
+		else if (option == -1) {
+			return;
+		}
+		else {
+			cout << "Invalid Input!" << endl;
+		}
+	}
+}
+
+
 /*	int index = 0;
 
 
