@@ -61,4 +61,14 @@ Node<review>* LinkedList<review>::createNode(string prodId, string custId, strin
 }
 
 
+bool LinkedList<review>::compareByField(const review* nodeA, const review* nodeB, int field) {
+	switch (field) {
+	case 1: return nodeA->custId < nodeB->custId;
+	case 2: return nodeA->prodId < nodeB->prodId;
+	case 3: return nodeA->rating < nodeB->rating;
+	case 4: return nodeA->reviewText < nodeB->reviewText;
+	default: return false;
+	}
+}
+
 template class LinkedList<review>;

@@ -2,6 +2,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <ctime>
+#include <iomanip>
 using namespace std;
 
 template<>
@@ -64,6 +66,35 @@ Node<transaction>* LinkedList<transaction>::createNode(string custId, string pro
 	newnode->_T = dataNode;
 	
 	return newnode;
+}
+
+bool LinkedList<transaction>::compareByField(const transaction* nodeA, const transaction* nodeB, int field) {
+	switch (field) {
+	case 1: return nodeA->custId < nodeB->custId;
+	case 2: return nodeA->product < nodeB->product;
+	case 3: return nodeA->category < nodeB->category;
+	case 4: return nodeA->price < nodeB->price;
+	case 5: 
+	{
+		stringstream ssA(nodeA->date), ssB(nodeB->date);
+		tm tmA = {};
+		tm tmB = {};
+
+		ssA >> get_time(&tmA, "%d/%m/%Y");
+		ssB >> get_time(&tmB, "%d/%m/%Y");
+		if (ssA.fail() || ssB.fail()) {
+			return false;
+
+			cout << "Failed to parse date" << endl;
+		}
+
+		//cout << mktime(&tmA) << " | " << mktime(&tmB) << endl;
+
+		return mktime(&tmA) < mktime(&tmB);
+	}
+	case 6: return nodeA->paymentMethod < nodeB->paymentMethod;
+	default: return false;
+	}
 }
 
 template class LinkedList<transaction>;
