@@ -4,7 +4,7 @@
 #include <stdexcept>
 using namespace std;
 
-class transaction {
+struct transaction {
 	// Attributes
 private:
 	string custId;
