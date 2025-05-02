@@ -63,4 +63,30 @@ void Array<review>::createArray() {
 	this->arrayLength = index;
 }
 
+bool Array<review>::compareByField(const review& a, const review& b, int field) {
+	switch (field) {
+	case 1: return a.custId < b.custId;
+	case 2: return a.prodId < b.prodId;
+	case 3: return a.rating < b.rating;
+	case 4: return a.reviewText < a.reviewText;
+	default: return false;
+	}
+}
+
+
+void Array<review>::BubbleSort(int field) {
+	if (!this->getClone()) {
+		cout << "Please Clone before sorting!" << endl;
+	}
+
+	for (int i = 0; i < this->arrayLength - 1; i++) {
+		for (int j = 0; j < this->arrayLength - i - 1; j++) {
+			if (!this->compareByField(this->typePointer[j], this->typePointer[j + 1], field)) {
+				swap(this->typePointer[j], this->typePointer[j + 1]);
+			}
+		}
+	}
+}
+
+
 template class Array<review>;

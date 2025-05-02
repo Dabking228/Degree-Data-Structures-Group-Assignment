@@ -2,7 +2,11 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <ctime>
+#include <iomanip>
 using namespace std;
+
+
 
 template<>
 void Array<transaction>::createArray() {
@@ -68,6 +72,54 @@ void Array<transaction>::createArray() {
 	this->arrayLength = index;
 	//return this->typePointer;
 }
+
+
+
+// Bubble Sorting
+
+bool Array<transaction>::compareByField(const transaction& a, const transaction& b, int field) {
+	switch (field) {
+	case 1: return a.custId < b.custId; //good
+	case 2: return a.product < b.product; //good
+	case 3: return a.category < b.category; // good
+	case 4: return a.price < b.price; // good
+	case 5: //good
+	{
+		stringstream ssA(a.date), ssB(b.date);
+		tm tmA = {};
+		tm tmB = {};
+
+		ssA >> get_time(&tmA, "%d/%m/%Y");
+		ssB >> get_time(&tmB, "%d/%m/%Y");
+		if (ssA.fail() || ssB.fail()) {
+			return false;
+
+			cout << "Failed to parse date" << endl;
+		}
+
+		//cout << mktime(&tmA) << " | " << mktime(&tmB) << endl;
+
+		return mktime(&tmA) < mktime(&tmB);
+	}
+	case 6: return a.paymentMethod < b.paymentMethod;
+	default: return false;
+	}
+}
+
+void Array<transaction>::BubbleSort(int field) {
+	if (!this->getClone()) {
+		cout << "Please Clone before sorting!" << endl;
+	}
+
+	for (int i = 0; i < this->arrayLength - 1; i++) {
+		for (int j = 0; j < this->arrayLength - i - 1; j++) {
+			if (!this->compareByField(this->typePointer[j], this->typePointer[j + 1], field)) {
+				swap(this->typePointer[j], this->typePointer[j + 1]);
+			}
+		}
+	}
+}
+
 
 template class Array<transaction>;
 

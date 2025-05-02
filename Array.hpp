@@ -2,19 +2,46 @@
 #include "structure.hpp"
 using namespace std;
 
+enum sortColTransaction {
+	trans_custId = 1,
+	trans_product = 2,
+	trans_category = 3,
+	trans_price = 4,
+	trans_date = 5,
+	trans_paymentMethod = 6
+};
+
+enum sortColReview {
+	rv_custId = 1, 
+	rv_prodId = 2, 
+	rv_rating = 3, 
+	rv_reviewText = 4
+};
+
 template <typename T> class Array {
 	string FILENAME;
 	int arrayLength;
 	T* typePointer {};
 
 	void toggleClone() {
-		if (!isClone) {
-			isClone = !isClone;
+		if (!this->isClone) {
+			this->isClone= !this->isClone;
 		}
 	}
+	
+	bool getClone() {
+		return isClone;
+	}
+
+	bool compareByField(const T& a, const T& b, int field);
+
+	void BubbleSort(int);
+
+	Array<T>* MergeSort(int);
 
 private:
 	bool isClone = false;
+
 
 public:
 	Array(string FILENAME) {
@@ -52,4 +79,15 @@ public:
 		return newArray;
 	}
 
+	void sortBy(int sortBy, int sortCol) {
+		switch (sortBy) {
+		case 1:
+			 BubbleSort(sortCol);
+			break;
+		case 2:
+			//MergeSort(sortCol);
+			break;
+		}
+		
+	}
 };
