@@ -2,65 +2,83 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <stdexcept>
 using namespace std;
 
 template<>
-void Array<review>::createArray() {
-	cout << "Creating Review Array.. \t";
-	string prodId, custId, rating, reviewText;
-	int index = 0;
+int Array<review>::getNumOfValidLines() {
+	ifstream file(this->FILENAME);
+	if (!file) {
+		cerr << "Error in opening review file for Array Creation!" << endl;
+		return 0;
+	}
 
+	string line;
+	int numOfValidLines = 0;
+
+	// Skip header
+	getline(file, line);
+
+	while (getline(file, line)) {
+		stringstream ss(line);
+		string prodId, custId, ratingStr, reviewText;
+		getline(ss, prodId, ',');
+		getline(ss, custId, ',');
+		getline(ss, ratingStr, ',');
+		getline(ss, reviewText); // So that review text with comma ',' will not be wrongly cut
+
+		if (review::isValidReview(prodId, custId, ratingStr, reviewText)) {
+			numOfValidLines++;
+		}
+		else {
+			continue;
+		}
+	}
+	return numOfValidLines;
+}
+
+void Array<review>::createArray() {
+	cout << "Creating Review Array... \t";
+	string prodId, custId, ratingStr, reviewText;
+	int numOfValidLines = getNumOfValidLines();
+
+	if (numOfValidLines == 0) {
+		cout << "No valid reviews found!" << endl;
+		return;
+	}
+
+	this->typePointer = new review[numOfValidLines];
 
 	ifstream file(this->FILENAME);
-
-	if (!file.good()) {
-		cout << "Something wrong with review file!" << endl;
+	if (!file) {
+		cerr << "Error in opening review file for Array Creation!" << endl;
+		return;
 	}
 
-	this->typePointer = new review[index + 1];
+	string line;
+	int index = 0;
 
-	while (file.good()) {
-		getline(file, prodId, ',');
-		getline(file, custId, ',');
-		getline(file, rating, ',');
-		getline(file, reviewText);
-		if (prodId == "Product ID") {
+	// Skip header
+	getline(file, line);
+
+	while (getline(file, line) && index < numOfValidLines) {
+		stringstream ss(line);
+		string prodId, custId, ratingStr, reviewText;
+		getline(ss, prodId, ',');
+		getline(ss, custId, ',');
+		getline(ss, ratingStr, ',');
+		getline(ss, reviewText); // So that review text with comma ',' will not be wrongly cut
+
+		if (review::isValidReview(prodId, custId, ratingStr, reviewText)) {
+			this->typePointer[index] = review(prodId, custId, ratingStr, reviewText);
+			index++;
+		}
+		else {
 			continue;
 		}
-		if (prodId == "" && custId == "" && rating == "" && reviewText == "") {
-			break; // stops when no more records
-		}
-		if (prodId == "" || custId == "" || rating == "" || reviewText == "") { // data cleaning line
-			continue; // skip missing values
-		}
-		// test if the rating can convert to interger
-		try {
-			stoi(rating);
-		}
-		catch (exception& err) {
-			continue;
-		}
-
-		//TODO: same as the on for transaction, need to optimize
-		review* oldReivewList = this->typePointer;
-		this->typePointer = new review[index + 1];
-		for (int i = 0; i < index; i++) {
-			this->typePointer[i] = oldReivewList[i];
-		}
-		//cout << index + 1 << endl;
-		delete[] oldReivewList;
-
-		// array creation
-		this->typePointer[index].prodId = prodId;
-		this->typePointer[index].custId = custId;
-		this->typePointer[index].rating = stoi(rating);
-		this->typePointer[index].reviewText = reviewText;
-
-		index++;
 	}
-
-	cout << "Review Array Created!" << endl;
 	this->arrayLength = index;
+	cout << "Successfully loaded " << index << " valid reviews!" << endl;
 }
 
 template class Array<review>;
