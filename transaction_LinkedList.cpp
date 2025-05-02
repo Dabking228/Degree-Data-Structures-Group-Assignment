@@ -6,63 +6,49 @@ using namespace std;
 
 template<>
 void LinkedList<transaction>::createLinkedList() {
-	cout << "Creating Trans Linked List.. \t";
-	string custId, product, category, price, date, paymentMethod;
-
+	cout << "Creating Transaction Linked List... \t";
 	ifstream file(this->FILENAME);
 
-	if (!file.good()) {
-		cout << "Something wrong with transation file under LinkedList!" << endl;
+	if (!file) {
+		cerr << "Error in opening transaction file for Array Creation!" << endl;
+		return;
 	}
 
-	while (file.good()) {
-		getline(file, custId, ',');
-		getline(file, product, ',');
-		getline(file, category, ',');
-		getline(file, price, ',');
-		getline(file, date, ',');
-		getline(file, paymentMethod);
-		if (custId == "Customer ID") {
-			continue;
+	string line;
+
+	// Skip header
+	getline(file, line);
+
+	while (getline(file, line)) {
+		stringstream ss(line);
+		string custId, product, category, priceStr, date, paymentMethod;
+		getline(ss, custId, ',');
+		getline(ss, product, ',');
+		getline(ss, category, ',');
+		getline(ss, priceStr, ',');
+		getline(ss, date, ',');
+		getline(ss, paymentMethod);
+
+		if (transaction::isValidTransaction(custId, product, category, priceStr, date, paymentMethod)) {
+			Node<transaction>* newnode = this->createNode(custId, product, category, priceStr, date, paymentMethod);
+			this->addEndOfList(newnode);
+			this->addLength();
 		}
-		if (custId == "" && product == "" && category == "" && price == "" && date == "" && paymentMethod == "") {
-			break; // stops when no more records
-		}
-		if (custId == "" || product == "" || category == "" || price == "" || date == "" || paymentMethod == "") { // data cleaning line
-			continue; // skip missing values
-		}
-		if (isnan(stod(price))) { // check for NaN price value
-			continue;
-		}
-		if (date == "Invalid Date") { // check if the text is invalid date, need to create another checker for invalid date that is NOT written in "Invalid Date"
-			continue;
-		}
-		
-		Node<transaction>* newnode = this->createNode(custId, product, category, price, date, paymentMethod);
-		this->addEndOfList(newnode);
-		this->addLength();
 	}
-		cout << "Transaction Array Created!" << endl;
+	cout << "Successfully loaded " << getListLength() << " valid transactions!" << endl;
 
 }
 
 template<>
-Node<transaction>* LinkedList<transaction>::createNode(string custId, string product, string category, string price, string date, string paymentMethod) 
+Node<transaction>* LinkedList<transaction>::createNode(string custId, string product, string category, string priceStr, string date, string paymentMethod)
 {
 	Node<transaction>* newnode = new Node<transaction>();
-	transaction* dataNode = new transaction();
+	transaction* dataNode = new transaction(custId, product, category, priceStr, date, paymentMethod);
 	newnode->nextnode = nullptr;
 	newnode->prevnode = nullptr;
 
-	dataNode->custId= custId;
-	dataNode->product = product;
-	dataNode->category = category;
-	dataNode->price = stod(price);
-	dataNode->date = date;
-	dataNode->paymentMethod = paymentMethod;
-
 	newnode->_T = dataNode;
-	
+
 	return newnode;
 }
 
