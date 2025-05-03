@@ -183,7 +183,7 @@ void testFindingMostFrequentWordInReview() {
 	chrono::time_point<chrono::system_clock> start, end;
 	start = chrono::system_clock::now();
 
-	int ratingInput = 5;
+	int ratingInput = 1;
 	int totalNumOfReviewWords = _ReviewArray.getTotalNumOfWords(ratingInput);
 	string* allReviewWords = _ReviewArray.extractAllWords(totalNumOfReviewWords, ratingInput);
 	string* allSortedReviewWords = _ReviewArray.mergeSortAndReturnAllReviewWords(allReviewWords, totalNumOfReviewWords);
