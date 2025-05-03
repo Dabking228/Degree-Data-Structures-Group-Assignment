@@ -106,4 +106,10 @@ public:
 		return newList;
 
 	}
+
+	void printList();
+
+	void linearSearch(string category, string keyword);
+
+	void searchAgain(string search);
 };

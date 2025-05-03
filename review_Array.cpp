@@ -212,7 +212,7 @@ void Array<review>::arrayLinearSearch(string category, string keyword) {
 
     resultArray.printList();
 
-    cout << "Number of results found: " << matchCount << " out of 4128 entries." << endl;
+    cout << "Number of results found: " << matchCount << " out of 3372 entries." << endl;
 	cout << "Time taken: " << fixed << setprecision(6) << taken.count() << endl << endl;
 
     resultArray.searchAgain("linear");
