@@ -21,7 +21,7 @@ public:
 		this->FILENAME = FILENAME;
 	}
 
-	~Array() { 
+	~Array() {
 		if (typePointer != nullptr) {
 			delete[] typePointer;
 		}
@@ -31,7 +31,7 @@ public:
 
 	int getNumOfValidLines();
 
-	T* getArray() const{
+	T* getArray() const {
 		return typePointer;
 	}
 
@@ -43,11 +43,11 @@ public:
 		if (isClone) {
 			cout << "Please use the same variable that is assigned." << endl;
 			return nullptr;
-		} 
+		}
 
 		if (FILENAME.empty() || this->arrayLength == 0) {
 			cout << "Return nullptr, please initialize before cloning!" << endl;
-			return nullptr; 
+			return nullptr;
 		}
 		Array<T>* newArray = new Array<T>(this->FILENAME);
 		newArray->arrayLength = this->arrayLength;
@@ -69,6 +69,6 @@ public:
 
 	void searchAgain(string search);
 
-	void arrayBinarySearch(string category, string keyword);
+	//void arrayBinarySearch(string category, string keyword);
 
 };
