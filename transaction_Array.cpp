@@ -7,11 +7,7 @@
 #include <chrono>
 #include <iomanip>
 #include <ctime>
-#include <iomanip>
-#include <stdexcept>
 using namespace std;
-
-
 
 template<>
 int Array<transaction>::getNumOfValidLines() {
@@ -394,44 +390,6 @@ void Array<transaction>::arrayBinarySearch(string category, string keyword) {
 	resultArray.searchAgain("binary");
 }
 
-template class Array<transaction>;
-
-	if (!file) {
-		cerr << "Error in opening transaction file for Array Creation!" << endl;
-		return;
-	}
-
-	string line;
-	int index = 0;
-
-	// Skip header
-	getline(file, line);
-
-	// Time Complexity: O(N)
-	while (getline(file, line) && index < numOfValidLines) {
-		stringstream ss(line);
-		string custId, product, category, priceStr, date, paymentMethod;
-
-		getline(ss, custId, ',');
-		getline(ss, product, ',');
-		getline(ss, category, ',');
-		getline(ss, priceStr, ',');
-		getline(ss, date, ',');
-		getline(ss, paymentMethod);
-
-		if (transaction::isValidTransaction(custId, product, category, priceStr, date, paymentMethod)) {
-			this->typePointer[index] = transaction(custId, product, category, priceStr, date, paymentMethod);
-			index++;
-		}
-		else {
-			continue;
-		}
-	}
-	this->arrayLength = index;
-	cout << "Successfully loaded " << arrayLength << " valid transactions!" << endl;
-}
-
-
 
 // Bubble Sorting
 
@@ -465,9 +423,8 @@ bool Array<transaction>::compareByField(const transaction& a, const transaction&
 }
 
 
-
 template class Array<transaction>;
-*/
+
 
 
 

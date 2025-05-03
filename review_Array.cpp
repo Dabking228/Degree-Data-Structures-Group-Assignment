@@ -313,4 +313,3 @@ bool Array<review>::compareByField(const review& a, const review& b, int field) 
 template class Array<review>;
 */
 
-template class Array<review>;
