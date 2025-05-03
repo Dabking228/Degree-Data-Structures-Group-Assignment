@@ -69,6 +69,8 @@ public:
 	
 	void searchAgain(string search);
 
-	//void arrayBinarySearch(string category, string keyword);
+	void arrayBinarySearch(string category, string keyword);
+
+	bool isSortedByCategory(string category, bool& isAscending);
 
 };

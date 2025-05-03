@@ -73,6 +73,8 @@ void callSearchTransactions(string search) {
 			_TransactionArray.arrayLinearSearch(category, keyword);
 		else if (search == "linearll")
 			_TransactionLinked.linearSearch(category, keyword);
+		else if (search == "binary") 
+			_TransactionArray.arrayBinarySearch(category, keyword);
 		else
 			cout << "Invalid!" << endl;
 		
@@ -133,7 +135,8 @@ int main() {
 		cout << "1. Linear Search Transaction Array" << "\n"
 			<< "2. Linear Search Reviews Array" << "\n"
 			<< "3. Linear Search Transaction Linked List" << "\n"
-			<< "4. Linear Search Reviews Linked List" << "\n" << endl;
+			<< "4. Linear Search Reviews Linked List" << "\n"
+			<< "5. Binary Search Transaction Array" << "\n" << endl;
 
 		int option;
 		cout << "Enter your option (-1 to exit): ";
@@ -153,6 +156,10 @@ int main() {
 		}
 		case 4: {
 			callReviewsSearch("linearll");
+			break;
+		}
+		case 5: {
+			callSearchTransactions("binary");
 			break;
 		}
 		case -1: {
