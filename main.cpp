@@ -179,6 +179,29 @@ void callSearchTransactions(string search) {
 
 }
 
+void testFindingMostFrequentWordInReview() {
+	chrono::time_point<chrono::system_clock> start, end;
+	start = chrono::system_clock::now();
+
+	int ratingInput = 5;
+	int totalNumOfReviewWords = _ReviewArray.getTotalNumOfWords(ratingInput);
+	string* allReviewWords = _ReviewArray.extractAllWords(totalNumOfReviewWords, ratingInput);
+	string* allSortedReviewWords = _ReviewArray.mergeSortAndReturnAllReviewWords(allReviewWords, totalNumOfReviewWords);
+	int totalNumOfUniqueWords = _ReviewArray.getTotalNumOfUniqueReviewWords(allSortedReviewWords, totalNumOfReviewWords);
+	WordFrequency* allUniqueWords = _ReviewArray.getUniqueWordsAndCount(allSortedReviewWords, totalNumOfReviewWords, totalNumOfUniqueWords);
+	WordFrequency* allSortedUniqueWordsByFrequency = _ReviewArray.mergeSortUniqueWordsByFrequency(allUniqueWords, totalNumOfUniqueWords);
+	_ReviewArray.printTop5MostFrequentlyUsedWords(allSortedUniqueWordsByFrequency, totalNumOfUniqueWords, ratingInput);
+
+	end = chrono::system_clock::now();
+	chrono::duration<double> taken = end - start;
+	cout << "Time taken for Most Frequent Words: " << taken.count() << endl;
+
+	delete[] allReviewWords;
+	delete[] allSortedReviewWords;
+	delete[] allUniqueWords;
+	delete[] allSortedUniqueWordsByFrequency;
+}
+
 int main() {
 	initializeData();
 
