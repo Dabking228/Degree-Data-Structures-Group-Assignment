@@ -207,6 +207,11 @@ bool LinkedList<review>::compareByField(const review* nodeA, const review* nodeB
 	case 2: return nodeA->getProdId() < nodeB->getProdId();
 	case 3: return nodeA->getRating() < nodeB->getRating();
 	case 4: return nodeA->getReviewText() < nodeB->getReviewText();
+	//desencdng
+	case 11: return nodeA->getCustId() > nodeB->getCustId();
+	case 12: return nodeA->getProdId() > nodeB->getProdId();
+	case 13: return nodeA->getRating() > nodeB->getRating();
+	case 14: return nodeA->getReviewText() > nodeB->getReviewText();
 	default: return false;
 	}
 }

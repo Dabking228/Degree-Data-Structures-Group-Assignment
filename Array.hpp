@@ -157,7 +157,11 @@ public:
 		return newArray;
 	}
 
-	void sortBy(int sortBy, int sortCol) {
+	void sortBy(int sortBy, int sortCol, bool asce = true) {
+		if (!asce) {
+			sortCol += 10;
+		}
+
 		switch (sortBy) {
 		case 1:
 			BubbleSort(sortCol);
@@ -168,6 +172,8 @@ public:
 		}
 		
 	}
+
+
 	void printList() const;
 
 	int countMatches(const string& category, const string& keyword) const;

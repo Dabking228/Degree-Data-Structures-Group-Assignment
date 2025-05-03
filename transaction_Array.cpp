@@ -402,9 +402,6 @@ void Array<transaction>::arrayBinarySearch(string category, string keyword) {
 	resultArray.searchAgain("binary");
 }
 
-
-// Bubble Sorting
-
 bool Array<transaction>::compareByField(const transaction& a, const transaction& b, int field) {
 	switch (field) {
 	case 1: return a.getCustId() < b.getCustId();
@@ -430,6 +427,30 @@ bool Array<transaction>::compareByField(const transaction& a, const transaction&
 		return mktime(&tmA) < mktime(&tmB);
 	}
 	case 6: return a.getPaymentMethod() < b.getPaymentMethod();
+	// desencding sorting
+	case 11: return a.getCustId() > b.getCustId();
+	case 12: return a.getProduct() > b.getProduct();
+	case 13: return a.getCategory() > b.getCategory();
+	case 14: return a.getPrice() > b.getPrice();
+	case 15:
+	{
+		stringstream ssA(a.getDate()), ssB(b.getDate());
+		tm tmA = {};
+		tm tmB = {};
+
+		ssA >> get_time(&tmA, "%d/%m/%Y");
+		ssB >> get_time(&tmB, "%d/%m/%Y");
+		if (ssA.fail() || ssB.fail()) {
+			return false;
+
+			cout << "Failed to parse date" << endl;
+		}
+
+		//cout << mktime(&tmA) << " | " << mktime(&tmB) << endl;
+
+		return mktime(&tmA) > mktime(&tmB);
+	}
+	case 16: return a.getPaymentMethod() > b.getPaymentMethod();
 	default: return false;
 	}
 }
