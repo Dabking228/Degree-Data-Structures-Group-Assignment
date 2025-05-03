@@ -69,6 +69,6 @@ public:
 	
 	void searchAgain(string search);
 
-	void arrayBinarySearch(string category, string keyword);
+	//void arrayBinarySearch(string category, string keyword);
 
 };
