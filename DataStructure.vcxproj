@@ -127,8 +127,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Array_Algorithms.cpp" />
+    <ClCompile Include="transaction_Array_Algorithms.cpp" />
     <ClCompile Include="review_Array.cpp" />
+    <ClCompile Include="review_Array_Algorithms.cpp" />
     <ClCompile Include="review_LinkedList.cpp" />
     <ClCompile Include="transaction_Array.cpp" />
     <ClCompile Include="main.cpp" />

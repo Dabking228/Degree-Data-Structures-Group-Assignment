@@ -7,7 +7,9 @@ using namespace std;
 inline string toLower(const string& input) {
     string result;
     for (char c : input) {
-        result += tolower(c);
+        if (isalnum(c)) {
+            result += tolower(c);
+        }
     }
     return result;
 }
