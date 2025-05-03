@@ -71,4 +71,10 @@ public:
 
 	//void arrayBinarySearch(string category, string keyword);
 
+
+	// For assignment question no.3
+	int getTotalNumOfWords(int ratingInput); //int getTotalNumOfWords(Array<review>& reviewArr, int ratingInput);
+	string* extractAllWords(int& wordCount, int ratingInput);
+	string* sortAllReviewWords(string*& allReviewWords);
+	
 };

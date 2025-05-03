@@ -221,6 +221,48 @@ void Array<review>::arrayLinearSearch(string category, string keyword) {
 
 }
 
+// For assignment question 3
+template<>
+int Array<review>::getTotalNumOfWords(int ratingInput) {
+	int totalWords = 0;
+
+	for (int i = 0; i < getArrayLength(); ++i) {
+		if (typePointer[i].getRating() == ratingInput) { // Assume it's 1 for assignment question
+			string text = typePointer[i].getReviewText();
+			stringstream ss(text);
+			string word;
+			while (ss >> word) {
+				totalWords++;
+			}
+		}
+	}
+	return totalWords;
+}
+
+string* Array<review>::extractAllWords(int& wordCount, int ratingInput) {
+	string* allReviewWords = new string[wordCount]; // Get Word Count from getTotalNumOfWords(int ratingInput)
+	int index = 0;
+
+	for (int i = 0; i < getArrayLength(); ++i) {
+		if (typePointer[i].getRating() == ratingInput) { // Assume it's 1 for assignment question
+			string text = typePointer[i].getReviewText();
+			stringstream ss(text);
+			string word;
+			while (ss >> word) {
+				allReviewWords[index] = toLower(word); // Remove punctuations and convert to lowercase
+				index++;
+			}
+		}
+	}
+	return allReviewWords;
+}
+
+// Do sorting for allReviewWords based on alphabetical order
+string* Array<review>::sortAllReviewWords(string*& allReviewWords) {
+
+}
+
+
 template class Array<review>;
 
 /*	int index = 0;
