@@ -632,7 +632,14 @@ void Array<review>::printTop5MostFrequentlyUsedWords(WordFrequency* allSortedUni
 		return;
 	}
 	// Prevent out of bounds if 5 > uniqueWordCount
-	int startIndex = max(0, uniqueWordCount - 5);
+	// int startIndex = max(0, uniqueWordCount - 5); Similar Implementation
+	int startIndex;
+	if (uniqueWordCount - 5 <= 0) {
+		startIndex = 0;
+	}
+	else {
+		startIndex = uniqueWordCount - 5;
+	}
 
 	cout << "Top " << (uniqueWordCount - startIndex) << " Most Frequent Words for " << ratingInput << "-star(s) review:\n";
 	for (int i = uniqueWordCount - 1; i >= startIndex; i--) {
