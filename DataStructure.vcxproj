@@ -127,6 +127,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Array_Algorithms.cpp" />
+    <ClCompile Include="LinkedList_Algorithms.cpp" />
     <ClCompile Include="review_Array.cpp" />
     <ClCompile Include="review_LinkedList.cpp" />
     <ClCompile Include="transaction_Array.cpp" />
@@ -140,6 +142,7 @@
     <ClInclude Include="LinkedList.hpp" />
     <ClInclude Include="SortAlgorithm.hpp" />
     <ClInclude Include="structure.hpp" />
+    <ClInclude Include="Utils.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -168,4 +168,16 @@ public:
 		}
 		
 	}
+	void printList() const;
+
+	int countMatches(const string& category, const string& keyword) const;
+
+	void arrayLinearSearch(string category, string keyword);
+	
+	void searchAgain(string search);
+
+	void arrayBinarySearch(string category, string keyword);
+
+	bool isSortedByCategory(string category, bool& isAscending);
+
 };

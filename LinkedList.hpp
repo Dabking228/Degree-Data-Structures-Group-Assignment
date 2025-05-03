@@ -254,4 +254,14 @@ public:
 		}
 
 	}
+
+	void printList();
+
+	void linearSearch(string category, string keyword);
+
+	void searchAgain(string search);
+
+	void binarySearch(string category, string keyword);
+
+	bool isSortedByCategory(string category, bool& isAscending);
 };
