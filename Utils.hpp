@@ -4,10 +4,12 @@
 #include <iostream>
 using namespace std;
 
-inline std::string toLower(const std::string& input) {
-    std::string result;
+inline string toLower(const string& input) {
+    string result;
     for (char c : input) {
-        result += std::tolower(c);
+        if (isalnum(c)) {
+            result += tolower(c);
+        }
     }
     return result;
 }
