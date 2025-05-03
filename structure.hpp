@@ -201,6 +201,37 @@ public:
 };
 
 struct WordFrequency {
+	// Attributes
+private:
 	string word;
-	int count;
+	int frequency;
+public:
+	// Constructors
+	WordFrequency(){}
+
+	WordFrequency(string word, int frequency) {
+		this->word = word;
+		this->frequency = frequency;
+	}
+	
+	// Getters
+	string getWord() const{
+		return word;
+	}
+	int getFrequency() const{
+		return frequency;
+	}
+
+	// Setters
+	void setWord(string word) {
+		this->word = word;
+	}
+	void setFrequency(int frequency) {
+		this->frequency = frequency;
+	}
+
+	// Add Frequency
+	void addFrequency() {
+		this->frequency += 1;
+	}
 };

@@ -119,7 +119,28 @@ void callSearch(string search) {
 int main() {
 	initializeData();
 
-	while (true) {
+	chrono::time_point<chrono::system_clock> start, end;
+	start = chrono::system_clock::now();
+
+	int ratingInput = 5;
+	int totalNumOfReviewWords = _ReviewArray.getTotalNumOfWords(ratingInput);
+	string* allReviewWords = _ReviewArray.extractAllWords(totalNumOfReviewWords, ratingInput);
+	string* allSortedReviewWords = _ReviewArray.mergeSortAndReturnAllReviewWords(allReviewWords, totalNumOfReviewWords);
+	int totalNumOfUniqueWords = _ReviewArray.getTotalNumOfUniqueReviewWords(allSortedReviewWords, totalNumOfReviewWords);
+	WordFrequency* allUniqueWords = _ReviewArray.getUniqueWordsAndCount(allSortedReviewWords, totalNumOfReviewWords, totalNumOfUniqueWords);
+	WordFrequency* allSortedUniqueWordsByFrequency = _ReviewArray.mergeSortUniqueWordsByFrequency(allUniqueWords, totalNumOfUniqueWords);
+	_ReviewArray.printTop5MostFrequentlyUsedWords(allSortedUniqueWordsByFrequency, totalNumOfUniqueWords, ratingInput);
+
+	end = chrono::system_clock::now();
+	chrono::duration<double> taken = end - start;
+	cout << "Time taken for Most Frequent Words: " << taken.count() << endl;
+
+	delete[] allReviewWords;
+	delete[] allSortedReviewWords;
+	delete[] allUniqueWords;
+	delete[] allSortedUniqueWordsByFrequency;
+}
+	/*while (true) {
 
 		int option;
 		cout << "Enter 2 to search trans array, 3 to search reviews array, or -1 to exit: ";
@@ -138,14 +159,14 @@ int main() {
 			return 0;
 		}
 		}
-	}
+	}*/
 
 	//cout << _TransactionLinked.getListLength() << endl;
 	//cout << _ReviewLinked.getListLength() << endl;
 
 	//cout << _TransactionArray.getArrayLength() << endl;
 	//cout << _ReviewArray.getArrayLength() << endl;
-}
+
 
 
 
