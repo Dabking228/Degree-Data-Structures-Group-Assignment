@@ -45,7 +45,7 @@ public:
 	void createLinkedList();
 
 	Node<T>* createNode(string, string, string, string, string, string);
-	Node<T>* createNode(string , string , string , string );
+	Node<T>* createNode(string, string, string, string);
 	Node<T>* createNode(T* type) {
 		Node<T>* newnode = new Node<T>();
 		T* data = new T();
@@ -61,7 +61,7 @@ public:
 	// create the list kekw
 	void addEndOfList(Node<T>* node) {
 		if (_NodeHEAD == NULL) {
-			_NodeHEAD = _NodeCurr =  _NodeTAIL = node;
+			_NodeHEAD = _NodeCurr = _NodeTAIL = node;
 		}
 		else if (_NodeHEAD != NULL) {
 			_NodeCurr->nextnode = node;
@@ -89,8 +89,8 @@ public:
 		}
 
 		if (FILENAME == "" || this->ListLength == 0) {
-			cout << "Return nullptr, please initialize before cloning!" << endl; 
-			return nullptr; 
+			cout << "Return nullptr, please initialize before cloning!" << endl;
+			return nullptr;
 		}
 		LinkedList<T>* newList = new LinkedList<T>(this->FILENAME);
 		Node<T>* curr = this->_NodeHEAD;
@@ -106,4 +106,10 @@ public:
 		return newList;
 
 	}
+
+	void printList();
+
+	void linearSearch(string category, string keyword);
+
+	void searchAgain(string search);
 };
