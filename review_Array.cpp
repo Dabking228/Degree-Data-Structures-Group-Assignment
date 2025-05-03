@@ -227,56 +227,90 @@ template class Array<review>;
 
 
 	ifstream file(this->FILENAME);
-
-	if (!file.good()) {
-		cout << "Something wrong with review file!" << endl;
+	if (!file) {
+		cerr << "Error in opening review file for Array Creation!" << endl;
+		return 0;
 	}
 
-	this->typePointer = new review[index + 1];
+	string line;
+	int numOfValidLines = 0;
 
-	while (file.good()) {
-		getline(file, prodId, ',');
-		getline(file, custId, ',');
-		getline(file, rating, ',');
-		getline(file, reviewText);
-		if (prodId == "Product ID") {
+	// Skip header
+	getline(file, line);
+
+	while (getline(file, line)) {
+		stringstream ss(line);
+		string prodId, custId, ratingStr, reviewText;
+		getline(ss, prodId, ',');
+		getline(ss, custId, ',');
+		getline(ss, ratingStr, ',');
+		getline(ss, reviewText); // So that review text with comma ',' will not be wrongly cut
+
+		if (review::isValidReview(prodId, custId, ratingStr, reviewText)) {
+			numOfValidLines++;
+		}
+		else {
 			continue;
 		}
-		if (prodId == "" && custId == "" && rating == "" && reviewText == "") {
-			break; // stops when no more records
-		}
-		if (prodId == "" || custId == "" || rating == "" || reviewText == "") { // data cleaning line
-			continue; // skip missing values
-		}
-		// test if the rating can convert to interger
-		try {
-			stoi(rating);
-		}
-		catch (exception& err) {
-			continue;
-		}
+	}
+	return numOfValidLines;
+}
 
-		//TODO: same as the on for transaction, need to optimize
-		review* oldReivewList = this->typePointer;
-		this->typePointer = new review[index + 1];
-		for (int i = 0; i < index; i++) {
-			this->typePointer[i] = oldReivewList[i];
-		}
-		//cout << index + 1 << endl;
-		delete[] oldReivewList;
+void Array<review>::createArray() {
+	cout << "Creating Review Array... \t";
+	string prodId, custId, ratingStr, reviewText;
+	int numOfValidLines = getNumOfValidLines();
 
-		// array creation
-		this->typePointer[index].prodId = prodId;
-		this->typePointer[index].custId = custId;
-		this->typePointer[index].rating = stoi(rating);
-		this->typePointer[index].reviewText = reviewText;
-
-		index++;
+	if (numOfValidLines == 0) {
+		cout << "No valid reviews found!" << endl;
+		return;
 	}
 
-	cout << "Review Array Created!" << endl;
+	this->typePointer = new review[numOfValidLines];
+
+	ifstream file(this->FILENAME);
+	if (!file) {
+		cerr << "Error in opening review file for Array Creation!" << endl;
+		return;
+	}
+
+	string line;
+	int index = 0;
+
+	// Skip header
+	getline(file, line);
+
+	while (getline(file, line) && index < numOfValidLines) {
+		stringstream ss(line);
+		string prodId, custId, ratingStr, reviewText;
+		getline(ss, prodId, ',');
+		getline(ss, custId, ',');
+		getline(ss, ratingStr, ',');
+		getline(ss, reviewText); // So that review text with comma ',' will not be wrongly cut
+
+		if (review::isValidReview(prodId, custId, ratingStr, reviewText)) {
+			this->typePointer[index] = review(prodId, custId, ratingStr, reviewText);
+			index++;
+		}
+		else {
+			continue;
+		}
+	}
 	this->arrayLength = index;
+	cout << "Successfully loaded " << index << " valid reviews!" << endl;
+}
+
+bool Array<review>::compareByField(const review& a, const review& b, int field) {
+	switch (field) {
+	case 1: return a.getCustId() < b.getCustId();
+	case 2: return a.getProdId() < b.getProdId();
+	case 3: return a.getRating() < b.getRating();
+	case 4: return a.getReviewText() < a.getReviewText();
+	default: return false;
+	}
 }
 
 template class Array<review>;
 */
+
+template class Array<review>;

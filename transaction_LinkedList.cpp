@@ -5,6 +5,8 @@
 #include <sstream>
 #include <iomanip>
 #include <chrono>
+#include <ctime>
+
 using namespace std;
 
 template<>
@@ -199,5 +201,34 @@ void LinkedList<transaction>::linearSearch(string category, string keyword) {
 
 	results.searchAgain("linear");
 } 
+
+bool LinkedList<transaction>::compareByField(const transaction* nodeA, const transaction* nodeB, int field) {
+	switch (field) {
+	case 1: return nodeA->getCustId() < nodeB->getCustId();
+	case 2: return nodeA->getProduct() < nodeB->getProduct();
+	case 3: return nodeA->getCategory() < nodeB->getCategory();
+	case 4: return nodeA->getPrice() < nodeB->getPrice();
+	case 5: 
+	{
+		stringstream ssA(nodeA->getDate()), ssB(nodeB->getDate());
+		tm tmA = {};
+		tm tmB = {};
+
+		ssA >> get_time(&tmA, "%d/%m/%Y");
+		ssB >> get_time(&tmB, "%d/%m/%Y");
+		if (ssA.fail() || ssB.fail()) {
+			return false;
+
+			cout << "Failed to parse date" << endl;
+		}
+
+		//cout << mktime(&tmA) << " | " << mktime(&tmB) << endl;
+
+		return mktime(&tmA) < mktime(&tmB);
+	}
+	case 6: return nodeA->getPaymentMethod() < nodeB->getPaymentMethod();
+	default: return false;
+	}
+}
 
 template class LinkedList<transaction>;
