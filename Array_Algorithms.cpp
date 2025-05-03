@@ -18,7 +18,7 @@ int Array<T>::countMatches(const string& category, const string& keyword) const 
             (category == "category" && typePointer[i].getCategory() == keyword) ||
             (category == "price" && to_string(typePointer[i].getPrice()) == keyword) ||
             (category == "date" && typePointer[i].getDate() == keyword) ||
-            (category == "payment method" && typePointer[i].getPaymentMethod() == keyword)) {
+            (category == "paymentmethod" && typePointer[i].getPaymentMethod() == keyword)) {
             ++matchCount;
         }
     }
@@ -71,8 +71,8 @@ void Array<T>::searchAgain(string search) {
                     category != "category" &&
                     category != "price" &&
                     category != "date" &&
-                    category != "payment method") {
-                    cout << "Invalid category! Please enter one of: customerId, product, category, price, date, payment method." << endl;
+                    category != "paymentmethod") {
+                    cout << "Invalid category! Please enter one of: customerId, product, category, price, date, paymentmethod." << endl;
                     continue;
                 }
 
@@ -136,7 +136,7 @@ void Array<T>::arrayLinearSearch(string category, string keyword) {
             (category == "category" && typePointer[i].getCategory() == keyword) ||
             (category == "price" && to_string(typePointer[i].getPrice()) == keyword) ||
             (category == "date" && typePointer[i].getDate() == keyword) ||
-            (category == "payment method" && typePointer[i].getPaymentMethod() == keyword)) {
+            (category == "paymentmethod" && typePointer[i].getPaymentMethod() == keyword)) {
             resultArray.typePointer[j++] = typePointer[i];
         }
     }
@@ -188,7 +188,7 @@ void Array<T>::arrayBinarySearch(string category, string keyword) {
         else if (category == "category") midValue = typePointer[mid].getCategory();
         else if (category == "price") midValue = to_string(typePointer[mid].getPrice());
         else if (category == "date") midValue = typePointer[mid].getDate();
-        else if (category == "payment method") midValue = typePointer[mid].getPaymentMethod();
+        else if (category == "paymentmethod") midValue = typePointer[mid].getPaymentMethod();
         else {
             cout << "Invalid category." << endl;
             return;

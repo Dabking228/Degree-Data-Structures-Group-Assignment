@@ -117,6 +117,7 @@ void Array<review>::searchAgain(string search) {
 
 	while (true) {
 		cout << "Search again in filtered list? (1: Yes, -1: No): ";
+
 		cin >> option;
 
 		if (option == 1) {
@@ -162,7 +163,15 @@ void Array<review>::searchAgain(string search) {
 				arrayLinearSearch(category, keyword);
 			}
 			else if (search == "binary") {
-				//arrayBinarySearch(category, keyword);
+				int sortField = -1;
+				if (category == "productid") sortField = 1;
+				else if (category == "customerid") sortField = 2;
+				else if (category == "rating") sortField = 3;
+				else if (category == "review") sortField = 4;
+
+				Array<review>* cloned_results = clone();
+				cloned_results->sortBy(1, sortField);
+				cloned_results->arrayBinarySearch(category, keyword);
 			}
 
 			return;
@@ -219,6 +228,153 @@ void Array<review>::arrayLinearSearch(string category, string keyword) {
 
     return;
 
+}
+
+bool Array<review>::isSortedByCategory(string category, bool& isAscending) {
+	isAscending = true;
+	bool isDescending = true;
+
+	for (int i = 1; i < arrayLength; ++i) {
+		string prev, curr;
+
+		if (category == "customerid") {
+			prev = typePointer[i - 1].getCustId();
+			curr = typePointer[i].getCustId();
+		}
+		else if (category == "productid") {
+			prev = typePointer[i - 1].getProdId();
+			curr = typePointer[i].getProdId();
+		}
+		else if (category == "rating") {
+			prev = to_string(typePointer[i - 1].getRating());
+			curr = to_string(typePointer[i].getRating());
+		}
+		else if (category == "review") {
+			prev = typePointer[i - 1].getReviewText();
+			curr = typePointer[i].getReviewText();
+		}
+		else {
+			cout << "Invalid category!" << endl;
+			return false;
+		}
+
+		if (prev > curr) isAscending = false;
+		if (prev < curr) isDescending = false;
+	}
+
+	return isAscending || isDescending;
+}
+
+template<>
+void Array<review>::arrayBinarySearch(string category, string keyword) {
+
+	if (typePointer == nullptr || arrayLength == 0) {
+		cout << "Error! Array is empty!" << endl;
+		return;
+	}
+
+	// 1. Check if the array is sorted (ascending or descending)
+	bool isAscending;
+	if (!isSortedByCategory(category, isAscending)) {
+		cout << "Error! The array is not sorted by category '" << category << "'." << endl;
+		return;
+	}
+
+	// 2. Perform binary search to find ONE matching record
+	int low = 0, high = arrayLength - 1, foundIndex = -1;
+
+	chrono::time_point<chrono::system_clock> start, end;
+	start = chrono::system_clock::now();
+
+	while (low <= high) {
+		int mid = (low + high) / 2;
+		string value;
+
+		if (category == "customerid") value = typePointer[mid].getCustId();
+		else if (category == "productid") value = typePointer[mid].getProdId();
+		else if (category == "rating") value = to_string(typePointer[mid].getRating());
+		else if (category == "review") value = typePointer[mid].getReviewText();
+
+		if (value == keyword) {
+			foundIndex = mid;
+			break;
+		}
+		else if ((isAscending && value < keyword) || (!isAscending && value > keyword)) {
+			// target is on the right
+			low = mid + 1;
+		}
+		else {
+			// target is on the left
+			high = mid - 1;
+		}
+	}
+
+	// 3. If found, expand left and right to get all matching records
+	if (foundIndex == -1) {
+		cout << "No results found for '" << keyword << "' in " << category << "." << endl;
+		return;
+	}
+
+	int left = foundIndex - 1;
+	int right = foundIndex + 1;
+	int matchCount = 1;
+
+	while (left >= 0) {
+		string value;
+		if (category == "customerid") value = typePointer[left].getCustId();
+		else if (category == "productid") value = typePointer[left].getProdId();
+		else if (category == "rating") value = to_string(typePointer[left].getRating());
+		else if (category == "review") value = typePointer[left].getReviewText();
+
+		if (value == keyword) {
+			matchCount++;
+			left--;
+		}
+		else break;
+	}
+
+	while (right < arrayLength) {
+		string value;
+		if (category == "customerid") value = typePointer[right].getCustId();
+		else if (category == "productid") value = typePointer[right].getProdId();
+		else if (category == "rating") value = to_string(typePointer[right].getRating());
+		else if (category == "review") value = typePointer[right].getReviewText();
+
+		if (value == keyword) {
+			matchCount++;
+			right++;
+		}
+		else break;
+	}
+
+	end = chrono::system_clock::now();
+	chrono::duration<double> taken = end - start;
+
+	// 4. Create result array
+	Array<review> resultArray("binary_results");
+	resultArray.arrayLength = matchCount;
+	resultArray.typePointer = new review[matchCount];
+
+	int idx = 0;
+	for (int i = left + 1; i < right; ++i) {
+		resultArray.typePointer[idx++] = typePointer[i];
+	}
+
+	resultArray.printList();
+	cout << "Number of results found: " << matchCount << " out of " << arrayLength << " entries." << endl;
+	cout << "Time taken: " << fixed << setprecision(6) << taken.count() << " seconds" << endl << endl;
+
+	resultArray.searchAgain("binary");
+}
+
+bool Array<review>::compareByField(const review& a, const review& b, int field) {
+	switch (field) {
+	case 1: return a.getCustId() < b.getCustId();
+	case 2: return a.getProdId() < b.getProdId();
+	case 3: return a.getRating() < b.getRating();
+	case 4: return a.getReviewText() < a.getReviewText();
+	default: return false;
+	}
 }
 
 template class Array<review>;

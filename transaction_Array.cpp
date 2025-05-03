@@ -104,7 +104,7 @@ int Array<transaction>::countMatches(const string& category, const string& keywo
 			(category == "category" && typePointer[i].getCategory() == keyword) ||
 			(category == "price" && to_string(typePointer[i].getPrice()) == keyword) ||
 			(category == "date" && typePointer[i].getDate() == keyword) ||
-			(category == "payment method" && typePointer[i].getPaymentMethod() == keyword)) {
+			(category == "paymentmethod" && typePointer[i].getPaymentMethod() == keyword)) {
 			++matchCount;
 		}
 	}
@@ -155,8 +155,8 @@ void Array<transaction>::searchAgain(string search) {
 					category != "category" &&
 					category != "price" &&
 					category != "date" &&
-					category != "payment method") {
-					cout << "Invalid category! Please enter one of: customerId, product, category, price, date, payment method." << endl;
+					category != "paymentmethod") {
+					cout << "Invalid category! Please enter one of: customerId, product, category, price, date, paymentmethod." << endl;
 					continue;
 				}
 
@@ -177,9 +177,21 @@ void Array<transaction>::searchAgain(string search) {
 
 			if (search == "linear") {
 				arrayLinearSearch(category, keyword);
+				return;
 			}
 			else if (search == "binary") {
-				//arrayBinarySearch(category, keyword);
+				
+				int sortField = -1;
+				if (category == "customerid") sortField = 1;
+				else if (category == "product") sortField = 2;
+				else if (category == "category") sortField = 3;
+				else if (category == "price") sortField = 4;
+				else if (category == "date") sortField = 5;
+				else if (category == "paymentmethod") sortField = 6;
+
+				Array<transaction>* cloned_results = clone();
+				cloned_results->sortBy(1, sortField);
+				cloned_results->arrayBinarySearch(category, keyword);
 			}
 
 			return;
@@ -220,7 +232,7 @@ void Array<transaction>::arrayLinearSearch(string category, string keyword) {
 			(category == "category" && typePointer[i].getCategory() == keyword) ||
 			(category == "price" && to_string(typePointer[i].getPrice()) == keyword) ||
 			(category == "date" && typePointer[i].getDate() == keyword) ||
-			(category == "payment method" && typePointer[i].getPaymentMethod() == keyword)) {
+			(category == "paymentmethod" && typePointer[i].getPaymentMethod() == keyword)) {
 			resultArray.typePointer[j++] = typePointer[i];
 		}
 	}
@@ -266,7 +278,7 @@ bool Array<transaction>::isSortedByCategory(string category, bool& isAscending) 
 			prev = typePointer[i - 1].getDate();
 			curr = typePointer[i].getDate();
 		}
-		else if (category == "payment method") {
+		else if (category == "paymentmethod") {
 			prev = typePointer[i - 1].getPaymentMethod();
 			curr = typePointer[i].getPaymentMethod();
 		}
@@ -312,7 +324,7 @@ void Array<transaction>::arrayBinarySearch(string category, string keyword) {
 		else if (category == "category") value = typePointer[mid].getCategory();
 		else if (category == "price") value = to_string(typePointer[mid].getPrice());
 		else if (category == "date") value = typePointer[mid].getDate();
-		else if (category == "payment method") value = typePointer[mid].getPaymentMethod();
+		else if (category == "paymentmethod") value = typePointer[mid].getPaymentMethod();
 
 		if (value == keyword) {
 			foundIndex = mid;
@@ -345,7 +357,7 @@ void Array<transaction>::arrayBinarySearch(string category, string keyword) {
 		else if (category == "category") value = typePointer[left].getCategory();
 		else if (category == "price") value = to_string(typePointer[left].getPrice());
 		else if (category == "date") value = typePointer[left].getDate();
-		else if (category == "payment method") value = typePointer[left].getPaymentMethod();
+		else if (category == "paymentmethod") value = typePointer[left].getPaymentMethod();
 
 		if (value == keyword) {
 			matchCount++;
@@ -361,7 +373,7 @@ void Array<transaction>::arrayBinarySearch(string category, string keyword) {
 		else if (category == "category") value = typePointer[right].getCategory();
 		else if (category == "price") value = to_string(typePointer[right].getPrice());
 		else if (category == "date") value = typePointer[right].getDate();
-		else if (category == "payment method") value = typePointer[right].getPaymentMethod();
+		else if (category == "paymentmethod") value = typePointer[right].getPaymentMethod();
 
 		if (value == keyword) {
 			matchCount++;
