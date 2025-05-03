@@ -13,5 +13,4 @@ inline string toLower(const string& input) {
     }
     return result;
 }
-
 #endif

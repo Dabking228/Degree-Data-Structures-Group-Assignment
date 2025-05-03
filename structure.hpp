@@ -199,3 +199,8 @@ public:
 		this->reviewText = reviewText;
 	}
 };
+
+struct WordFrequency {
+	string word;
+	int count;
+};
