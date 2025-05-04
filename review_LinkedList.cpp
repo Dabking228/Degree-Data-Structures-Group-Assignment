@@ -143,7 +143,8 @@ void LinkedList<review>::searchAgain(string search) {
 				else if (category == "rating") sortField = 3;
 				else if (category == "review") sortField = 4;
 
-				binarySearch(category, keyword);
+				this->sortBy(1, sortField, true);
+				this->binarySearch(category, keyword);
 
 				return;
 			}
@@ -368,7 +369,7 @@ void LinkedList<review>::binarySearch(string category, string keyword) {
 
 	// Print the final results and time taken
 	resultList.printList();
-	cout << "Number of results found: " << resultsCount << " entries out of " << resultList.getListLength() << endl;
+	cout << "Number of results found: " << resultsCount << " entries. " << endl;
 
 	finish = chrono::system_clock::now();
 	chrono::duration<double> taken = finish - begin;

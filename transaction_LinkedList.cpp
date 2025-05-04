@@ -150,20 +150,23 @@ void LinkedList<transaction>::searchAgain(string search) {
 				else if (category == "date") sortField = 5;
 				else if (category == "paymentmethod") sortField = 6;
 
-				//LinkedList<transaction>* cloned_results = clone();
+				/*LinkedList<transaction>* cloned_results = clone();
 
-				//// Check if cloning was successful
-				//if (cloned_results == nullptr) {
-				//	cout << "Cloning failed! Unable to proceed with binary search." << endl;
-				//	return;
-				//}
+				// Check if cloning was successful
+				if (cloned_results == nullptr) {
+					cout << "Cloning failed! Unable to proceed with binary search." << endl;
+					return;
+				}
 
-				//cloned_results->sortBy(1, sortField);
-				//cloned_results->binarySearch(category, keyword);
-				//TELEPORT
+				cloned_results->toggleClone();
+				cloned_results->sortBy(1, sortField, true);
+				cloned_results->binarySearch(category, keyword);
 
-				//sortBy(1, sortField);
-				binarySearch(category, keyword);
+				sortBy(1, sortField);
+				binarySearch(category, keyword);*/
+
+				this->sortBy(1, sortField, true);
+				this->binarySearch(category, keyword);
 
 				return;
 			}
@@ -451,7 +454,7 @@ void LinkedList<transaction>::binarySearch(string category, string keyword) {
 
 	// Print the final results and time taken
 	resultList.printList();
-	cout << "Number of results found: " << resultsCount << " entries " << resultList.getListLength() << endl;
+	cout << "Number of results found: " << resultsCount << " entries." << endl;
 
 	finish = chrono::system_clock::now();
 	chrono::duration<double> taken = finish - begin;
