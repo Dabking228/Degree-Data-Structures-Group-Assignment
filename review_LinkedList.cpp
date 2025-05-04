@@ -163,14 +163,15 @@ void LinkedList<review>::searchAgain(string search) {
 
 template<>
 void LinkedList<review>::linearSearch(string category, string keyword) {
+	
+	chrono::time_point<chrono::system_clock> start, end;
+	start = chrono::system_clock::now();
+	
 	Node<review>* current = _NodeHEAD;
 	bool found = false;
 
 	// Create a new linked list to store results
 	LinkedList<review> results("search_results");
-
-	chrono::time_point<chrono::system_clock> start, end;
-	start = chrono::system_clock::now();
 
 	while (current != nullptr) {
 		bool match = false;
@@ -267,6 +268,10 @@ bool LinkedList<review>::isSortedByCategory(string category, bool& isAscending) 
 
 template<>
 void LinkedList<review>::binarySearch(string category, string keyword) {
+	
+	chrono::time_point<chrono::system_clock> begin, finish;
+	begin = chrono::system_clock::now();
+	
 	if (_NodeHEAD == nullptr) {
 		cout << "Error! Linked list is empty!" << endl;
 		return;
@@ -282,9 +287,6 @@ void LinkedList<review>::binarySearch(string category, string keyword) {
 	Node<review>* right = _NodeTAIL;
 	Node<review>* mid = nullptr;
 	int matchCount = 0;
-
-	chrono::time_point<chrono::system_clock> begin, finish;
-	begin = chrono::system_clock::now();
 
 	while (left != right) {
 		// Find the middle node using slow and fast pointer technique

@@ -198,6 +198,9 @@ void Array<review>::searchAgain(string search) {
 template<>
 void Array<review>::arrayLinearSearch(string category, string keyword) {
 
+	chrono::time_point<chrono::system_clock> start, end;
+	start = chrono::system_clock::now();
+
     if (typePointer == nullptr || arrayLength == 0) {
         cout << "Error! Array is empty!" << endl;
         return;
@@ -211,9 +214,6 @@ void Array<review>::arrayLinearSearch(string category, string keyword) {
     Array<review> resultArray("filtered_results");
     resultArray.arrayLength = matchCount;
     resultArray.typePointer = new review[matchCount];
-
-    chrono::time_point<chrono::system_clock> start, end;
-    start = chrono::system_clock::now();
 
     int j = 0;
     for (int i = 0; i < arrayLength; ++i) {
@@ -277,6 +277,9 @@ bool Array<review>::isSortedByCategory(string category, bool& isAscending) {
 template<>
 void Array<review>::arrayBinarySearch(string category, string keyword) {
 
+	chrono::time_point<chrono::system_clock> start, end;
+	start = chrono::system_clock::now();
+
 	if (typePointer == nullptr || arrayLength == 0) {
 		cout << "Error! Array is empty!" << endl;
 		return;
@@ -291,9 +294,6 @@ void Array<review>::arrayBinarySearch(string category, string keyword) {
 
 	// 2. Perform binary search to find ONE matching record
 	int low = 0, high = arrayLength - 1, foundIndex = -1;
-
-	chrono::time_point<chrono::system_clock> start, end;
-	start = chrono::system_clock::now();
 
 	while (low <= high) {
 		int mid = (low + high) / 2;

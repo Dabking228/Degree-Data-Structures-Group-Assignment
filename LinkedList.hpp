@@ -262,7 +262,7 @@ public:
 
 		end = chrono::system_clock::now();
 		chrono::duration<double> taken = end - start;
-		cout << "Time taken for sorting: " << taken.count() << " seconds" << endl;
+		//cout << "Time taken for sorting: " << taken.count() << " seconds" << endl;
 
 	}
 

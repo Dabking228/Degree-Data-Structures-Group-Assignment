@@ -186,14 +186,15 @@ void LinkedList<transaction>::searchAgain(string search) {
 
 template<>
 void LinkedList<transaction>::linearSearch(string category, string keyword) {
-    Node<transaction>* current = _NodeHEAD;
+    
+	chrono::time_point<chrono::system_clock> start, end;
+	start = chrono::system_clock::now();
+	
+	Node<transaction>* current = _NodeHEAD;
     bool found = false;
 
     // Create a new linked list to store results
     LinkedList<transaction> results("search_results");
-
-    chrono::time_point<chrono::system_clock> start, end;
-    start = chrono::system_clock::now();
 
     while (current!=nullptr) {
         bool match = false;
@@ -347,6 +348,10 @@ bool LinkedList<transaction>::isSortedByCategory(string category, bool& isAscend
 
 template<>
 void LinkedList<transaction>::binarySearch(string category, string keyword) {
+	
+	chrono::time_point<chrono::system_clock> begin, finish;
+	begin = chrono::system_clock::now();
+	
 	if (_NodeHEAD == nullptr) {
 		cout << "Error! Linked list is empty!" << endl;
 		return;
@@ -362,9 +367,6 @@ void LinkedList<transaction>::binarySearch(string category, string keyword) {
 	Node<transaction>* right = _NodeTAIL;
 	Node<transaction>* mid = nullptr;
 	int matchCount = 0;
-
-	chrono::time_point<chrono::system_clock> begin, finish;
-	begin = chrono::system_clock::now();
 
 	while (left != right) {
 		// Find the middle node using slow and fast pointer technique
