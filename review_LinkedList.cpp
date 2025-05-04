@@ -85,7 +85,7 @@ void LinkedList<review>::searchAgain(string search) {
 
 		cin >> option;
 
-		cout << "Option is: " << option;
+		//cout << "Option is: " << option;
 
 		if (option == 1) {
 
