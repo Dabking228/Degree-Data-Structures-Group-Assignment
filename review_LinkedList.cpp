@@ -574,4 +574,43 @@ void LinkedList<review>::printTop5MostFrequentlyUsedWords(WordFrequencyNode* hea
 	}
 }
 
+void LinkedList<review>::runLinkedListFindingMostFrequentWordInReview(int ratingInput) {
+	chrono::time_point<chrono::system_clock> start, end;
+	start = chrono::system_clock::now();
+
+	Node<review>* reviewNode = LinkedList<review>::getHEAD();
+
+	if (!reviewNode) {
+		cout << "Review list is empty!";
+		return;
+	}
+
+	int ratingInput = 1;
+	WordNode* words = LinkedList<review>::extractAllWordsByRating(reviewNode, ratingInput);
+	words = LinkedList<review>::mergeSortWordNodes(words);
+	WordFrequencyNode* wordFrequencyList = LinkedList<review>::countWordFrequency(words);
+	wordFrequencyList = LinkedList<review>::mergeSortWordFrequencyNodes(wordFrequencyList);
+
+	cout << "The Top 5 Most Frequent Words for " << ratingInput << "-star(s) review:\n";
+	LinkedList<review>::printTop5MostFrequentlyUsedWords(wordFrequencyList);
+
+	end = chrono::system_clock::now();
+	chrono::duration<double> taken = end - start;
+	cout << "Time taken: " << taken.count() << endl;
+
+	while (words) {
+		WordNode* temp = words;
+		words = words->next;
+		delete temp;
+		temp = nullptr;
+	}
+
+	while (wordFrequencyList) {
+		WordFrequencyNode* temp = wordFrequencyList;
+		wordFrequencyList = wordFrequencyList->next;
+		delete temp;
+		temp = nullptr;
+	}
+}
+
 template class LinkedList<review>;

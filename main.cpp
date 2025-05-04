@@ -659,12 +659,12 @@ int main() {
 
             if (structureChoice == 1) { // Array
                 Array<review>* reviewArray = _ReviewArray.clone();
-                reviewArray->runFindingMostFrequentWordInReview(ratingInput);
+                reviewArray->runArrayFindingMostFrequentWordInReview(ratingInput);
                 delete reviewArray;
             }
             else { // Linked List
                 LinkedList<review>* reviewList = _ReviewLinked.clone();
-
+                reviewList->runLinkedListFindingMostFrequentWordInReview(ratingInput);
                 delete reviewList;
             }
 

@@ -287,4 +287,5 @@ public:
 	void splitWordFrequencyNodes(WordFrequencyNode* head, WordFrequencyNode** front, WordFrequencyNode** back);
 	WordFrequencyNode* mergeSortWordFrequencyNodes(WordFrequencyNode* head);
 	void printTop5MostFrequentlyUsedWords(WordFrequencyNode* head);
+	void runLinkedListFindingMostFrequentWordInReview(int ratingInput);
 };

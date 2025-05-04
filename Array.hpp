@@ -206,5 +206,5 @@ public:
 	void mergeSortUniqueWords(WordFrequency* allUniqueWords, int left, int right);
 	WordFrequency* mergeSortUniqueWordsByFrequency(WordFrequency* allUniqueWords, int uniqueWordCount);
 	void printTop5MostFrequentlyUsedWords(WordFrequency* allSortedUniqueWordsByFrequency, int uniqueWordCount, int ratingInput);
-	void runFindingMostFrequentWordInReview(int ratingInput);
+	void runArrayFindingMostFrequentWordInReview(int ratingInput);
 };

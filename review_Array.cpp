@@ -665,7 +665,7 @@ void Array<review>::printTop5MostFrequentlyUsedWords(WordFrequency* allSortedUni
 	}
 }
 
-void Array<review>::runFindingMostFrequentWordInReview(int ratingInput) {
+void Array<review>::runArrayFindingMostFrequentWordInReview(int ratingInput) {
 	chrono::time_point<chrono::system_clock> start, end;
 	start = chrono::system_clock::now();
 
