@@ -32,11 +32,11 @@ enum sortColReview {
 };
 
 namespace {
-    LinkedList<transaction> _TransactionLinked(TransactionFILENAME);
-    LinkedList<review> _ReviewLinked(ReviewFILENAME);
-
     Array<transaction> _TransactionArray(TransactionFILENAME);
     Array<review> _ReviewArray(ReviewFILENAME);
+
+    LinkedList<transaction> _TransactionLinked(TransactionFILENAME);
+    LinkedList<review> _ReviewLinked(ReviewFILENAME);
 }
 
 void initializeData() {
