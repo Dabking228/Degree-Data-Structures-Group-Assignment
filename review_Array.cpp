@@ -659,7 +659,7 @@ void Array<review>::printTop5MostFrequentlyUsedWords(WordFrequency* allSortedUni
 		startIndex = uniqueWordCount - 5;
 	}
 
-	cout << "Top " << (uniqueWordCount - startIndex) << " Most Frequent Words for " << ratingInput << "-star(s) review:\n";
+	cout << "\nTop " << (uniqueWordCount - startIndex) << " Most Frequent Words for " << ratingInput << "-star(s) review:\n";
 	for (int i = uniqueWordCount - 1; i >= startIndex; i--) {
 		cout << allSortedUniqueWordsByFrequency[i].getWord() << " : " << allSortedUniqueWordsByFrequency[i].getFrequency() << endl;
 	}

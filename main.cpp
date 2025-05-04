@@ -609,9 +609,9 @@ int main() {
             cout << "\nOverall search time: " << taken.count() << " seconds" << endl;
             break;
         }
-        case 5:
+        case 5: {
             int structureChoice;
-            cout << "\n=== Search Reviews ===" << endl;
+            cout << "\n=== Review Analysis ===" << endl;
             cout << "1. Array" << endl;
             cout << "2. Linked List" << endl;
             cout << "-1. Back to main menu" << endl;
@@ -672,7 +672,7 @@ int main() {
             chrono::duration<double> taken = end - start;
             cout << "\nOverall time taken: " << taken.count() << " seconds" << endl;
             break;
-
+        }
         default:
             cout << "Invalid choice. Please enter a number between 1 and 5." << endl;
             break;
