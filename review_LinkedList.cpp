@@ -17,7 +17,7 @@ void LinkedList<review>::createLinkedList() {
 	ifstream file(this->FILENAME);
 
 	if (!file) {
-		cerr << "Error in opening review file for LinkedList Creation!" << endl;
+		cerr << "Error in opening review file for Linked List Creation!" << endl;
 		return;
 	}
 

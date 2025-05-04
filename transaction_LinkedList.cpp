@@ -20,7 +20,7 @@ void LinkedList<transaction>::createLinkedList() {
 	ifstream file(this->FILENAME);
 
 	if (!file) {
-		cerr << "Error in opening transaction file for Array Creation!" << endl;
+		cerr << "Error in opening transaction file for Linked List Creation!" << endl;
 		return;
 	}
 
