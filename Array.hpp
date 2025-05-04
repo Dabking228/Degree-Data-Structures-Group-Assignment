@@ -157,7 +157,11 @@ public:
 		return newArray;
 	}
 
-	void sortBy(int sortBy, int sortCol) {
+	void sortBy(int sortBy, int sortCol, bool asce = true) {
+		if (!asce) {
+			sortCol += 10;
+		}
+
 		switch (sortBy) {
 		case 1:
 			BubbleSort(sortCol);
@@ -168,6 +172,8 @@ public:
 		}
 		
 	}
+
+
 	void printList() const;
 
 	int countMatches(const string& category, const string& keyword) const;
@@ -179,5 +185,18 @@ public:
 	void arrayBinarySearch(string category, string keyword);
 
 	bool isSortedByCategory(string category, bool& isAscending);
+
+	// For assignment question no.3 (Find Most Frequent Words in Review Text based on Rating)
+	int getTotalNumOfWords(int ratingInput); //int getTotalNumOfWords(Array<review>& reviewArr, int ratingInput);
+	string* extractAllWords(const int& wordCount, int ratingInput);
+	void mergeAllReviewWords(string* allReviewWords, int left, int mid, int right);
+	void mergeSortAllReviewWords(string* allReviewWords, int left, int right);
+	string* mergeSortAndReturnAllReviewWords(string* allReviewWords, const int& wordCount);
+	int getTotalNumOfUniqueReviewWords(string* allSortedReviewWords, const int& wordCount);
+	WordFrequency* getUniqueWordsAndCount(string* allSortedReviewWords, const int& wordCount, int uniqueWordCount);
+	void mergeUniqueWords(WordFrequency* allUniqueWords, int left, int mid, int right);
+	void mergeSortUniqueWords(WordFrequency* allUniqueWords, int left, int right);
+	WordFrequency* mergeSortUniqueWordsByFrequency(WordFrequency* allUniqueWords, int uniqueWordCount);
+	void printTop5MostFrequentlyUsedWords(WordFrequency* allSortedUniqueWordsByFrequency, int uniqueWordCount, int ratingInput);
 
 };

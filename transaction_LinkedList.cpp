@@ -258,6 +258,30 @@ bool LinkedList<transaction>::compareByField(const transaction* nodeA, const tra
 		return mktime(&tmA) < mktime(&tmB);
 	}
 	case 6: return nodeA->getPaymentMethod() < nodeB->getPaymentMethod();
+	// descending
+	case 11: return nodeA->getCustId() > nodeB->getCustId();
+	case 12: return nodeA->getProduct() > nodeB->getProduct();
+	case 13: return nodeA->getCategory() > nodeB->getCategory();
+	case 14: return nodeA->getPrice() > nodeB->getPrice();
+	case 15:
+	{
+		stringstream ssA(nodeA->getDate()), ssB(nodeB->getDate());
+		tm tmA = {};
+		tm tmB = {};
+
+		ssA >> get_time(&tmA, "%d/%m/%Y");
+		ssB >> get_time(&tmB, "%d/%m/%Y");
+		if (ssA.fail() || ssB.fail()) {
+			return false;
+
+			cout << "Failed to parse date" << endl;
+		}
+
+		//cout << mktime(&tmA) << " | " << mktime(&tmB) << endl;
+
+		return mktime(&tmA) > mktime(&tmB);
+	}
+	case 16: return nodeA->getPaymentMethod() > nodeB->getPaymentMethod();
 	default: return false;
 	}
 }

@@ -171,7 +171,6 @@ public:
 
 		while (_NodeHEAD != nullptr) {
 			_NodeCurr = _NodeHEAD->nextnode;
-			delete _NodeHEAD->_T;
 			delete _NodeHEAD;
 			_NodeHEAD = _NodeCurr;
 		}
@@ -243,7 +242,11 @@ public:
 
 	}
 
-	void sortBy(int sortBy, int sortCol) {
+	void sortBy(int sortBy, int sortCol, bool asce) {
+		if (!asce) {
+			sortCol += 10;
+		}
+
 		switch (sortBy) {
 		case 1:
 			BubbleSort(sortCol);
