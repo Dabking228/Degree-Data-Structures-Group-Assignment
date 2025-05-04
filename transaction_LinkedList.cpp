@@ -13,6 +13,9 @@ using namespace std;
 
 template<>
 void LinkedList<transaction>::createLinkedList() {
+	chrono::time_point<chrono::system_clock> start, end;
+	start = chrono::system_clock::now();
+
 	cout << "Creating Transaction Linked List... \t";
 	ifstream file(this->FILENAME);
 
@@ -20,9 +23,6 @@ void LinkedList<transaction>::createLinkedList() {
 		cerr << "Error in opening transaction file for Array Creation!" << endl;
 		return;
 	}
-
-	chrono::time_point<chrono::system_clock> start, end;
-	start = chrono::system_clock::now();
 
 	string line;
 

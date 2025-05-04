@@ -47,6 +47,9 @@ int Array<transaction>::getNumOfValidLines() {
 
 
 void Array<transaction>::createArray() {
+	chrono::time_point<chrono::system_clock> start, end;
+	start = chrono::system_clock::now();
+
 	cout << "Creating Transaction Array... \t";
 	string custId, product, category, price, date, paymentMethod;
 	int numOfValidLines = getNumOfValidLines(); // Time Complexity = O(N)
@@ -64,9 +67,6 @@ void Array<transaction>::createArray() {
 		cerr << "Error in opening transaction file for Array Creation!" << endl;
 		return;
 	}
-
-	chrono::time_point<chrono::system_clock> start, end;
-	start = chrono::system_clock::now();
 
 	string line;
 	int index = 0;

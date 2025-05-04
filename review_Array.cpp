@@ -41,6 +41,9 @@ int Array<review>::getNumOfValidLines() {
 }
 
 void Array<review>::createArray() {
+	chrono::time_point<chrono::system_clock> start, end;
+	start = chrono::system_clock::now();
+
 	cout << "Creating Review Array... \t";
 	string prodId, custId, ratingStr, reviewText;
 	int numOfValidLines = getNumOfValidLines();
@@ -57,9 +60,6 @@ void Array<review>::createArray() {
 		cerr << "Error in opening review file for Array Creation!" << endl;
 		return;
 	}
-
-	chrono::time_point<chrono::system_clock> start, end;
-	start = chrono::system_clock::now();
 
 	string line;
 	int index = 0;
