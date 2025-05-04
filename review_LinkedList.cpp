@@ -9,6 +9,9 @@ using namespace std;
 
 template <>
 void LinkedList<review>::createLinkedList() {
+	chrono::time_point<chrono::system_clock> start, end;
+	start = chrono::system_clock::now();
+
 	cout << "Creating Review Linked List... \t";
 
 	ifstream file(this->FILENAME);
@@ -17,9 +20,6 @@ void LinkedList<review>::createLinkedList() {
 		cerr << "Error in opening review file for LinkedList Creation!" << endl;
 		return;
 	}
-
-	chrono::time_point<chrono::system_clock> start, end;
-	start = chrono::system_clock::now();
 
 	string line;
 

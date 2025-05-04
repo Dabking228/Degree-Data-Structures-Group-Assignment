@@ -32,22 +32,22 @@ enum sortColReview {
 };
 
 namespace {
-    LinkedList<transaction> _TransactionLinked(TransactionFILENAME);
-    LinkedList<review> _ReviewLinked(ReviewFILENAME);
-
     Array<transaction> _TransactionArray(TransactionFILENAME);
     Array<review> _ReviewArray(ReviewFILENAME);
+
+    LinkedList<transaction> _TransactionLinked(TransactionFILENAME);
+    LinkedList<review> _ReviewLinked(ReviewFILENAME);
 }
 
 void initializeData() {
     chrono::time_point<chrono::system_clock> start, end;
     start = chrono::system_clock::now();
 
-    _TransactionLinked.createLinkedList();
-    _ReviewLinked.createLinkedList();
-
     _TransactionArray.createArray();
     _ReviewArray.createArray();
+
+    _TransactionLinked.createLinkedList();
+    _ReviewLinked.createLinkedList();
 
     end = chrono::system_clock::now();
     chrono::duration<double> taken = end - start;
