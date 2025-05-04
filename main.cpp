@@ -660,9 +660,12 @@ int main() {
             if (structureChoice == 1) { // Array
                 Array<review>* reviewArray = _ReviewArray.clone();
                 reviewArray->runFindingMostFrequentWordInReview(ratingInput);
+                delete reviewArray;
             }
             else { // Linked List
                 LinkedList<review>* reviewList = _ReviewLinked.clone();
+
+                delete reviewList;
             }
 
             end = chrono::system_clock::now();
