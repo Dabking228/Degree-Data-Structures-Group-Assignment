@@ -631,7 +631,7 @@ int main() {
             }
 
             int ratingInput;
-            cout << "\nRatings: (To find most frequently used words in product reviews)" << endl;
+            cout << "\nRatings: (To find the most frequently used words in product reviews)" << endl;
             cout << "1. 1 Star" << endl;
             cout << "2. 2 Stars" << endl;
             cout << "3. 3 Stars" << endl;
