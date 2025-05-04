@@ -590,7 +590,7 @@ void LinkedList<review>::runLinkedListFindingMostFrequentWordInReview(int rating
 	WordFrequencyNode* wordFrequencyList = LinkedList<review>::countWordFrequency(words);
 	wordFrequencyList = LinkedList<review>::mergeSortWordFrequencyNodes(wordFrequencyList);
 
-	cout << "\nThe Top 5 Most Frequent Words for " << ratingInput << "-star(s) review:\n";
+	cout << "\nThe Top 5 Most Frequent Words for " << ratingInput << "-Star(s) Reviews:\n";
 	LinkedList<review>::printTop5MostFrequentlyUsedWords(wordFrequencyList);
 
 	end = chrono::system_clock::now();
