@@ -679,7 +679,7 @@ void Array<review>::runFindingMostFrequentWordInReview(int ratingInput) {
 
 	end = chrono::system_clock::now();
 	chrono::duration<double> taken = end - start;
-	cout << "Time taken for Most Frequent Words: " << taken.count() << endl;
+	cout << "Time taken: " << taken.count() << endl;
 
 	delete[] allReviewWords;
 	delete[] allSortedReviewWords;

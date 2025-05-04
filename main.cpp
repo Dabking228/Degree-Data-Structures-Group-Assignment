@@ -114,8 +114,7 @@ int main() {
         cout << "3. Sort reviews" << endl;
         cout << "4. Search reviews" << endl;
         cout << "5. Review analysis" << endl;
-        cout << "6. Exit" << endl;
-        cout << "Enter your choice (1-6, -1 to exit): ";
+        cout << "Enter your choice (1-5, -1 to exit): ";
 
         if (!(cin >> choice)) {
             cout << "Invalid input. Please enter a number." << endl;
@@ -136,7 +135,7 @@ int main() {
             cout << "1. Array" << endl;
             cout << "2. Linked List" << endl;
             cout << "-1. Back to main menu" << endl;
-            cout << "Enter your choice (1-2, -1 to go back): ";
+            cout << "Enter your choice (1-2, -1 to go back to main menu): ";
 
             if (!(cin >> structureChoice)) {
                 cout << "Invalid input." << endl;
@@ -155,8 +154,8 @@ int main() {
             cout << "\nSorting Algorithm:" << endl;
             cout << "1. Bubble Sort" << endl;
             cout << "2. Merge Sort" << endl;
-            cout << "-1. Back" << endl;
-            cout << "Enter your choice (1-2, -1 to go back): ";
+            cout << "-1. Back to main menu" << endl;
+            cout << "Enter your choice (1-2, -1 to go back to main menu): ";
 
             if (!(cin >> sortChoice)) {
                 cout << "Invalid input." << endl;
@@ -179,8 +178,8 @@ int main() {
             cout << "4. Price" << endl;
             cout << "5. Date" << endl;
             cout << "6. Payment Method" << endl;
-            cout << "-1. Back" << endl;
-            cout << "Enter column number to sort by (1-6, -1 to go back): ";
+            cout << "-1. Back to main menu" << endl;
+            cout << "Enter column number to sort by (1-6, -1 to go back to main menu): ";
 
             if (!(cin >> columnChoice)) {
                 cout << "Invalid input." << endl;
@@ -199,8 +198,8 @@ int main() {
             cout << "\nSort Order:" << endl;
             cout << "1. Ascending" << endl;
             cout << "2. Descending" << endl;
-            cout << "-1. Back" << endl;
-            cout << "Enter your choice (1-2, -1 to go back): ";
+            cout << "-1. Back to main menu" << endl;
+            cout << "Enter your choice (1-2, -1 to go back to main menu): ";
 
             if (!(cin >> orderChoice)) {
                 cout << "Invalid input." << endl;
@@ -265,7 +264,7 @@ int main() {
             cout << "1. Array" << endl;
             cout << "2. Linked List" << endl;
             cout << "-1. Back to main menu" << endl;
-            cout << "Enter your choice (1-2, -1 to go back): ";
+            cout << "Enter your choice (1-2, -1 to go back to main menu): ";
 
             if (!(cin >> structureChoice)) {
                 cout << "Invalid input." << endl;
@@ -284,8 +283,8 @@ int main() {
             cout << "\nSearch Algorithm:" << endl;
             cout << "1. Linear Search" << endl;
             cout << "2. Binary Search" << endl;
-            cout << "-1. Back" << endl;
-            cout << "Enter your choice (1-2, -1 to go back): ";
+            cout << "-1. Back to main menu" << endl;
+            cout << "Enter your choice (1-2, -1 to go back to main menu): ";
 
             if (!(cin >> searchChoice)) {
                 cout << "Invalid input." << endl;
@@ -308,8 +307,8 @@ int main() {
             cout << "4. Price" << endl;
             cout << "5. Date" << endl;
             cout << "6. Payment Method" << endl;
-            cout << "-1. Back" << endl;
-            cout << "Enter column number to search in (1-6, -1 to go back): ";
+            cout << "-1. Back to main menu" << endl;
+            cout << "Enter column number to search in (1-6, -1 to go back to main menu): ";
 
             if (!(cin >> columnChoice)) {
                 cout << "Invalid input." << endl;
@@ -325,7 +324,7 @@ int main() {
             }
 
             string keyword;
-            cout << "Enter keyword to search for (or -1 to go back): ";
+            cout << "Enter keyword to search for (or -1 to go back to main menu): ";
             cin.ignore();
             getline(cin, keyword);
 
@@ -379,7 +378,7 @@ int main() {
             cout << "1. Array" << endl;
             cout << "2. Linked List" << endl;
             cout << "-1. Back to main menu" << endl;
-            cout << "Enter your choice (1-2, -1 to go back): ";
+            cout << "Enter your choice (1-2, -1 to go back to main menu): ";
 
             if (!(cin >> structureChoice)) {
                 cout << "Invalid input." << endl;
@@ -398,8 +397,8 @@ int main() {
             cout << "\nSorting Algorithm:" << endl;
             cout << "1. Bubble Sort" << endl;
             cout << "2. Merge Sort" << endl;
-            cout << "-1. Back" << endl;
-            cout << "Enter your choice (1-2, -1 to go back): ";
+            cout << "-1. Back to main menu" << endl;
+            cout << "Enter your choice (1-2, -1 to go back to main menu): ";
 
             if (!(cin >> sortChoice)) {
                 cout << "Invalid input." << endl;
@@ -420,8 +419,8 @@ int main() {
             cout << "2. Product ID" << endl;
             cout << "3. Rating" << endl;
             cout << "4. Review Text" << endl;
-            cout << "-1. Back" << endl;
-            cout << "Enter column number to sort by (1-4, -1 to go back): ";
+            cout << "-1. Back to main menu" << endl;
+            cout << "Enter column number to sort by (1-4, -1 to go back to main menu): ";
 
             if (!(cin >> columnChoice)) {
                 cout << "Invalid input." << endl;
@@ -440,8 +439,8 @@ int main() {
             cout << "\nSort Order:" << endl;
             cout << "1. Ascending" << endl;
             cout << "2. Descending" << endl;
-            cout << "-1. Back" << endl;
-            cout << "Enter your choice (1-2, -1 to go back): ";
+            cout << "-1. Back to main menu" << endl;
+            cout << "Enter your choice (1-2, -1 to go back to main menu): ";
 
             if (!(cin >> orderChoice)) {
                 cout << "Invalid input." << endl;
@@ -504,7 +503,7 @@ int main() {
             cout << "1. Array" << endl;
             cout << "2. Linked List" << endl;
             cout << "-1. Back to main menu" << endl;
-            cout << "Enter your choice (1-2, -1 to go back): ";
+            cout << "Enter your choice (1-2, -1 to go back to main menu): ";
 
             if (!(cin >> structureChoice)) {
                 cout << "Invalid input." << endl;
@@ -523,8 +522,8 @@ int main() {
             cout << "\nSearch Algorithm:" << endl;
             cout << "1. Linear Search" << endl;
             cout << "2. Binary Search" << endl;
-            cout << "-1. Back" << endl;
-            cout << "Enter your choice (1-2, -1 to go back): ";
+            cout << "-1. Back to main menu" << endl;
+            cout << "Enter your choice (1-2, -1 to go back to main menu): ";
 
             if (!(cin >> searchChoice)) {
                 cout << "Invalid input." << endl;
@@ -545,8 +544,8 @@ int main() {
             cout << "2. Product ID" << endl;
             cout << "3. Rating" << endl;
             cout << "4. Review Text" << endl;
-            cout << "-1. Back" << endl;
-            cout << "Enter column number to search in (1-4, -1 to go back): ";
+            cout << "-1. Back to main menu" << endl;
+            cout << "Enter column number to search in (1-4, -1 to go back to main menu): ";
 
             if (!(cin >> columnChoice)) {
                 cout << "Invalid input." << endl;
@@ -562,7 +561,7 @@ int main() {
             }
 
             string keyword;
-            cout << "Enter keyword to search for (or -1 to go back): ";
+            cout << "Enter keyword to search for (or -1 to go back to main menu): ";
             cin.ignore();
             getline(cin, keyword);
 
@@ -616,14 +615,63 @@ int main() {
             cout << "1. Array" << endl;
             cout << "2. Linked List" << endl;
             cout << "-1. Back to main menu" << endl;
-            cout << "Enter your choice (1-2, -1 to go back): ";
+            cout << "Enter your choice (1-2, -1 to go back to main menu): ";
 
-        case 6:
-            running = false;
-            cout << "Exiting program. Goodbye!" << endl;
+            if (!(cin >> structureChoice)) {
+                cout << "Invalid input." << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                continue;
+            }
+
+            if (structureChoice == -1) continue;
+            if (structureChoice < 1 || structureChoice > 2) {
+                cout << "Invalid choice." << endl;
+                continue;
+            }
+
+            int ratingInput;
+            cout << "\nRatings: (To find most frequently used words in product reviews)" << endl;
+            cout << "1. 1 Star" << endl;
+            cout << "2. 2 Stars" << endl;
+            cout << "3. 3 Stars" << endl;
+            cout << "4. 4 Stars" << endl;
+            cout << "5. 5 Stars" << endl;
+            cout << "-1. Back to main menu" << endl;
+            cout << "Select rating (1-5, -1 to go back to main menu): ";
+
+            if (!(cin >> ratingInput)) {
+                cout << "Invalid input." << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                continue;
+            }
+
+            if (ratingInput == -1) continue;
+            if (ratingInput < 1 || ratingInput > 5) {
+                cout << "Invalid rating." << endl;
+                continue;
+            }
+
+            // Perform review analysis
+            chrono::time_point<chrono::system_clock> start, end;
+            start = chrono::system_clock::now();
+
+            if (structureChoice == 1) { // Array
+                Array<review>* reviewArray = _ReviewArray.clone();
+                reviewArray->runFindingMostFrequentWordInReview(ratingInput);
+            }
+            else { // Linked List
+                LinkedList<review>* reviewList = _ReviewLinked.clone();
+            }
+
+            end = chrono::system_clock::now();
+            chrono::duration<double> taken = end - start;
+            cout << "\nOverall time taken: " << taken.count() << " seconds" << endl;
             break;
+
         default:
-            cout << "Invalid choice. Please enter a number between 1 and 6." << endl;
+            cout << "Invalid choice. Please enter a number between 1 and 5." << endl;
             break;
         }
     }
