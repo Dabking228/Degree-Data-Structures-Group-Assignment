@@ -101,29 +101,6 @@ string callSearch(int columnChoice, string data) {
     return "invalid";
 }
 
-void testFindingMostFrequentWordInReview() {
-	chrono::time_point<chrono::system_clock> start, end;
-	start = chrono::system_clock::now();
-
-	int ratingInput = 1;
-	int totalNumOfReviewWords = _ReviewArray.getTotalNumOfWords(ratingInput);
-	string* allReviewWords = _ReviewArray.extractAllWords(totalNumOfReviewWords, ratingInput);
-	string* allSortedReviewWords = _ReviewArray.mergeSortAndReturnAllReviewWords(allReviewWords, totalNumOfReviewWords);
-	int totalNumOfUniqueWords = _ReviewArray.getTotalNumOfUniqueReviewWords(allSortedReviewWords, totalNumOfReviewWords);
-	WordFrequency* allUniqueWords = _ReviewArray.getUniqueWordsAndCount(allSortedReviewWords, totalNumOfReviewWords, totalNumOfUniqueWords);
-	WordFrequency* allSortedUniqueWordsByFrequency = _ReviewArray.mergeSortUniqueWordsByFrequency(allUniqueWords, totalNumOfUniqueWords);
-	_ReviewArray.printTop5MostFrequentlyUsedWords(allSortedUniqueWordsByFrequency, totalNumOfUniqueWords, ratingInput);
-
-	end = chrono::system_clock::now();
-	chrono::duration<double> taken = end - start;
-	cout << "Time taken for Most Frequent Words: " << taken.count() << endl;
-
-	delete[] allReviewWords;
-	delete[] allSortedReviewWords;
-	delete[] allUniqueWords;
-	delete[] allSortedUniqueWordsByFrequency;
-}
-
 int main() {
     initializeData();
 
@@ -634,14 +611,19 @@ int main() {
             break;
         }
         case 5:
-            // review analysis code here.
+            int structureChoice;
+            cout << "\n=== Search Reviews ===" << endl;
+            cout << "1. Array" << endl;
+            cout << "2. Linked List" << endl;
+            cout << "-1. Back to main menu" << endl;
+            cout << "Enter your choice (1-2, -1 to go back): ";
 
         case 6:
             running = false;
             cout << "Exiting program. Goodbye!" << endl;
             break;
         default:
-            cout << "Invalid choice. Please enter a number between 1 and 5." << endl;
+            cout << "Invalid choice. Please enter a number between 1 and 6." << endl;
             break;
         }
     }

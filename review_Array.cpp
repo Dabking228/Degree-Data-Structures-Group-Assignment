@@ -665,5 +665,27 @@ void Array<review>::printTop5MostFrequentlyUsedWords(WordFrequency* allSortedUni
 	}
 }
 
+void Array<review>::runFindingMostFrequentWordInReview(int ratingInput) {
+	chrono::time_point<chrono::system_clock> start, end;
+	start = chrono::system_clock::now();
+
+	int totalNumOfReviewWords = Array<review>::getTotalNumOfWords(ratingInput);
+	string* allReviewWords = Array<review>::extractAllWords(totalNumOfReviewWords, ratingInput);
+	string* allSortedReviewWords = Array<review>::mergeSortAndReturnAllReviewWords(allReviewWords, totalNumOfReviewWords);
+	int totalNumOfUniqueWords = Array<review>::getTotalNumOfUniqueReviewWords(allSortedReviewWords, totalNumOfReviewWords);
+	WordFrequency* allUniqueWords = Array<review>::getUniqueWordsAndCount(allSortedReviewWords, totalNumOfReviewWords, totalNumOfUniqueWords);
+	WordFrequency* allSortedUniqueWordsByFrequency = Array<review>::mergeSortUniqueWordsByFrequency(allUniqueWords, totalNumOfUniqueWords);
+	Array<review>::printTop5MostFrequentlyUsedWords(allSortedUniqueWordsByFrequency, totalNumOfUniqueWords, ratingInput);
+
+	end = chrono::system_clock::now();
+	chrono::duration<double> taken = end - start;
+	cout << "Time taken for Most Frequent Words: " << taken.count() << endl;
+
+	delete[] allReviewWords;
+	delete[] allSortedReviewWords;
+	delete[] allUniqueWords;
+	delete[] allSortedUniqueWordsByFrequency;
+}
+
 template class Array<review>;
 
