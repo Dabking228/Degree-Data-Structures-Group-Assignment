@@ -385,14 +385,6 @@ void LinkedList<review>::binarySearch(string category, string keyword) {
 
 // For assignment question 3
 
-void LinkedList<review>::appendWordInFront(WordNode*& head, const string& word) {
-	WordNode* newnode = new WordNode{ word, nullptr, head };
-	if (head) {
-		head->prev = newnode;
-	}
-	head = newnode;
-}
-
 // Time Complexity: O(1) for insert because of tail
 //		O(W) overall where W is the number of words from all reviews with the target rating
 // Space Complexity: O(N) for N words
