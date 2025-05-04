@@ -235,3 +235,16 @@ public:
 		this->frequency += 1;
 	}
 };
+
+struct WordNode {
+	string word;
+	WordNode* prev;
+	WordNode* next;
+};
+
+struct WordFrequencyNode {
+	string word;
+	int frequency;
+	WordFrequencyNode* prev;
+	WordFrequencyNode* next;
+};

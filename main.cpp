@@ -8,26 +8,34 @@ string TransactionFILENAME = "./datasets/transactions.csv";
 string ReviewFILENAME = "./datasets/reviews.csv";
 
 namespace {
-	//LinkedList<transaction> _TransactionLinked(TransactionFILENAME);
-	//LinkedList<review> _ReviewLinked(ReviewFILENAME);
+	LinkedList<transaction> _TransactionLinked(TransactionFILENAME);
+	LinkedList<review> _ReviewLinked(ReviewFILENAME);
 
 	Array<transaction> _TransactionArray(TransactionFILENAME);
 	Array<review> _ReviewArray(ReviewFILENAME);
 }
 
 void initializeData() {
-	chrono::time_point<chrono::system_clock> start, end;
-	start = chrono::system_clock::now();
-
-	//_TransactionLinked.createLinkedList();
-	//_ReviewLinked.createLinkedList();
+	chrono::time_point<chrono::system_clock> startArray, endArray;
+	startArray = chrono::system_clock::now();
 
 	_TransactionArray.createArray();
 	_ReviewArray.createArray();
 
-	end = chrono::system_clock::now();
-	chrono::duration<double> taken = end - start;
-	cout << "Time taken: " << taken.count() << endl;
+	endArray = chrono::system_clock::now();
+	chrono::duration<double> takenArray = endArray - startArray;
+	cout << "Time taken for Array Creation: " << takenArray.count() << endl;
+
+
+	chrono::time_point<chrono::system_clock> startLinkedList, endLinkedList;
+	startLinkedList = chrono::system_clock::now();
+
+	_TransactionLinked.createLinkedList();
+	_ReviewLinked.createLinkedList();
+
+	endLinkedList = chrono::system_clock::now();
+	chrono::duration<double> takenLinkedList = endLinkedList - startLinkedList;
+	cout << "Time taken for Linked List Creation: " << takenLinkedList.count() << endl;
 }
 
 void callSearch(string search) {
@@ -116,9 +124,7 @@ void callSearch(string search) {
 
 }
 
-int main() {
-	initializeData();
-
+void testQ3forArrays() {
 	chrono::time_point<chrono::system_clock> start, end;
 	start = chrono::system_clock::now();
 
@@ -139,6 +145,53 @@ int main() {
 	delete[] allSortedReviewWords;
 	delete[] allUniqueWords;
 	delete[] allSortedUniqueWordsByFrequency;
+}
+
+void testQ3forLinkedList() {
+	chrono::time_point<chrono::system_clock> start, end;
+	start = chrono::system_clock::now();
+
+	Node<review>* reviewNode = _ReviewLinked.getHEAD();
+
+	if (!reviewNode) {
+		cout << "Review list is empty!";
+		return;
+	}
+
+	int ratingInput = 1;
+	WordNode* words = _ReviewLinked.extractAllWordsByRating(reviewNode, ratingInput);
+	words = _ReviewLinked.mergeSortWordNodes(words);
+	WordFrequencyNode* wordFrequencyList = _ReviewLinked.countWordFrequency(words);
+	wordFrequencyList = _ReviewLinked.mergeSortWordFrequencyNodes(wordFrequencyList);
+
+	cout << "The Top 5 Most Frequent Words for " << ratingInput << "-star(s) review:\n";
+	_ReviewLinked.printTop5MostFrequentlyUsedWords(wordFrequencyList);
+
+	end = chrono::system_clock::now();
+	chrono::duration<double> taken = end - start;
+	cout << "Time taken for Most Frequent Words: " << taken.count() << endl;
+
+	while (words) {
+		WordNode* temp = words;
+		words = words->next;
+		delete temp;
+		temp = nullptr;
+	}
+
+	while (wordFrequencyList) {
+		WordFrequencyNode* temp = wordFrequencyList;
+		wordFrequencyList = wordFrequencyList->next;
+		delete temp;
+		temp = nullptr;
+	}
+}
+
+int main() {
+	initializeData();
+
+
+
+	return 0;
 }
 	/*while (true) {
 
