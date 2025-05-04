@@ -58,6 +58,9 @@ void Array<review>::createArray() {
 		return;
 	}
 
+	chrono::time_point<chrono::system_clock> start, end;
+	start = chrono::system_clock::now();
+
 	string line;
 	int index = 0;
 
@@ -81,7 +84,11 @@ void Array<review>::createArray() {
 		}
 	}
 	this->arrayLength = index;
-	cout << "Successfully loaded " << index << " valid reviews!" << endl;
+
+	end = chrono::system_clock::now();
+	chrono::duration<double> taken = end - start;
+
+	cout << "Successfully loaded " << index << " valid reviews! Time taken: " << taken.count() << " seconds." << endl;
 }
 
 int Array<review>::countMatches(const string& category, const string& keyword) const {
@@ -161,6 +168,7 @@ void Array<review>::searchAgain(string search) {
 
 			if (search == "linear") {
 				arrayLinearSearch(category, keyword);
+				return;
 			}
 			else if (search == "binary") {
 				int sortField = -1;
@@ -171,6 +179,7 @@ void Array<review>::searchAgain(string search) {
 
 				Array<review>* cloned_results = clone();
 				cloned_results->sortBy(1, sortField);
+				cloned_results->printList();
 				cloned_results->arrayBinarySearch(category, keyword);
 			}
 
@@ -222,7 +231,7 @@ void Array<review>::arrayLinearSearch(string category, string keyword) {
     resultArray.printList();
 
     cout << "Number of results found: " << matchCount << " out of 3372 entries." << endl;
-	cout << "Time taken: " << fixed << setprecision(6) << taken.count() << endl << endl;
+	cout << "Time taken for searching: " << fixed << setprecision(6) << taken.count() << endl << endl;
 
     resultArray.searchAgain("linear");
 
@@ -362,7 +371,7 @@ void Array<review>::arrayBinarySearch(string category, string keyword) {
 
 	resultArray.printList();
 	cout << "Number of results found: " << matchCount << " out of " << arrayLength << " entries." << endl;
-	cout << "Time taken: " << fixed << setprecision(6) << taken.count() << " seconds" << endl << endl;
+	cout << "Time taken for searching: " << fixed << setprecision(6) << taken.count() << " seconds" << endl << endl;
 
 	resultArray.searchAgain("binary");
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "structure.hpp"
+#include <chrono>
 using namespace std;
 
 template <typename T> class Array {
@@ -158,6 +159,9 @@ public:
 	}
 
 	void sortBy(int sortBy, int sortCol, bool asce = true) {
+		chrono::time_point<chrono::system_clock> start, end;
+		start = chrono::system_clock::now();
+
 		if (!asce) {
 			sortCol += 10;
 		}
@@ -170,6 +174,10 @@ public:
 			MergeSort(sortCol, 0 , this->arrayLength - 1);
 			break;	
 		}
+
+		end = chrono::system_clock::now();
+		chrono::duration<double> taken = end - start;
+		cout << "Time taken for sorting: " << taken.count() << " seconds" << endl;
 		
 	}
 

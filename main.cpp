@@ -1,5 +1,6 @@
 #include "Array.hpp"
 #include "LinkedList.hpp"
+#include "Utils.hpp"
 #include <iostream>
 #include <chrono>
 #include <limits>
@@ -55,46 +56,49 @@ void initializeData() {
 
 void displayTransactionSortResults(Array<transaction>* sortedArray, int sortColumn) {
     for (int i = 0; i < min(10, sortedArray->getArrayLength()); i++) {
-        switch (sortColumn) {
-        case trans_custId:
-            cout << i << " : Customer ID - " << sortedArray->getArray()[i].getCustId() << endl;
-            break;
-        case trans_product:
-            cout << i << " : Product - " << sortedArray->getArray()[i].getProduct() << endl;
-            break;
-        case trans_category:
-            cout << i << " : Category - " << sortedArray->getArray()[i].getCategory() << endl;
-            break;
-        case trans_price:
-            cout << i << " : Price - " << sortedArray->getArray()[i].getPrice() << endl;
-            break;
-        case trans_date:
-            cout << i << " : Date - " << sortedArray->getArray()[i].getDate() << endl;
-            break;
-        case trans_paymentMethod:
-            cout << i << " : Payment Method - " << sortedArray->getArray()[i].getPaymentMethod() << endl;
-            break;
-        }
+        transaction t = sortedArray->getArray()[i];
+        cout << i << " : "
+            << "Customer ID: " << t.getCustId() << " | "
+            << "Product: " << t.getProduct() << " | "
+            << "Category: " << t.getCategory() << " | "
+            << "Price: " << t.getPrice() << " | "
+            << "Date: " << t.getDate() << " | "
+            << "Payment Method: " << t.getPaymentMethod()
+            << endl;
     }
 }
 
 void displayReviewSortResults(Array<review>* sortedArray, int sortColumn) {
     for (int i = 0; i < min(10, sortedArray->getArrayLength()); i++) {
-        switch (sortColumn) {
-        case rv_custId:
-            cout << i << " : Customer ID - " << sortedArray->getArray()[i].getCustId() << endl;
-            break;
-        case rv_prodId:
-            cout << i << " : Product ID - " << sortedArray->getArray()[i].getProdId() << endl;
-            break;
-        case rv_rating:
-            cout << i << " : Rating - " << sortedArray->getArray()[i].getRating() << endl;
-            break;
-        case rv_reviewText:
-            cout << i << " : Review Text - " << sortedArray->getArray()[i].getReviewText() << endl;
-            break;
-        }
+        review r = sortedArray->getArray()[i];
+        cout << i << " : "
+            << "Customer ID: " << r.getCustId() << " | "
+            << "Product ID: " << r.getProdId() << " | "
+            << "Rating: " << r.getRating() << " | "
+            << "Review Text: " << r.getReviewText()
+            << endl;
     }
+}
+
+string callSearch(int columnChoice, string data) {
+
+    if (data == "transaction") {
+        if (columnChoice == 1) return "customerid";
+        else if (columnChoice == 2) return "product";
+        else if (columnChoice == 3) return "category";
+        else if (columnChoice == 4) return "price";
+        else if (columnChoice == 5) return "date";
+        else if (columnChoice == 6) return "paymentmethod";
+    }
+
+    else if (data == "review") {
+        if (columnChoice == 1) return "customerid";
+        else if (columnChoice == 2) return "productid";
+        else if (columnChoice == 3) return "rating";
+        else if (columnChoice == 4) return "review";
+    }
+
+    return "invalid";
 }
 
 void testFindingMostFrequentWordInReview() {
@@ -132,8 +136,9 @@ int main() {
         cout << "2. Search transactions" << endl;
         cout << "3. Sort reviews" << endl;
         cout << "4. Search reviews" << endl;
-        cout << "5. Exit" << endl;
-        cout << "Enter your choice (1-5, -1 to go back): ";
+        cout << "5. Review analysis" << endl;
+        cout << "6. Exit" << endl;
+        cout << "Enter your choice (1-6, -1 to exit): ";
 
         if (!(cin >> choice)) {
             cout << "Invalid input. Please enter a number." << endl;
@@ -143,8 +148,8 @@ int main() {
         }
 
         if (choice == -1) {
-            cout << "Already at main menu." << endl;
-            continue;
+            cout << "System shutting down..." << endl;
+            return 0;
         }
 
         switch (choice) {
@@ -256,26 +261,16 @@ int main() {
                 int displayCount = min(10, sortedList->getListLength());
                 Node<transaction>* current = sortedList->getHEAD();
                 for (int i = 0; i < displayCount && current != nullptr; i++) {
-                    switch (columnChoice) {
-                    case trans_custId:
-                        cout << i << " : Customer ID - " << current->_T->getCustId()<< endl;
-                        break;
-                    case trans_product:
-                        cout << i << " : Product - " << current->_T->getProduct() << endl;
-                        break;
-                    case trans_category:
-                        cout << i << " : Category - " << current->_T->getCategory() << endl;
-                        break;
-                    case trans_price:
-                        cout << i << " : Price - " << current->_T->getPrice() << endl;
-                        break;
-                    case trans_date:
-                        cout << i << " : Date - " << current->_T->getDate() << endl;
-                        break;
-                    case trans_paymentMethod:
-                        cout << i << " : Payment Method - " << current->_T->getPaymentMethod() << endl;
-                        break;
-                    }
+
+                    // Display all fields for the current transaction
+                    cout << i << ":"
+                    << " Customer ID: " << current->_T->getCustId()
+                    << " Product: " << current->_T->getProduct() 
+                    << " Category: " << current->_T->getCategory() 
+                    << " Price: " << current->_T->getPrice() 
+                    << " Date: " << current->_T->getDate()
+                    << " Payment Method: " << current->_T->getPaymentMethod() << endl;
+
                     current = current->nextnode;
                 }
 
@@ -284,7 +279,7 @@ int main() {
 
             end = chrono::system_clock::now();
             chrono::duration<double> taken = end - start;
-            cout << "\nSorting time: " << taken.count() << " seconds" << endl;
+            cout << "\nOverall sorting time: " << taken.count() << " seconds" << endl;
             break;
         }
         case 2: { // Search transactions
@@ -365,30 +360,40 @@ int main() {
 
             if (structureChoice == 1) { // Array
                 Array<transaction>* searchArray = _TransactionArray.clone();
-                if (searchChoice == 2) { // Binary search requires sorted data
-                    searchArray->sortBy(BubbleSort, static_cast<sortColTransaction>(columnChoice), true);
+                string category = callSearch(columnChoice, "transaction");
+
+                if (searchChoice == 1) { // Linear search
+                    searchArray->arrayLinearSearch(category, keyword);
                 }
 
-                // Implement search logic here
-                // searchArray->search(static_cast<sortColTransaction>(columnChoice), keyword);
+                if (searchChoice == 2) { // Binary search requires sorted data
+                    cout << "Performing sorting for " << category << "... Please wait a moment..." << endl;
+                    searchArray->sortBy(BubbleSort, static_cast<sortColTransaction>(columnChoice), true);
+                    searchArray->arrayBinarySearch(category, keyword);
+                }
 
                 delete searchArray;
             }
             else { // Linked List
                 LinkedList<transaction>* searchList = _TransactionLinked.clone();
-                if (searchChoice == 2) { // Binary search requires sorted data
-                    searchList->sortBy(BubbleSort, static_cast<sortColTransaction>(columnChoice), true);
+                string category = callSearch(columnChoice, "transaction");
+
+                if (searchChoice == 1) { // Linear search
+                    searchList->linearSearch(category, keyword);
                 }
 
-                // Implement search logic here
-                // searchList->search(static_cast<sortColTransaction>(columnChoice), keyword);
+                if (searchChoice == 2) { // Binary search requires sorted data
+                    cout << "Performing sorting for " << category << "... Please wait a moment..." << endl;
+                    searchList->sortBy(BubbleSort, static_cast<sortColTransaction>(columnChoice), true);
+                    searchList->binarySearch(category, keyword);
+                }
 
                 delete searchList;
             }
 
             end = chrono::system_clock::now();
             chrono::duration<double> taken = end - start;
-            cout << "\nSearch time: " << taken.count() << " seconds" << endl;
+            cout << "\nOverall search time: " << taken.count() << " seconds" << endl;
             break;
         }
         case 3: { // Sort reviews
@@ -497,20 +502,14 @@ int main() {
                 int displayCount = min(10, sortedList->getListLength());
                 Node<review>* current = sortedList->getHEAD();
                 for (int i = 0; i < displayCount && current != nullptr; i++) {
-                    switch (columnChoice) {
-                    case rv_custId:
-                        cout << i << " : Customer ID - " << current->_T->getCustId() << endl;
-                        break;
-                    case rv_prodId:
-                        cout << i << " : Product ID - " << current->_T->getProdId() << endl;
-                        break;
-                    case rv_rating:
-                        cout << i << " : Rating - " << current->_T->getRating() << endl;
-                        break;
-                    case rv_reviewText:
-                        cout << i << " : Review Text - " << current->_T->getReviewText() << endl;
-                        break;
-                    }
+
+                    // Display all fields for the current review
+                    cout << i << ":"
+                    << " Customer ID: " << current->_T->getCustId()
+                    << " Product ID: " << current->_T->getProdId() 
+                    << " Rating: " << current->_T->getRating()
+                    << " Review Text: " << current->_T->getReviewText() << endl;
+
                     current = current->nextnode;
                 }
 
@@ -519,7 +518,7 @@ int main() {
 
             end = chrono::system_clock::now();
             chrono::duration<double> taken = end - start;
-            cout << "\nSorting time: " << taken.count() << " seconds" << endl;
+            cout << "\nOverall sorting time: " << taken.count() << " seconds" << endl;
             break;
         }
         case 4: { // Search reviews
@@ -598,33 +597,46 @@ int main() {
 
             if (structureChoice == 1) { // Array
                 Array<review>* searchArray = _ReviewArray.clone();
-                if (searchChoice == 2) { // Binary search requires sorted data
-                    searchArray->sortBy(BubbleSort, static_cast<sortColReview>(columnChoice), true);
+                string category = callSearch(columnChoice, "review");
+
+                if (searchChoice == 1) { // Linear search
+                    searchArray->arrayLinearSearch(category, keyword);
                 }
 
-                // Implement search logic here
-                // searchArray->search(static_cast<sortColReview>(columnChoice), keyword);
+                if (searchChoice == 2) { // Binary search requires sorted data
+                    cout << "Performing sorting for " << category << "... Please wait a moment..." << endl;
+                    searchArray->sortBy(BubbleSort, static_cast<sortColReview>(columnChoice), true);
+                    searchArray->arrayBinarySearch(category, keyword);
+                }
 
                 delete searchArray;
             }
             else { // Linked List
                 LinkedList<review>* searchList = _ReviewLinked.clone();
-                if (searchChoice == 2) { // Binary search requires sorted data
-                    searchList->sortBy(BubbleSort, static_cast<sortColReview>(columnChoice), true);
+                string category = callSearch(columnChoice, "review");
+
+                if (searchChoice == 1) { // Linear search
+                    searchList->linearSearch(category, keyword);
                 }
 
-                // Implement search logic here
-                // searchList->search(static_cast<sortColReview>(columnChoice), keyword);
+                if (searchChoice == 2) { // Binary search requires sorted data
+                    cout << "Performing sorting for " << category << "... Please wait a moment..." << endl;
+                    searchList->sortBy(BubbleSort, static_cast<sortColReview>(columnChoice), true);
+                    searchList->binarySearch(category, keyword);
+                }
 
                 delete searchList;
             }
 
             end = chrono::system_clock::now();
             chrono::duration<double> taken = end - start;
-            cout << "\nSearch time: " << taken.count() << " seconds" << endl;
+            cout << "\nOverall search time: " << taken.count() << " seconds" << endl;
             break;
         }
         case 5:
+            // review analysis code here.
+
+        case 6:
             running = false;
             cout << "Exiting program. Goodbye!" << endl;
             break;
@@ -636,3 +648,4 @@ int main() {
 
     return 0;
 }
+

@@ -18,6 +18,9 @@ void LinkedList<review>::createLinkedList() {
 		return;
 	}
 
+	chrono::time_point<chrono::system_clock> start, end;
+	start = chrono::system_clock::now();
+
 	string line;
 
 	// Skip header
@@ -41,7 +44,11 @@ void LinkedList<review>::createLinkedList() {
 		}
 
 	}
-	cout << "Successfully loaded " << getListLength() << " valid reviews!" << endl;
+
+	end = chrono::system_clock::now();
+	chrono::duration<double> taken = end - start;
+
+	cout << "Successfully loaded " << getListLength() << " valid reviews! Time taken: " << taken.count() << " seconds." << endl;
 }
 
 template<>
@@ -192,7 +199,7 @@ void LinkedList<review>::linearSearch(string category, string keyword) {
 	results.printList();
 
 	cout << "Number of results found: " << results.getListLength() << " out of 3372 entries." << endl;
-	cout << "Time taken: " << fixed << setprecision(6) << taken.count() << endl << endl;
+	cout << "Time taken for searching: " << fixed << setprecision(6) << taken.count() << endl << endl;
 
 	if (!found) {
 		cout << "No matching records found!" << endl;
@@ -365,7 +372,7 @@ void LinkedList<review>::binarySearch(string category, string keyword) {
 
 	finish = chrono::system_clock::now();
 	chrono::duration<double> taken = finish - begin;
-	cout << "Time taken: " << fixed << setprecision(6) << taken.count() << " seconds" << endl << endl;
+	cout << "Time taken for searching: " << fixed << setprecision(6) << taken.count() << " seconds" << endl << endl;
 
 	resultList.toggleClone();
 

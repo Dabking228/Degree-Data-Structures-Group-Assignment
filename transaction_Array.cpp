@@ -65,6 +65,9 @@ void Array<transaction>::createArray() {
 		return;
 	}
 
+	chrono::time_point<chrono::system_clock> start, end;
+	start = chrono::system_clock::now();
+
 	string line;
 	int index = 0;
 
@@ -92,7 +95,11 @@ void Array<transaction>::createArray() {
 		}
 	}
 	this->arrayLength = index;
-	cout << "Successfully loaded " << arrayLength << " valid transactions!" << endl;
+
+	end = chrono::system_clock::now();
+	chrono::duration<double> taken = end - start;
+
+	cout << "Successfully loaded " << arrayLength << " valid transactions! Time taken: " << taken.count() << " seconds." << endl;
 }
 
 int Array<transaction>::countMatches(const string& category, const string& keyword) const {
@@ -243,7 +250,7 @@ void Array<transaction>::arrayLinearSearch(string category, string keyword) {
 	resultArray.printList();
 
 	cout << "Number of results found: " << matchCount << " out of 4128 entries." << endl;
-	cout << "Time taken: " << fixed << setprecision(6) << taken.count() << endl << endl;
+	cout << "Time taken for searching: " << fixed << setprecision(6) << taken.count() << endl << endl;
 
 	resultArray.searchAgain("linear");
 
@@ -397,7 +404,7 @@ void Array<transaction>::arrayBinarySearch(string category, string keyword) {
 
 	resultArray.printList();
 	cout << "Number of results found: " << matchCount << " out of " << arrayLength << " entries." << endl;
-	cout << "Time taken: " << fixed << setprecision(6) << taken.count() << " seconds" << endl << endl;
+	cout << "Time taken for searching: " << fixed << setprecision(6) << taken.count() << " seconds" << endl << endl;
 
 	resultArray.searchAgain("binary");
 }
