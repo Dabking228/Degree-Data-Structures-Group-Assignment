@@ -275,4 +275,16 @@ public:
 	void binarySearch(string category, string keyword);
 
 	bool isSortedByCategory(string category, bool& isAscending);
+
+	// For assignment question no.3
+	void appendWordInFront(WordNode*& head, const string& word);
+	WordNode* extractAllWordsByRating(Node<review>* reviewHead, int ratingInput);
+	WordNode* mergeWordNodes(WordNode* left, WordNode* right);
+	void splitWordNodes(WordNode* head, WordNode** front, WordNode** back);
+	WordNode* mergeSortWordNodes(WordNode* head);
+	WordFrequencyNode* countWordFrequency(WordNode* sortedWordHead);
+	WordFrequencyNode* mergeWordFrequencyNodes(WordFrequencyNode* left, WordFrequencyNode* right);
+	void splitWordFrequencyNodes(WordFrequencyNode* head, WordFrequencyNode** front, WordFrequencyNode** back);
+	WordFrequencyNode* mergeSortWordFrequencyNodes(WordFrequencyNode* head);
+	void printTop5MostFrequentlyUsedWords(WordFrequencyNode* head);
 };
