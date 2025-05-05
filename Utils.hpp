@@ -18,9 +18,9 @@ inline string toLower(const string& input) {
 }
 
 inline SIZE_T getCurrentMemoryUsage() {
-    PROCESS_MEMORY_COUNTERS pmc;
-    if (GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc))) {
-        return pmc.WorkingSetSize; // returns in bytes
+    PROCESS_MEMORY_COUNTERS_EX pmc;
+    if (GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*) & pmc, sizeof(pmc))) {
+        return pmc.PrivateUsage; // Or pmc.PrivateUsage for more accuracy // returns in bytes
     }
     return 0;
 }

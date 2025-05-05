@@ -206,11 +206,11 @@ public:
 		}
 	}
 
-	Node<T>* getHEAD() {
+	Node<T>* getHEAD() const{
 		return _NodeHEAD;
 	};
 
-	int getListLength() {
+	int getListLength() const{
 		return ListLength;
 	}
 
@@ -281,7 +281,7 @@ public:
 	WordNode* extractAllWordsByRating(Node<review>* reviewHead, int ratingInput);
 	WordNode* mergeWordNodes(WordNode* left, WordNode* right);
 	void splitWordNodes(WordNode* head, WordNode** front, WordNode** back);
-	WordNode* mergeSortWordNodes(WordNode* head);
+	WordNode* mergeSortWordNodes(WordNode* head, int depth);
 	WordFrequencyNode* countWordFrequency(WordNode* sortedWordHead);
 	WordFrequencyNode* mergeWordFrequencyNodes(WordFrequencyNode* left, WordFrequencyNode* right);
 	void splitWordFrequencyNodes(WordFrequencyNode* head, WordFrequencyNode** front, WordFrequencyNode** back);

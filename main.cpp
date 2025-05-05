@@ -221,20 +221,31 @@ int main() {
             bool ascending = (orderChoice == 1); // convert to bool when asc is selected
 
             // Perform the sorting
-            chrono::time_point<chrono::system_clock> start, end;
-            start = chrono::system_clock::now();
-            SIZE_T memSortBefore = getCurrentMemoryUsage();
+            
 
             if (structureChoice == 1) { // Array
+                chrono::time_point<chrono::system_clock> start, end;
+                start = chrono::system_clock::now();
+                SIZE_T memSortBefore = getCurrentMemoryUsage();
                 Array<transaction>* sortedArray = _TransactionArray.clone();
                 sortedArray->sortBy(static_cast<sortBy>(sortChoice), static_cast<sortColTransaction>(columnChoice), ascending);
 
                 cout << "\nSorting completed. First 10 results:" << endl;
                 displayTransactionSortResults(sortedArray, columnChoice);
 
+                end = chrono::system_clock::now();
+                chrono::duration<double> taken = end - start;
+                cout << "\nOverall sorting time: " << taken.count() << " seconds" << endl;
+                SIZE_T memSortAfter = getCurrentMemoryUsage();
+                long long memorySortUsed = static_cast<long long>(memSortAfter) - static_cast<long long>(memSortBefore);
+                if (memorySortUsed < 0) { memorySortUsed = 0; }
+                cout << "Memory used: " << memorySortUsed / 1024 << " KB" << endl;
                 delete sortedArray;
             }
             else { // Linked List
+                chrono::time_point<chrono::system_clock> start, end;
+                start = chrono::system_clock::now();
+                SIZE_T memSortBefore = getCurrentMemoryUsage();
                 LinkedList<transaction>* sortedList = _TransactionLinked.clone();
                 sortedList->sortBy(static_cast<sortBy>(sortChoice), static_cast<sortColTransaction>(columnChoice), ascending);
 
@@ -255,14 +266,15 @@ int main() {
                     current = current->nextnode;
                 }
 
+                end = chrono::system_clock::now();
+                chrono::duration<double> taken = end - start;
+                cout << "\nOverall sorting time: " << taken.count() << " seconds" << endl;
+                SIZE_T memSortAfter = getCurrentMemoryUsage();
+                long long memorySortUsed = static_cast<long long>(memSortAfter) - static_cast<long long>(memSortBefore);
+                if (memorySortUsed < 0) { memorySortUsed = 0; }
+                cout << "Memory used: " << memorySortUsed / 1024 << " KB" << endl;
                 delete sortedList;
             }
-
-            end = chrono::system_clock::now();
-            chrono::duration<double> taken = end - start;
-            cout << "\nOverall sorting time: " << taken.count() << " seconds" << endl;
-            SIZE_T memSortAfter = getCurrentMemoryUsage();
-            cout << "Memory used: " << (memSortAfter - memSortBefore) / 1024 << " KB" << endl;
             break;
         }
         case 2: { // Search transactions
@@ -338,11 +350,12 @@ int main() {
             if (keyword == "-1") continue;
 
             // Perform the search
-            chrono::time_point<chrono::system_clock> start, end;
-            start = chrono::system_clock::now();
-            SIZE_T memSearchBefore = getCurrentMemoryUsage();
 
             if (structureChoice == 1) { // Array
+                chrono::time_point<chrono::system_clock> start, end;
+                start = chrono::system_clock::now();
+                SIZE_T memSearchBefore = getCurrentMemoryUsage();
+
                 Array<transaction>* searchArray = _TransactionArray.clone();
                 string category = callSearch(columnChoice, "transaction");
 
@@ -356,9 +369,18 @@ int main() {
                     searchArray->arrayBinarySearch(category, keyword);
                 }
 
+                end = chrono::system_clock::now();
+                chrono::duration<double> taken = end - start;
+                cout << "\nOverall search time: " << taken.count() << " seconds" << endl;
+                SIZE_T memSearchAfter = getCurrentMemoryUsage();
+                cout << "Overall memory used: " << (memSearchAfter - memSearchBefore) / 1024 << " KB" << endl;
                 delete searchArray;
             }
             else { // Linked List
+                chrono::time_point<chrono::system_clock> start, end;
+                start = chrono::system_clock::now();
+                SIZE_T memSearchBefore = getCurrentMemoryUsage();
+
                 LinkedList<transaction>* searchList = _TransactionLinked.clone();
                 string category = callSearch(columnChoice, "transaction");
 
@@ -372,14 +394,14 @@ int main() {
                     searchList->binarySearch(category, keyword);
                 }
 
+                end = chrono::system_clock::now();
+                chrono::duration<double> taken = end - start;
+                cout << "\nOverall search time: " << taken.count() << " seconds" << endl;
+                SIZE_T memSearchAfter = getCurrentMemoryUsage();
+                cout << "Overall memory used: " << (memSearchAfter - memSearchBefore) / 1024 << " KB" << endl;
                 delete searchList;
             }
 
-            end = chrono::system_clock::now();
-            chrono::duration<double> taken = end - start;
-            cout << "\nOverall search time: " << taken.count() << " seconds" << endl;
-            SIZE_T memSearchAfter = getCurrentMemoryUsage();
-            cout << "Overall memory used: " << (memSearchAfter - memSearchBefore) / 1024 << " KB" << endl;
             break;
         }
         case 3: { // Sort reviews
@@ -468,20 +490,30 @@ int main() {
             bool ascending = (orderChoice == 1);
 
             // Perform the sorting
-            chrono::time_point<chrono::system_clock> start, end;
-            start = chrono::system_clock::now();
-            SIZE_T memSortBefore = getCurrentMemoryUsage();
 
             if (structureChoice == 1) { // Array
+                chrono::time_point<chrono::system_clock> start, end;
+                start = chrono::system_clock::now();
+                SIZE_T memSortBefore = getCurrentMemoryUsage();
+
                 Array<review>* sortedArray = _ReviewArray.clone();
                 sortedArray->sortBy(static_cast<sortBy>(sortChoice), static_cast<sortColReview>(columnChoice), ascending);
 
                 cout << "\nSorting completed. First 10 results:" << endl;
                 displayReviewSortResults(sortedArray, columnChoice);
 
+                end = chrono::system_clock::now();
+                chrono::duration<double> taken = end - start;
+                cout << "\nOverall sorting time: " << taken.count() << " seconds" << endl;
+                SIZE_T memSortAfter = getCurrentMemoryUsage();
+                cout << "Memory used: " << (memSortAfter - memSortBefore) / 1024 << " KB" << endl;
                 delete sortedArray;
             }
             else { // Linked List
+                chrono::time_point<chrono::system_clock> start, end;
+                start = chrono::system_clock::now();
+                SIZE_T memSortBefore = getCurrentMemoryUsage();
+
                 LinkedList<review>* sortedList = _ReviewLinked.clone();
                 sortedList->sortBy(static_cast<sortBy>(sortChoice), static_cast<sortColReview>(columnChoice), ascending);
 
@@ -500,14 +532,14 @@ int main() {
                     current = current->nextnode;
                 }
 
+                end = chrono::system_clock::now();
+                chrono::duration<double> taken = end - start;
+                cout << "\nOverall sorting time: " << taken.count() << " seconds" << endl;
+                SIZE_T memSortAfter = getCurrentMemoryUsage();
+                cout << "Memory used: " << (memSortAfter - memSortBefore) / 1024 << " KB" << endl;
                 delete sortedList;
             }
 
-            end = chrono::system_clock::now();
-            chrono::duration<double> taken = end - start;
-            cout << "\nOverall sorting time: " << taken.count() << " seconds" << endl;
-            SIZE_T memSortAfter = getCurrentMemoryUsage();
-            cout << "Memory used: " << (memSortAfter - memSortBefore) / 1024 << " KB" << endl;
             break;
         }
         case 4: { // Search reviews
@@ -581,11 +613,12 @@ int main() {
             if (keyword == "-1") continue;
 
             // Perform the search
-            chrono::time_point<chrono::system_clock> start, end;
-            start = chrono::system_clock::now();
-            SIZE_T memSearchBefore = getCurrentMemoryUsage();
 
             if (structureChoice == 1) { // Array
+                chrono::time_point<chrono::system_clock> start, end;
+                start = chrono::system_clock::now();
+                SIZE_T memSearchBefore = getCurrentMemoryUsage();
+
                 Array<review>* searchArray = _ReviewArray.clone();
                 string category = callSearch(columnChoice, "review");
 
@@ -599,9 +632,18 @@ int main() {
                     searchArray->arrayBinarySearch(category, keyword);
                 }
 
+                end = chrono::system_clock::now();
+                chrono::duration<double> taken = end - start;
+                cout << "\nOverall search time: " << taken.count() << " seconds" << endl;
+                SIZE_T memSearchAfter = getCurrentMemoryUsage();
+                cout << "Overall memory used: " << (memSearchAfter - memSearchBefore) / 1024 << " KB" << endl;
                 delete searchArray;
             }
             else { // Linked List
+                chrono::time_point<chrono::system_clock> start, end;
+                start = chrono::system_clock::now();
+                SIZE_T memSearchBefore = getCurrentMemoryUsage();
+
                 LinkedList<review>* searchList = _ReviewLinked.clone();
                 string category = callSearch(columnChoice, "review");
 
@@ -615,14 +657,14 @@ int main() {
                     searchList->binarySearch(category, keyword);
                 }
 
+                end = chrono::system_clock::now();
+                chrono::duration<double> taken = end - start;
+                cout << "\nOverall search time: " << taken.count() << " seconds" << endl;
+                SIZE_T memSearchAfter = getCurrentMemoryUsage();
+                cout << "Overall memory used: " << (memSearchAfter - memSearchBefore) / 1024 << " KB" << endl;
                 delete searchList;
             }
 
-            end = chrono::system_clock::now();
-            chrono::duration<double> taken = end - start;
-            cout << "\nOverall search time: " << taken.count() << " seconds" << endl;
-            SIZE_T memSearchAfter = getCurrentMemoryUsage();
-            cout << "Overall memory used: " << (memSearchAfter - memSearchBefore) / 1024 << " KB" << endl;
             break;
         }
         case 5: {
@@ -670,26 +712,38 @@ int main() {
             }
 
             // Perform review analysis
-            chrono::time_point<chrono::system_clock> start, end;
-            start = chrono::system_clock::now();
-            SIZE_T memReviewAnalysisBefore = getCurrentMemoryUsage();
 
             if (structureChoice == 1) { // Array
+                chrono::time_point<chrono::system_clock> start, end;
+                start = chrono::system_clock::now();
+                SIZE_T memReviewAnalysisBefore = getCurrentMemoryUsage();
+
                 Array<review>* reviewArray = _ReviewArray.clone();
                 reviewArray->runArrayFindingMostFrequentWordInReview(ratingInput);
+
+                end = chrono::system_clock::now();
+                chrono::duration<double> taken = end - start;
+                cout << "\nTime taken: " << taken.count() << " seconds" << endl;
+                SIZE_T memReviewAnalysisAfter = getCurrentMemoryUsage();
+                cout << "Memory used: " << (memReviewAnalysisAfter - memReviewAnalysisBefore) / 1024 << " KB" << endl;
                 delete reviewArray;
             }
             else { // Linked List
+                chrono::time_point<chrono::system_clock> start, end;
+                start = chrono::system_clock::now();
+                SIZE_T memReviewAnalysisBefore = getCurrentMemoryUsage();
+
                 LinkedList<review>* reviewList = _ReviewLinked.clone();
                 reviewList->runLinkedListFindingMostFrequentWordInReview(ratingInput);
+
+                end = chrono::system_clock::now();
+                chrono::duration<double> taken = end - start;
+                cout << "\nTime taken: " << taken.count() << " seconds" << endl;
+                SIZE_T memReviewAnalysisAfter = getCurrentMemoryUsage();
+                cout << "Memory used: " << (memReviewAnalysisAfter - memReviewAnalysisBefore) / 1024 << " KB" << endl;
                 delete reviewList;
             }
 
-            end = chrono::system_clock::now();
-            chrono::duration<double> taken = end - start;
-            cout << "\nTime taken: " << taken.count() << " seconds" << endl;
-            SIZE_T memReviewAnalysisAfter = getCurrentMemoryUsage();
-            cout << "Memory used: " << (memReviewAnalysisAfter - memReviewAnalysisBefore) / 1024 << " KB" << endl;
             break;
         }
         default:

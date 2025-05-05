@@ -461,15 +461,19 @@ void LinkedList<review>::splitWordNodes(WordNode* head, WordNode** front, WordNo
 	}
 }
 
-WordNode* LinkedList<review>::mergeSortWordNodes(WordNode* head) {
+WordNode* LinkedList<review>::mergeSortWordNodes(WordNode* head, int depth) {
 	if (!head || !head->next) {
+		return head;
+	}
+	if (depth > 1000) {
+		cout << "[DEBUG] Merge sort depth too deep! Possible infinite recursion." << endl;
 		return head;
 	}
 	WordNode* front, * back;
 	splitWordNodes(head, &front, &back);
 
-	front = mergeSortWordNodes(front);
-	back = mergeSortWordNodes(back);
+	front = mergeSortWordNodes(front, depth + 1);
+	back = mergeSortWordNodes(back, depth + 1);
 
 	return mergeWordNodes(front, back);
 }
@@ -570,7 +574,11 @@ void LinkedList<review>::printTop5MostFrequentlyUsedWords(WordFrequencyNode* hea
 }
 
 void LinkedList<review>::runLinkedListFindingMostFrequentWordInReview(int ratingInput) {
-	Node<review>* reviewNode = LinkedList<review>::getHEAD();
+	if (ratingInput < 1 || ratingInput > 5) {
+		cout << "Invalid rating!" << endl;
+		return;
+	}
+	Node<review>* reviewNode = this->getHEAD();
 
 	if (!reviewNode) {
 		cout << "Review list is empty!";
@@ -578,7 +586,7 @@ void LinkedList<review>::runLinkedListFindingMostFrequentWordInReview(int rating
 	}
 
 	WordNode* words = LinkedList<review>::extractAllWordsByRating(reviewNode, ratingInput);
-	words = LinkedList<review>::mergeSortWordNodes(words);
+	words = LinkedList<review>::mergeSortWordNodes(words, 0);
 	WordFrequencyNode* wordFrequencyList = LinkedList<review>::countWordFrequency(words);
 	wordFrequencyList = LinkedList<review>::mergeSortWordFrequencyNodes(wordFrequencyList);
 
