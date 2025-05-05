@@ -570,9 +570,6 @@ void LinkedList<review>::printTop5MostFrequentlyUsedWords(WordFrequencyNode* hea
 }
 
 void LinkedList<review>::runLinkedListFindingMostFrequentWordInReview(int ratingInput) {
-	chrono::time_point<chrono::system_clock> start, end;
-	start = chrono::system_clock::now();
-
 	Node<review>* reviewNode = LinkedList<review>::getHEAD();
 
 	if (!reviewNode) {
@@ -587,10 +584,6 @@ void LinkedList<review>::runLinkedListFindingMostFrequentWordInReview(int rating
 
 	cout << "\nThe Top 5 Most Frequent Words for " << ratingInput << "-Star(s) Reviews:\n";
 	LinkedList<review>::printTop5MostFrequentlyUsedWords(wordFrequencyList);
-
-	end = chrono::system_clock::now();
-	chrono::duration<double> taken = end - start;
-	cout << "Time taken: " << taken.count() << endl;
 
 	while (words) {
 		WordNode* temp = words;
